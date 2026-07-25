@@ -7,4 +7,4 @@
       descendant picking, and rejected-hit continuation.
 - [x] T005 Run full static, unit, build, package, documentation, asset, design, topology, and i18n verification.
 - [x] T006 Complete browser hide/pick/show acceptance and verify the persistent smart-home entity is restored visible.
-- [ ] T007 Complete reverse review, temporary-file cleanup, delivery recording, commit and push closeout.
+- [x] T007 Complete reverse review, temporary-file cleanup, delivery recording, commit and push closeout.

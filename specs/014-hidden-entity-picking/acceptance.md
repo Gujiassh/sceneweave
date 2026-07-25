@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted locally; delivery commit and push pending.
+Accepted and delivered to `origin/main`.
 
 ## Delivery Lineage
 
@@ -15,7 +15,9 @@ Accepted locally; delivery commit and push pending.
   collision-visibility SSoT documentation.
 - Frozen scope: SceneDocument/schema/save contracts, source assets, runtime target mappings, explicit API selection,
   hotspot precedence, and invisible collision-proxy raycast availability.
-- Repair commit and push state: pending final acceptance.
+- Repair commit: `cf977fd6501c5da7cf1e3a050e1bb33dc0787752`.
+- Delivery target: `origin/main`; no downstream merge or cherry-pick is planned. The exact pushed acceptance-ledger HEAD
+  is recorded in the linked dev-workbench closeout.
 
 ## Review Matrix
 

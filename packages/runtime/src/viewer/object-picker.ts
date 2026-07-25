@@ -9,6 +9,7 @@ interface PickOptions<Id extends string> {
     getBoundingClientRect(): DOMRect | { left: number; top: number; width: number; height: number };
   };
   readonly resolveId: (object: Object3D) => Id | undefined;
+  readonly isPickable?: (id: Id, object: Object3D) => boolean;
 }
 
 export class ObjectPicker<Id extends string> {
@@ -24,7 +25,12 @@ export class ObjectPicker<Id extends string> {
     this.#raycaster.setFromCamera(this.#pointer, options.camera);
     for (const hit of this.#raycaster.intersectObject(options.root, true)) {
       const id = options.resolveId(hit.object);
-      if (id !== undefined) return id;
+      if (
+        id !== undefined &&
+        (options.isPickable === undefined || options.isPickable(id, hit.object))
+      ) {
+        return id;
+      }
     }
     return null;
   }

@@ -33,4 +33,30 @@ describe("ObjectPicker", () => {
     expect(result).toBe("first-entity");
     expect(resolveId.mock.calls.map(([object]) => object)).toEqual([unresolved, firstResolvable]);
   });
+
+  it("skips rejected resolved hits and returns the next accepted hit", () => {
+    const hidden = new Object3D();
+    const visible = new Object3D();
+    vi.spyOn(Raycaster.prototype, "intersectObject").mockReturnValue([
+      { distance: 1, object: hidden },
+      { distance: 2, object: visible },
+    ] as ReturnType<Raycaster["intersectObject"]>);
+    const isPickable = vi.fn((id: string) => id !== "hidden-entity");
+
+    const result = new ObjectPicker<string>().pick({
+      camera: new PerspectiveCamera(),
+      clientX: 50,
+      clientY: 50,
+      root: new Scene(),
+      surface: {
+        getBoundingClientRect: () => ({ left: 0, top: 0, width: 100, height: 100 }),
+      },
+      resolveId: (object) => (object === hidden ? "hidden-entity" : "visible-entity"),
+      isPickable,
+    });
+
+    expect(result).toBe("visible-entity");
+    expect(isPickable).toHaveBeenNthCalledWith(1, "hidden-entity", hidden);
+    expect(isPickable).toHaveBeenNthCalledWith(2, "visible-entity", visible);
+  });
 });

@@ -1,7 +1,7 @@
 # Collision Geometry Visibility
 
 > Status: Accepted
-> Updated: 2026-07-23
+> Updated: 2026-07-25
 
 SceneWeave supports glTF assets that separate visible geometry from collision and picking geometry through a strict
 node contract. The runtime hides only collision geometry proven by that complete contract; a loose name match is not
@@ -25,6 +25,19 @@ effect cannot make the collision subtree render. Ordinary authored hidden target
 
 Only formal glTF nodes proven by parser associations participate in recognition. Runtime attachments or primitive
 objects that merely reuse a contract name cannot activate the behavior.
+
+## Picking Visibility Contract
+
+Three.js raycasting does not use `Object3D.visible` as a picking gate. SceneWeave therefore resolves each sorted
+raycast hit to its owning entity and then checks the entity root's complete parent chain through the current runtime
+generation root. An entity hidden directly, below a hidden group, or detached from that generation is rejected by
+both authoring entity picks and readonly Viewer target picks. A rejected nearer hit does not terminate the search; the
+picker continues to the next sorted hit.
+
+The policy intentionally does not inspect the hit object's own `visible` value. A formal `COLLISION` subtree remains
+`visible = false` for rendering, but its meshes remain valid picking geometry whenever their owning entity is
+effectively visible. Programmatic `selectEntity` and `selectTarget` commands are explicit host operations and are not
+changed by this pointer-picking gate.
 
 ## Coplanar Visual Face Contract
 
@@ -73,6 +86,8 @@ placement remains user data.
 - Formal target/node indexes and `nodesByIndex` / `nodeIndexByObject` mappings are unchanged.
 - `VISUAL` remains renderable and only the recognized `COLLISION` subtree is skipped by the renderer.
 - Collision objects remain available to explicit Three.js raycasts and existing picking flows.
+- Pointer picking rejects entities hidden directly or by an ancestor without rejecting invisible collision hits owned
+  by an effectively visible entity.
 - Runtime visibility effects cannot re-enable the recognized `COLLISION` root.
 - Qualifying duplicate visual faces contribute one rendered surface while retaining source index order and raycasts.
 - Qualifying high-coverage coplanar faces retain their material/color and raycasts with deterministic depth priority.
@@ -85,7 +100,9 @@ placement remains user data.
 Loader tests must cover direct and nested valid contracts, preserved visual geometry, formal maps and hierarchy,
 raycasting through the invisible collision root, and rejection of incomplete, cross-root, duplicate-name, or nested
 visual/collision shapes. Runtime target tests must prove a visibility rule cannot re-enable the recognized collision
-root. Coplanar-visual tests must prove exact suppression, different-triangulation coverage, the 95 percent boundary,
+root. Picking tests must prove hidden entity roots, hidden ancestor groups, readonly Viewer targets, invisible
+descendant collision geometry, and continuation after a rejected nearer hit. Coplanar-visual tests must prove exact
+suppression, different-triangulation coverage, the 95 percent boundary,
 stable multi-layer priority, unchanged indexes and `faceIndex`, raycast availability, and shared-resource lifecycle.
 The starter contract test must prove at least 0.02 m master air-conditioner/wardrobe clearance and at least 0.005 m
 separation for audited visible kitchen planes. Browser acceptance must cover both an existing project with the explicit

@@ -4,6 +4,8 @@ All notable project changes are recorded here. The project follows Semantic Vers
 
 ## Unreleased
 
+- Prevented viewport pointer picking from selecting entities hidden directly or by an ancestor group while preserving
+  invisible collision geometry as a valid picking surface for effectively visible entities.
 - Resolved exact and high-coverage coplanar visual faces at runtime, separated the default master-bedroom air
   conditioner from the wardrobe, and removed the remaining visible kitchen instance-plane overlaps, eliminating
   localized z-fighting while preserving asset hashes, face-index raycasts, authored colors, animation boundaries, and

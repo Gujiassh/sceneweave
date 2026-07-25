@@ -1167,6 +1167,7 @@ class ThreeSceneViewport {
         root: generation.root,
         surface: this.#renderer.domElement,
         resolveId: (object) => generation.entityForObject(object),
+        isPickable: (entityId) => isEntityEffectivelyVisible(generation, entityId),
       });
       this.#selectEntities(entityId === null ? [] : [entityId], entityId, "viewport");
       return;
@@ -1178,6 +1179,10 @@ class ThreeSceneViewport {
       root: generation.root,
       surface: this.#renderer.domElement,
       resolveId: (object) => generation.targetForObject(object),
+      isPickable: (_targetId, object) => {
+        const entityId = generation.entityForObject(object);
+        return entityId !== undefined && isEntityEffectivelyVisible(generation, entityId);
+      },
     });
     this.#selectTarget(targetId, "viewer");
   };
@@ -1237,6 +1242,18 @@ class ThreeSceneViewport {
 
 function isAbortError(error: unknown): boolean {
   return error instanceof DOMException && error.name === "AbortError";
+}
+
+function isEntityEffectivelyVisible(generation: RuntimeGeneration, entityId: string): boolean {
+  const entity = generation.entities.get(entityId);
+  if (entity === undefined) return false;
+  let current: Object3D | null = entity.object;
+  while (current !== null) {
+    if (!current.visible) return false;
+    if (current === generation.root) return true;
+    current = current.parent;
+  }
+  return false;
 }
 
 function parseSceneBackground(color: string | null): Color | null {

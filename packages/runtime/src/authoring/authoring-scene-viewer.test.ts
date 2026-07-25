@@ -1404,6 +1404,71 @@ describe("createAuthoringSceneViewer", () => {
     await viewer.dispose();
   });
 
+  it("does not select an entity through a hidden entity root", async () => {
+    const { asset, scene } = await fixture();
+    const viewer = createAuthoringSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+    });
+    await viewer.load(lockEntity(scene, { visible: false }));
+    const object = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    if (object === undefined) throw new Error("Hidden entity object is missing.");
+    vi.spyOn(Raycaster.prototype, "intersectObject").mockReturnValue([
+      { object } as ReturnType<Raycaster["intersectObject"]>[number],
+    ]);
+
+    const canvas = runtime.canvases.at(-1);
+    if (canvas === undefined) throw new Error("Canvas not created.");
+    canvas.dispatch("pointerdown", { clientX: 100, clientY: 100 });
+    canvas.dispatch("pointerup", { clientX: 100, clientY: 100 });
+
+    expect(viewer.getSnapshot().selectedEntityId).toBeNull();
+    await viewer.dispose();
+  });
+
+  it("does not select a visible child through a hidden entity group", async () => {
+    const { asset, scene } = await fixture();
+    const viewer = createAuthoringSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+    });
+    await viewer.load(withParentState(scene, { visible: false, locked: false }));
+    const object = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    if (object === undefined) throw new Error("Grouped entity object is missing.");
+    vi.spyOn(Raycaster.prototype, "intersectObject").mockReturnValue([
+      { object } as ReturnType<Raycaster["intersectObject"]>[number],
+    ]);
+
+    const canvas = runtime.canvases.at(-1);
+    if (canvas === undefined) throw new Error("Canvas not created.");
+    canvas.dispatch("pointerdown", { clientX: 100, clientY: 100 });
+    canvas.dispatch("pointerup", { clientX: 100, clientY: 100 });
+
+    expect(viewer.getSnapshot().selectedEntityId).toBeNull();
+    await viewer.dispose();
+  });
+
+  it("keeps invisible descendant geometry available for visible entity picking", async () => {
+    const { asset, scene } = await fixture();
+    const viewer = createAuthoringSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+    });
+    await viewer.load(scene);
+    const entity = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    const invisibleGeometry = entity?.children[0];
+    if (invisibleGeometry === undefined) throw new Error("Entity descendant geometry is missing.");
+    invisibleGeometry.visible = false;
+    vi.spyOn(Raycaster.prototype, "intersectObject").mockReturnValue([
+      { object: invisibleGeometry } as ReturnType<Raycaster["intersectObject"]>[number],
+    ]);
+
+    const canvas = runtime.canvases.at(-1);
+    if (canvas === undefined) throw new Error("Canvas not created.");
+    canvas.dispatch("pointerdown", { clientX: 100, clientY: 100 });
+    canvas.dispatch("pointerup", { clientX: 100, clientY: 100 });
+
+    expect(viewer.getSnapshot().selectedEntityId).toBe("factory-cell");
+    await viewer.dispose();
+  });
+
   it("preserves selection across revisions and reattaches to the new runtime object", async () => {
     const { asset, scene } = await fixture();
     const events: AuthoringViewerEvent[] = [];

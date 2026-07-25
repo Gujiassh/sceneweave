@@ -13,6 +13,7 @@ import {
   GridHelper,
   HemisphereLight,
   PointLight,
+  Raycaster,
   SpotLight,
   type Scene,
   type Vector3,
@@ -123,6 +124,7 @@ describe("SceneViewer lifecycle", () => {
     runtime.orbitControls.length = 0;
     runtime.reportError.mockClear();
     runtime.scenes.length = 0;
+    vi.restoreAllMocks();
     vi.stubGlobal(
       "ResizeObserver",
       class FakeResizeObserver {
@@ -148,6 +150,32 @@ describe("SceneViewer lifecycle", () => {
     viewer.setCanvasLabel("Factory operations scene");
     expect(canvas.attributes["aria-label"]).toBe("Factory operations scene");
     expect(viewer.getSnapshot()).toEqual(snapshot);
+    await viewer.dispose();
+  });
+
+  it("does not select a target hit through a hidden owning entity", async () => {
+    const { asset, scene } = await fixture();
+    const viewer = createSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+    });
+    await viewer.load({
+      ...scene,
+      entities: scene.entities.map((entity) =>
+        entity.id === "factory-cell" ? { ...entity, visible: false } : entity,
+      ),
+    });
+    const target = runtime.generations.at(-1)?.targets.get("press-01");
+    if (target === undefined) throw new Error("Hidden target is missing.");
+    vi.spyOn(Raycaster.prototype, "intersectObject").mockReturnValue([
+      { object: target.object } as ReturnType<Raycaster["intersectObject"]>[number],
+    ]);
+
+    const canvas = runtime.canvases.at(-1);
+    if (canvas === undefined) throw new Error("Canvas not created.");
+    canvas.dispatch("pointerdown", { clientX: 100, clientY: 100 });
+    canvas.dispatch("pointerup", { clientX: 100, clientY: 100 });
+
+    expect(viewer.getSnapshot().selectedTargetId).toBeNull();
     await viewer.dispose();
   });
 
@@ -1303,12 +1331,20 @@ function deferred<T>() {
 
 function fakeCanvas() {
   const attributes: Record<string, string> = {};
+  const listeners = new Map<string, Set<(event: Record<string, number>) => void>>();
   return {
     attributes,
     dataset: {} as Record<string, string>,
     style: {} as Record<string, string>,
     tabIndex: 0,
-    addEventListener(): void {},
+    addEventListener(type: string, listener: (event: Record<string, number>) => void): void {
+      const entries = listeners.get(type) ?? new Set();
+      entries.add(listener);
+      listeners.set(type, entries);
+    },
+    dispatch(type: string, event: Record<string, number>): void {
+      listeners.get(type)?.forEach((listener) => listener(event));
+    },
     getBoundingClientRect: () => ({
       bottom: 600,
       height: 600,
@@ -1318,7 +1354,9 @@ function fakeCanvas() {
       width: 800,
     }),
     remove(): void {},
-    removeEventListener(): void {},
+    removeEventListener(type: string, listener: (event: Record<string, number>) => void): void {
+      listeners.get(type)?.delete(listener);
+    },
     setAttribute(name: string, value: string): void {
       attributes[name] = value;
     },

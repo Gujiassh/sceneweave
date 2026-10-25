@@ -140,6 +140,127 @@ describe("SceneViewer lifecycle", () => {
     vi.stubGlobal("reportError", runtime.reportError);
   });
 
+  it("settles an entered load before disposal without waiting for an abort-insensitive resolver", async () => {
+    const { asset, scene } = await fixture();
+    const entered = deferred<void>();
+    const gate = deferred<Blob>();
+    const viewer = createSceneViewer(fakeContainer(), {
+      assetResolver: {
+        resolve() {
+          entered.resolve();
+          return gate.promise;
+        },
+      },
+    });
+    let rejected = false;
+    const loading = viewer.load(scene).catch((error: unknown) => {
+      rejected = true;
+      expect(error).toMatchObject({ name: "AbortError" });
+    });
+    await entered.promise;
+    try {
+      const disposing = viewer.dispose();
+      expect(viewer.dispose()).toBe(disposing);
+      await disposing;
+      expect(rejected).toBe(true);
+      expect(viewer.getSnapshot().lifecycle).toBe("disposed");
+    } finally {
+      gate.resolve(new Blob([asset]));
+      await loading;
+    }
+  });
+
+  it("lets a newer load finish before an abort-insensitive old resolver settles", async () => {
+    const { asset, scene } = await fixture();
+    const entered = deferred<void>();
+    const gate = deferred<Blob>();
+    let calls = 0;
+    const events: Array<{ type: string; revision?: number }> = [];
+    const viewer = createSceneViewer(fakeContainer(), {
+      assetResolver: {
+        resolve() {
+          if (++calls === 1) {
+            entered.resolve();
+            return gate.promise;
+          }
+          return Promise.resolve(new Blob([asset]));
+        },
+      },
+      onEvent: (event) => events.push(event),
+    });
+    const old = viewer.load(scene);
+    await entered.promise;
+    const latest = viewer.load({ ...scene, revision: scene.revision + 1 });
+    await expect(old).rejects.toMatchObject({ name: "AbortError" });
+    await latest;
+    expect(viewer.getSnapshot().revision).toBe(scene.revision + 1);
+    gate.resolve(new Blob([asset]));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(events.filter((event) => event.type === "ready").map((event) => event.revision)).toEqual(
+      [scene.revision + 1],
+    );
+    await viewer.dispose();
+  });
+
+  it("observes a detached resolver rejection without reviving disposed state or diagnostics", async () => {
+    const { scene } = await fixture();
+    const entered = deferred<void>();
+    let rejectResolver: ((error: Error) => void) | undefined;
+    const gate = new Promise<Blob>((_resolve, reject) => {
+      rejectResolver = reject;
+    });
+    const events: Array<{ type: string }> = [];
+    const viewer = createSceneViewer(fakeContainer(), {
+      assetResolver: {
+        resolve() {
+          entered.resolve();
+          return gate;
+        },
+      },
+      onEvent: (event) => events.push(event),
+    });
+    const loading = viewer.load(scene);
+    await entered.promise;
+    await viewer.dispose();
+    await expect(loading).rejects.toMatchObject({ name: "AbortError" });
+    rejectResolver?.(new Error("late host rejection"));
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    expect(viewer.getSnapshot().lifecycle).toBe("disposed");
+    expect(viewer.getDiagnostics()).toEqual([]);
+    expect(events.some((event) => event.type === "ready")).toBe(false);
+  });
+
+  it("cleans a parsed asset that completes after cancellation without publishing it", async () => {
+    const { asset, scene } = await fixture();
+    const parsed = deferred<void>();
+    const release = deferred<void>();
+    const original = GLTFLoader.prototype.parseAsync;
+    vi.spyOn(GLTFLoader.prototype, "parseAsync").mockImplementation(async function (
+      this: GLTFLoader,
+      data,
+      path,
+    ) {
+      const value = await original.call(this, data, path);
+      parsed.resolve();
+      await release.promise;
+      return value;
+    });
+    const dispose = vi.spyOn(BufferGeometry.prototype, "dispose");
+    const events: Array<{ type: string }> = [];
+    const viewer = createSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+      onEvent: (event) => events.push(event),
+    });
+    const loading = viewer.load(scene);
+    await parsed.promise;
+    await viewer.dispose();
+    await expect(loading).rejects.toMatchObject({ name: "AbortError" });
+    release.resolve();
+    await vi.waitFor(() => expect(dispose.mock.calls.length).toBeGreaterThan(0));
+    expect(events.some((event) => event.type === "ready")).toBe(false);
+    expect(viewer.getSnapshot().lifecycle).toBe("disposed");
+  });
+
   it("defaults the canvas aria-label and updates it in place", async () => {
     const viewer = createSceneViewer(fakeContainer());
     const canvas = runtime.canvases.at(-1);
@@ -914,7 +1035,8 @@ describe("SceneViewer lifecycle", () => {
     const firstLoad = viewer.load(scene);
     await vi.waitFor(() => expect(active.start).toHaveBeenCalledOnce());
     const latestLoad = viewer.load({ ...scene, revision: scene.revision + 1 });
-    await Promise.all([firstLoad, latestLoad]);
+    await expect(firstLoad).rejects.toMatchObject({ name: "AbortError" });
+    await latestLoad;
 
     expect(active.stop).toHaveBeenCalledOnce();
     expect(active.start).toHaveBeenCalledTimes(2);
@@ -1076,7 +1198,8 @@ describe("SceneViewer lifecycle", () => {
     const stopped = deferred<void>();
     const active = adapter("active", () => stopped.promise);
     await viewer.setAdapter("factory-telemetry", active.value);
-    const queuedAdapter = viewer.setAdapter("factory-telemetry", adapter("queued").value);
+    const queued = adapter("queued");
+    const queuedAdapter = viewer.setAdapter("factory-telemetry", queued.value);
     await vi.waitFor(() => expect(active.stop).toHaveBeenCalledOnce());
 
     const originalParse = GLTFLoader.prototype.parseAsync;
@@ -1100,6 +1223,8 @@ describe("SceneViewer lifecycle", () => {
     stopped.resolve();
     await queuedAdapter;
     await expect(loading).rejects.toMatchObject({ name: "AbortError" });
+    expect(queued.start).not.toHaveBeenCalled();
+    expect(viewer.getSnapshot().lifecycle).toBe("disposed");
     dispose.mockRestore();
     parse.mockRestore();
   });
@@ -1115,7 +1240,7 @@ describe("SceneViewer lifecycle", () => {
       throw new Error("post-commit dispose race");
     });
     const loading = viewer.load({ ...scene, revision: scene.revision + 1 });
-    await expect(loading).rejects.toThrow("post-commit dispose race");
+    await expect(loading).rejects.toMatchObject({ name: "AbortError" });
     const committedDispose = runtime.generationDisposals.at(-1);
     if (committedDispose === undefined) throw new Error("Committed generation was not built.");
     await viewer.dispose();

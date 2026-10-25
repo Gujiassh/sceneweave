@@ -18,7 +18,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import { sha256Hex } from "../assets/asset-loader";
 import { applyRuleEffects, resetRuleEffects } from "./effect-projector";
-import { buildRuntimeGeneration } from "./runtime-generation";
+import { buildRuntimeGeneration, prepareEntityPropertyUpdate } from "./runtime-generation";
 
 const sceneUrl = new URL(
   "../../../../tests/fixtures/m0-factory/public/m0-scene.json",
@@ -156,6 +156,35 @@ describe("buildRuntimeGeneration", () => {
     generation.dispose();
   });
 
+  it("updates a retained entity-root target visibility baseline for later effect resets", async () => {
+    const [json, asset] = await Promise.all([readFile(sceneUrl, "utf8"), readFile(assetUrl)]);
+    const parsed = parseSceneDocument(json);
+    if (!parsed.ok) throw new Error("Invalid fixture");
+    const scene = parsed.value;
+    const target = scene.targets[0];
+    if (!target) throw new Error("Target missing");
+    const generation = await buildRuntimeGeneration(
+      { ...scene, targets: [{ ...target, nodeIndex: null }] },
+      { resolve: () => Promise.resolve(new Blob([asset])) },
+      new AbortController().signal,
+    );
+    const runtimeTarget = generation.targets.get(target.id);
+    if (!runtimeTarget) throw new Error("Runtime target missing");
+    const hidden = {
+      ...scene,
+      entities: scene.entities.map((entity) => ({ ...entity, visible: false })),
+    };
+    prepareEntityPropertyUpdate(generation, hidden)();
+    expect(runtimeTarget.baseline.visible).toBe(false);
+    applyRuleEffects(runtimeTarget, [{ type: "visibility", value: true }]);
+    resetRuleEffects(runtimeTarget);
+    expect(runtimeTarget.object.visible).toBe(false);
+    prepareEntityPropertyUpdate(generation, scene)();
+    resetRuleEffects(runtimeTarget);
+    expect(runtimeTarget.object.visible).toBe(true);
+    generation.dispose();
+  });
+
   it("keeps a targeted contract collision root hidden across visibility effects", async () => {
     const sceneJson = await readFile(sceneUrl, "utf8");
     const parsed = parseSceneDocument(sceneJson);
@@ -185,7 +214,7 @@ describe("buildRuntimeGeneration", () => {
       scene,
       scenes: [scene],
     } as unknown as GLTF);
-    const bytes = new TextEncoder().encode("contract-collision-runtime");
+    const bytes = new Uint8Array(await readFile(assetUrl));
     const sha256 = await sha256Hex(bytes.buffer);
 
     try {
@@ -222,6 +251,18 @@ describe("buildRuntimeGeneration", () => {
       expect(target).toBeDefined();
       if (target === undefined) return;
       expect(target.object).toBe(collision);
+      expect(target.baseline.visible).toBe(false);
+      const retainedEntity = generation.entities.get("contract-entity")?.entity;
+      if (!retainedEntity) throw new Error("Retained entity missing");
+      prepareEntityPropertyUpdate(generation, {
+        ...parsed.value,
+        entities: [{ ...retainedEntity, visible: false }],
+      })();
+      prepareEntityPropertyUpdate(generation, {
+        ...parsed.value,
+        entities: [{ ...retainedEntity, visible: true }],
+      })();
+      expect(collision.visible).toBe(false);
       expect(target.baseline.visible).toBe(false);
       expect(target.visibilityLockedHidden).toBe(true);
 

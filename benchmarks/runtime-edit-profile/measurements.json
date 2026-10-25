@@ -1,0 +1,186 @@
+{
+  "baselineRef": "0c5de5d92712ffbb76be7330fe54896040d0ad31",
+  "scope": "CPU-only actual GLTF parsing and edit-ready, not WebGL/GPU/frame timing",
+  "before": {
+    "environment": {
+      "node": "v24.22.0",
+      "platform": "win32",
+      "os": "10.0.19045",
+      "cpu": "Intel(R) Core(TM) i5-14600K",
+      "renderer": "fake WebGL renderer; actual GLTFLoader and geometry",
+      "viewport": [800, 600],
+      "dpr": 1
+    },
+    "fixture": {
+      "archiveBytes": 1045464,
+      "assets": 49,
+      "instances": 71
+    },
+    "coldMs": 50.76750000000004,
+    "samples": [
+      {
+        "kind": "rename",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 25.339899999999943
+      },
+      {
+        "kind": "transform",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 23.71989999999994
+      },
+      {
+        "kind": "rename",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 24.850599999999986
+      },
+      {
+        "kind": "transform",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 21.29860000000008
+      },
+      {
+        "kind": "rename",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 25.953499999999963
+      },
+      {
+        "kind": "transform",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 24.04340000000002
+      },
+      {
+        "kind": "rename",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 35.061000000000035
+      },
+      {
+        "kind": "transform",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 20.784200000000055
+      },
+      {
+        "kind": "rename",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 20.705299999999966
+      },
+      {
+        "kind": "transform",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 21.649800000000027
+      },
+      {
+        "kind": "rename",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 21.02679999999998
+      },
+      {
+        "kind": "transform",
+        "parses": 71,
+        "resolves": 71,
+        "readyMs": 31.60680000000002
+      }
+    ]
+  },
+  "after": {
+    "environment": {
+      "node": "v24.22.0",
+      "platform": "win32",
+      "os": "10.0.19045",
+      "cpu": "Intel(R) Core(TM) i5-14600K",
+      "renderer": "fake WebGL renderer; actual GLTFLoader and geometry",
+      "viewport": [800, 600],
+      "dpr": 1
+    },
+    "fixture": {
+      "archiveBytes": 1045464,
+      "assets": 49,
+      "instances": 71
+    },
+    "coldMs": 46.863399999999956,
+    "samples": [
+      {
+        "kind": "rename",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.824799999999982
+      },
+      {
+        "kind": "transform",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 3.10329999999999
+      },
+      {
+        "kind": "rename",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.8904999999999745
+      },
+      {
+        "kind": "transform",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 3.1894999999999527
+      },
+      {
+        "kind": "rename",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 3.1031999999999016
+      },
+      {
+        "kind": "transform",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.189700000000016
+      },
+      {
+        "kind": "rename",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.247600000000034
+      },
+      {
+        "kind": "transform",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.6035000000000537
+      },
+      {
+        "kind": "rename",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.613399999999956
+      },
+      {
+        "kind": "transform",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.8596999999999753
+      },
+      {
+        "kind": "rename",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.7362999999999147
+      },
+      {
+        "kind": "transform",
+        "parses": 0,
+        "resolves": 0,
+        "readyMs": 2.130300000000034
+      }
+    ]
+  }
+}

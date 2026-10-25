@@ -19,12 +19,12 @@ export interface RuntimeTarget {
 }
 
 export interface RuntimeTargetBaseline {
-  readonly visible: boolean;
+  visible: boolean;
   readonly colors: readonly (Color | null)[];
 }
 
 export interface RuntimeEntity {
-  readonly entity: SceneEntity;
+  entity: SceneEntity;
   readonly object: Object3D;
 }
 
@@ -237,6 +237,37 @@ export async function buildRuntimeGeneration(
     });
     throw error;
   }
+}
+
+export function prepareEntityPropertyUpdate(
+  generation: RuntimeGeneration,
+  document: SceneDocument,
+): () => void {
+  const entries = document.entities
+    .filter((entity) => entity.type !== "light")
+    .map((entity) => {
+      const runtime = generation.entities.get(entity.id);
+      if (runtime === undefined || runtime.entity.type !== entity.type)
+        throw new Error(`Missing retained entity ${entity.id}.`);
+      return { runtime, entity };
+    });
+  const visibility = new Map(
+    entries.map(({ runtime, entity }) => [runtime.object, entity.visible]),
+  );
+  const targetBaselines = [...generation.targets.values()].flatMap((target) => {
+    const visible = visibility.get(target.object);
+    return visible === undefined
+      ? []
+      : [{ target, visible: target.visibilityLockedHidden ? false : visible }];
+  });
+  return () => {
+    for (const { runtime, entity } of entries) {
+      runtime.entity = entity;
+      applyEntity(runtime.object, entity);
+    }
+    for (const { target, visible } of targetBaselines) target.baseline.visible = visible;
+    generation.root.updateMatrixWorld(true);
+  };
 }
 
 function hasColor(material: Material): material is Material & { color: Color } {

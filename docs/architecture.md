@@ -39,6 +39,18 @@ be observed through Viewer snapshots but is never saved.
 
 ## Ownership
 
-Each Viewer instance owns its adapters, animation frame, event listeners, observers, renderer, parsed assets and pending
-loads. `dispose()` is idempotent and completes only after owned work is stopped. React StrictMode remounts exercise the
-same lifecycle rather than adding a separate ownership layer.
+Each Viewer instance owns its adapters, animation frame, event listeners, observers, renderer and parsed assets.
+`dispose()` is idempotent: it disables new work and releases render resources immediately, then waits for cancelled public
+load promises and currently active adapter stops to settle. Public load cancellation does not advance the internal
+mutation/adapter queue; that queue remains serialized and checks current authority before committing.
+
+Host resolvers, parsers and previously started host callbacks may not physically support cancellation. Pending generation
+builds are detached after abort so a non-cooperating resolver cannot block a newer load. Their eventual results and errors
+are observed, and late resources are disposed without committing a scene or emitting ready. An already queued adapter
+operation may finish later but cannot restart adapters after disposal. React StrictMode remounts exercise the same ownership
+rules. Disposal completion is not a guarantee that arbitrary host promises have physically finished.
+
+In authoring Edit mode with data runtime disabled, validated name and existing non-light entity property updates can retain
+the loaded generation when all resources, topology, targets and other persisted contracts are unchanged. Unsupported
+updates use the existing light reconciliation or atomic full-generation replacement. Retained updates preserve node,
+material and camera identity and update the accepted document revision before publishing ready.

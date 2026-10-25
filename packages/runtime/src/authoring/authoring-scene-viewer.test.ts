@@ -9,6 +9,7 @@ import {
 import type { Camera, Material, Object3D, Scene } from "three";
 import { BoxHelper, Color, LineSegments, Mesh, PointLight, Raycaster, Vector3 } from "three";
 import type * as ThreeModule from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 
 import {
@@ -21,6 +22,7 @@ import {
 import type { AuthoringViewerEvent, DataAdapter, DataEnvelope } from "../types";
 import { createHotspotTestContainer } from "../hotspots/hotspot-test-dom";
 import { AuthoredLightController } from "../viewer/authored-light-controller";
+import { HotspotRuntimeController } from "../hotspots/hotspot-runtime-controller";
 
 const runtime = vi.hoisted(() => ({
   canvases: [] as ReturnType<typeof fakeCanvas>[],
@@ -170,6 +172,136 @@ describe("createAuthoringSceneViewer", () => {
     });
     vi.stubGlobal("cancelAnimationFrame", () => undefined);
     vi.stubGlobal("reportError", runtime.reportError);
+  });
+
+  it("retains loaded objects for ordinary Edit properties without resolving or parsing assets", async () => {
+    const { asset, scene } = await fixture();
+    const resolve = vi.fn(() => Promise.resolve(new Blob([asset])));
+    const parse = vi.spyOn(GLTFLoader.prototype, "parseAsync");
+    const viewer = createAuthoringSceneViewer(fakeContainer(), { assetResolver: { resolve } });
+    await viewer.load(scene);
+    const object = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    if (!object) throw new Error("Entity object missing");
+    const target = object.children[0];
+    const parseCount = parse.mock.calls.length;
+    const resolveCount = resolve.mock.calls.length;
+    viewer.selectEntity("factory-cell");
+    viewer.setTool("translate");
+    let source = { ...scene, revision: scene.revision + 1, name: "Renamed document" };
+    await viewer.load(source);
+    expect(parse.mock.calls.length).toBe(parseCount);
+    expect(resolve.mock.calls.length).toBe(resolveCount);
+    source = {
+      ...source,
+      revision: source.revision + 1,
+      entities: source.entities.map((entity) =>
+        entity.id === "factory-cell"
+          ? {
+              ...entity,
+              name: "Moved entity",
+              transform: { ...entity.transform, position: [2, 3, 4] as const },
+            }
+          : entity,
+      ),
+    };
+    await viewer.load(source);
+    expect(runtime.scenes.at(-1)?.getObjectByName("factory-cell")).toBe(object);
+    expect(object.children[0]).toBe(target);
+    expect(object.position.toArray()).toEqual([2, 3, 4]);
+    expect(requiredControls().object).toBe(object);
+    source = {
+      ...source,
+      revision: source.revision + 1,
+      entities: source.entities.map((entity) =>
+        entity.id === "factory-cell" ? { ...entity, locked: true, visible: false } : entity,
+      ),
+    };
+    await viewer.load(source);
+    expect(object.visible).toBe(false);
+    expect(requiredControls().object).toBeUndefined();
+    expect(viewer.getSnapshot().revision).toBe(source.revision);
+    expect(parse.mock.calls.length).toBe(parseCount);
+    expect(resolve.mock.calls.length).toBe(resolveCount);
+    await viewer.dispose();
+  });
+
+  it("keeps only the latest retained property update and preserves fallback atomicity", async () => {
+    const { asset, scene } = await fixture();
+    const resolve = vi.fn(() => Promise.resolve(new Blob([asset])));
+    const events: AuthoringViewerEvent[] = [];
+    const viewer = createAuthoringSceneViewer(fakeContainer(), {
+      assetResolver: { resolve },
+      onEvent: (event) => events.push(event),
+    });
+    await viewer.load(scene);
+    const count = resolve.mock.calls.length;
+    const first = viewer.load({ ...scene, revision: scene.revision + 1, name: "superseded" });
+    const latest = viewer.load({ ...scene, revision: scene.revision + 2, name: "accepted" });
+    await expect(first).rejects.toMatchObject({ name: "AbortError" });
+    await latest;
+    expect(resolve).toHaveBeenCalledTimes(count);
+    expect(events.filter((event) => event.type === "ready").map((event) => event.revision)).toEqual(
+      [scene.revision, scene.revision + 2],
+    );
+    const object = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    const invalidAssets = scene.assets.map((asset) => ({ ...asset, sha256: "0".repeat(64) }));
+    const broken = {
+      ...scene,
+      revision: scene.revision + 3,
+      assets: invalidAssets,
+      targets: scene.targets.map((target) => ({ ...target, assetHash: "0".repeat(64) })),
+    };
+    await expect(viewer.load(broken)).rejects.toMatchObject({
+      diagnostic: { code: "ASSET_HASH_MISMATCH" },
+    });
+    expect(runtime.scenes.at(-1)?.getObjectByName("factory-cell")).toBe(object);
+    expect(viewer.getSnapshot().revision).toBe(scene.revision + 2);
+    await viewer.dispose();
+  });
+
+  it("rolls back retained properties when post-property synchronization fails", async () => {
+    const { asset, scene } = await fixture();
+    const viewer = createAuthoringSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+    });
+    await viewer.load(scene);
+    const object = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    const position = object?.position.toArray();
+    const sync = vi.spyOn(HotspotRuntimeController.prototype, "sync").mockImplementationOnce(() => {
+      throw new Error("retained sync failed");
+    });
+    const candidate = {
+      ...scene,
+      revision: scene.revision + 1,
+      entities: scene.entities.map((entity) => ({
+        ...entity,
+        visible: false,
+        transform: { ...entity.transform, position: [3, 2, 1] as const },
+      })),
+    };
+    await expect(viewer.load(candidate)).rejects.toThrow("retained sync failed");
+    expect(viewer.getSnapshot().revision).toBe(scene.revision);
+    expect(object?.position.toArray()).toEqual(position);
+    expect(object?.visible).toBe(true);
+    sync.mockRestore();
+    await viewer.load({ ...scene, revision: scene.revision + 2, name: "recovered" });
+    expect(viewer.getSnapshot().revision).toBe(scene.revision + 2);
+    await viewer.dispose();
+  });
+
+  it("uses full loading for property updates after switching to Run", async () => {
+    const { asset, scene } = await fixture();
+    const resolve = vi.fn(() => Promise.resolve(new Blob([asset])));
+    const viewer = createAuthoringSceneViewer(fakeContainer(), { assetResolver: { resolve } });
+    await viewer.load(scene);
+    const before = resolve.mock.calls.length;
+    const object = runtime.scenes.at(-1)?.getObjectByName("factory-cell");
+    viewer.setAuthoringMode("run");
+    await viewer.setDataRuntimeEnabled(true);
+    await viewer.load({ ...scene, revision: scene.revision + 1, name: "Run update" });
+    expect(resolve.mock.calls.length).toBeGreaterThan(before);
+    expect(runtime.scenes.at(-1)?.getObjectByName("factory-cell")).not.toBe(object);
+    await viewer.dispose();
   });
 
   it("applies the initial canvas aria-label and updates it in place", async () => {
@@ -357,7 +489,11 @@ describe("createAuthoringSceneViewer", () => {
     expect(Object.isFrozen(frame?.position)).toBe(true);
     expect(Object.isFrozen(frame?.target)).toBe(true);
 
-    const loading = viewer.load({ ...scene, revision: scene.revision + 1 });
+    const loading = viewer.load({
+      ...scene,
+      revision: scene.revision + 1,
+      environment: { ...scene.environment, grid: !scene.environment.grid },
+    });
     await vi.waitFor(() => expect(viewer.getSnapshot().lifecycle).toBe("loading"));
     expect(viewer.getLightCreationFrame()).toBeNull();
     replacement.resolve(new Blob([asset]));
@@ -1312,7 +1448,7 @@ describe("createAuthoringSceneViewer", () => {
     expect(previousObject.position.x).toBe(0);
     expect(requiredGuideGroup().visible).toBe(false);
     expect(controls.object).toBeDefined();
-    expect(controls.object).not.toBe(previousObject);
+    expect(controls.object).toBe(previousObject);
     expect(transformEvents(events, "transform-commit")).toHaveLength(0);
     await viewer.dispose();
   });
@@ -1495,7 +1631,7 @@ describe("createAuthoringSceneViewer", () => {
     await viewer.dispose();
   });
 
-  it("preserves selection across revisions and reattaches to the new runtime object", async () => {
+  it("preserves selection and the loaded object across property-only revisions", async () => {
     const { asset, scene } = await fixture();
     const events: AuthoringViewerEvent[] = [];
     const viewer = createAuthoringSceneViewer(fakeContainer(), {
@@ -1512,7 +1648,7 @@ describe("createAuthoringSceneViewer", () => {
 
     expect(viewer.getSnapshot().selectedEntityId).toBe("factory-cell");
     expect(requiredControls().object).toBeDefined();
-    expect(requiredControls().object).not.toBe(previousObject);
+    expect(requiredControls().object).toBe(previousObject);
     expect(selectionEvents(events)).toHaveLength(selectionEventCount);
     await viewer.dispose();
   });

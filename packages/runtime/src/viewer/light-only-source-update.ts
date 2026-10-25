@@ -1,4 +1,6 @@
-import type { LightEntity, SceneDocument, SceneEntity } from "@web3d/document";
+import type { LightEntity, SceneDocument } from "@web3d/document";
+
+import { sameSourceValue } from "./source-state";
 
 export interface LightOnlySourceUpdate {
   readonly lights: readonly LightEntity[];
@@ -36,10 +38,10 @@ export function classifyLightOnlySourceUpdate(
     }
     if (currentEntity.type !== candidateEntity.type) return null;
     if (currentEntity.type !== "light") {
-      if (!sameValue(currentEntity, candidateEntity)) return null;
+      if (!sameSourceValue(currentEntity, candidateEntity)) return null;
       continue;
     }
-    if (!sameValue(currentEntity, candidateEntity)) lightChanged = true;
+    if (!sameSourceValue(currentEntity, candidateEntity)) lightChanged = true;
   }
 
   for (const candidateEntity of candidate.entities) {
@@ -63,23 +65,9 @@ function sameNonEntityDocumentState(left: SceneDocument, right: SceneDocument): 
   void leftRevision;
   void rightEntities;
   void rightRevision;
-  return sameValue(leftRest, rightRest);
+  return sameSourceValue(leftRest, rightRest);
 }
 
 function sameStringArray(left: readonly string[], right: readonly string[]): boolean {
   return left.length === right.length && left.every((value, index) => value === right[index]);
-}
-
-function sameValue(left: SceneEntity | object, right: SceneEntity | object): boolean {
-  return canonicalJson(left) === canonicalJson(right);
-}
-
-function canonicalJson(value: unknown): string {
-  if (value === null || typeof value !== "object") return JSON.stringify(value);
-  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
-  const record = value as Readonly<Record<string, unknown>>;
-  return `{${Object.keys(record)
-    .sort()
-    .map((key) => `${JSON.stringify(key)}:${canonicalJson(record[key])}`)
-    .join(",")}}`;
 }

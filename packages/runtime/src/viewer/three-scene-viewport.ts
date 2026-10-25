@@ -62,9 +62,11 @@ import {
   classifyLightOnlySourceUpdate,
   type LightOnlySourceUpdate,
 } from "./light-only-source-update";
+import { isEntityPropertySourceUpdate } from "./entity-property-source-update";
 import { ObjectPicker } from "./object-picker";
 import {
   buildRuntimeGeneration,
+  prepareEntityPropertyUpdate,
   type RuntimeEntity,
   type RuntimeGeneration,
   type RuntimeTarget,
@@ -140,6 +142,7 @@ class ThreeSceneViewport {
   #gridPreview: boolean | null = null;
   #grid: GridHelper | null = null;
   #loadBarrier: Promise<void> = Promise.resolve();
+  readonly #loadSettlements = new Set<Promise<void>>();
   #loadController: AbortController | null = null;
   #loadOwnsAdapterLifecycle = false;
   #focusFrame: number | null = null;
@@ -304,19 +307,29 @@ class ThreeSceneViewport {
 
     const lightOnlyUpdate =
       current === null ? null : classifyLightOnlySourceUpdate(current, validation.value);
+    const entityPropertyUpdate =
+      current !== null &&
+      this.#authoring.enabled &&
+      this.#authoringMode === "edit" &&
+      !this.#dataRuntimeEnabled &&
+      isEntityPropertySourceUpdate(current, validation.value);
     const supersededController = this.#loadController;
     const restoreAdapters = supersededController !== null && this.#loadOwnsAdapterLifecycle;
     const supersededAdapters = restoreAdapters ? this.#adapterRuntime.stopAll() : Promise.resolve();
     supersededController?.abort();
     const controller = new AbortController();
     this.#loadController = controller;
-    this.#loadOwnsAdapterLifecycle = lightOnlyUpdate === null || restoreAdapters;
+    this.#loadOwnsAdapterLifecycle =
+      (lightOnlyUpdate === null && !entityPropertyUpdate) || restoreAdapters;
     if (this.#pendingEntitySelection?.controller === supersededController) {
       this.#pendingEntitySelection = { ...this.#pendingEntitySelection, controller };
     }
     const operation = this.#loadBarrier.then(async () => {
       await supersededAdapters;
-      if (lightOnlyUpdate === null) await this.#performLoad(validation.value, controller);
+      controller.signal.throwIfAborted();
+      if (entityPropertyUpdate)
+        await this.#performEntityPropertyLoad(validation.value, controller, restoreAdapters);
+      else if (lightOnlyUpdate === null) await this.#performLoad(validation.value, controller);
       else {
         await this.#performLightOnlyLoad(
           validation.value,
@@ -327,7 +340,17 @@ class ThreeSceneViewport {
       }
     });
     this.#loadBarrier = operation.catch(() => undefined);
-    return operation;
+    const publicOperation = abortableLoad(operation, controller.signal);
+    const settled = publicOperation.then(
+      () => {
+        this.#loadSettlements.delete(settled);
+      },
+      () => {
+        this.#loadSettlements.delete(settled);
+      },
+    );
+    this.#loadSettlements.add(settled);
+    return publicOperation;
   }
 
   async #performLoad(source: SceneDocument, controller: AbortController): Promise<void> {
@@ -339,12 +362,15 @@ class ThreeSceneViewport {
     let committed = false;
 
     try {
-      candidate = await buildRuntimeGeneration(
-        source,
-        this.#assetResolver,
+      candidate = await awaitGeneration(
+        buildRuntimeGeneration(
+          source,
+          this.#assetResolver,
+          controller.signal,
+          this.#authoringMode,
+          this.#requestRender,
+        ),
         controller.signal,
-        this.#authoringMode,
-        this.#requestRender,
       );
       this.#pendingGenerations.add(candidate);
       controller.signal.throwIfAborted();
@@ -354,6 +380,8 @@ class ThreeSceneViewport {
         candidate = null;
         committed = true;
       });
+      controller.signal.throwIfAborted();
+      if (this.#disposing || this.#loadController !== controller) throw abortError();
       await this.#adapterRuntime.applyDocumentAdapters();
 
       if (this.#disposing) throw abortError();
@@ -381,12 +409,109 @@ class ThreeSceneViewport {
           await this.#adapterRuntime.applyDocumentAdapters();
         }
       }
-      if (!isAbortError(error)) {
+      if (!this.#disposing && !isAbortError(error)) {
         const value =
           error instanceof RuntimeDiagnosticError
             ? error.diagnostic
             : diagnostic("ASSET_LOAD_FAILED", "asset", "error", "Scene loading failed.");
         this.#recordDiagnostic(value);
+      }
+      throw error;
+    } finally {
+      if (this.#loadController === controller) {
+        this.#loadController = null;
+        this.#loadOwnsAdapterLifecycle = false;
+      }
+    }
+  }
+
+  async #performEntityPropertyLoad(
+    source: SceneDocument,
+    controller: AbortController,
+    restoreAdapters: boolean,
+  ): Promise<void> {
+    controller.signal.throwIfAborted();
+    const generation = this.#generation;
+    const previous = this.#document;
+    if (this.#disposing || generation === null || previous === null) throw abortError();
+    if (!isEntityPropertySourceUpdate(previous, source)) {
+      this.#loadOwnsAdapterLifecycle = true;
+      await this.#performLoad(source, controller);
+      return;
+    }
+    const commitProperties = prepareEntityPropertyUpdate(generation, source);
+    const rollbackProperties = prepareEntityPropertyUpdate(generation, previous);
+    let previousSelection = this.#entitySelection;
+    let propertiesCommitted = false;
+    try {
+      await Promise.resolve();
+      if (restoreAdapters) await this.#adapterRuntime.applyDocumentAdapters();
+      controller.signal.throwIfAborted();
+      if (
+        this.#disposing ||
+        this.#loadController !== controller ||
+        this.#generation !== generation ||
+        this.#document !== previous
+      )
+        throw abortError();
+      if (this.#authoringMode !== "edit" || this.#dataRuntimeEnabled) {
+        this.#loadOwnsAdapterLifecycle = true;
+        await this.#performLoad(source, controller);
+        return;
+      }
+      previousSelection = this.#entitySelection;
+      const pendingSelection =
+        this.#pendingEntitySelection?.controller === controller
+          ? this.#pendingEntitySelection
+          : null;
+      const nextSelection =
+        pendingSelection === null
+          ? this.#entitySelection
+          : retainEntitySelection(pendingSelection.selection, (id) => generation.entities.has(id));
+      this.#transformAuthoring?.sync(null, [], this.#entitySelection.primaryEntityId);
+      controller.signal.throwIfAborted();
+      if (this.#disposing || this.#loadController !== controller) throw abortError();
+      commitProperties();
+      propertiesCommitted = true;
+      this.#document = source;
+      this.#entitySelection = nextSelection;
+      if (pendingSelection !== null) this.#pendingEntitySelection = null;
+      this.#hotspots.sync(source, generation);
+      this.#dataRuntime.refreshDocumentAuthority(source, generation);
+      this.#syncSelectionOverlay();
+      this.#transformAuthoring?.sync(
+        generation,
+        this.#entitySelection.entityIds,
+        this.#entitySelection.primaryEntityId,
+      );
+      this.#lifecycle = "ready";
+      if (previousSelection.primaryEntityId !== nextSelection.primaryEntityId)
+        this.#emitAuthoring({
+          type: "entity-selection-change",
+          entityId: nextSelection.primaryEntityId,
+          origin: pendingSelection?.origin ?? "api",
+        });
+      controller.signal.throwIfAborted();
+      if (this.#disposing || this.#loadController !== controller) throw abortError();
+      this.#emitViewer({ type: "ready", documentId: source.id, revision: source.revision });
+      this.#requestRender();
+    } catch (error) {
+      if (this.#pendingEntitySelection?.controller === controller)
+        this.#pendingEntitySelection = null;
+      if (this.#loadController === controller && !this.#disposing) {
+        if (propertiesCommitted) {
+          rollbackProperties();
+          this.#document = previous;
+          this.#entitySelection = previousSelection;
+          this.#dataRuntime.refreshDocumentAuthority(previous, generation);
+          this.#syncSelectionOverlay();
+          this.#transformAuthoring?.sync(
+            generation,
+            previousSelection.entityIds,
+            previousSelection.primaryEntityId,
+          );
+        }
+        this.#hotspots.sync(previous, generation);
       }
       throw error;
     } finally {
@@ -458,7 +583,7 @@ class ThreeSceneViewport {
           this.#hotspots.sync(this.#document, this.#generation);
         }
       }
-      if (!isAbortError(error)) {
+      if (!this.#disposing && !isAbortError(error)) {
         const value = diagnostic(
           "AUTHORED_LIGHT_RECONCILE_FAILED",
           "viewer",
@@ -882,7 +1007,7 @@ class ThreeSceneViewport {
     this.#generation = null;
     this.#renderer.dispose();
     this.#renderer.domElement.remove();
-    await this.#adapterRuntime.stopAll();
+    await Promise.all([this.#adapterRuntime.stopAll(), ...this.#loadSettlements]);
   }
 
   readonly #requestRender = (): void => {
@@ -1299,4 +1424,59 @@ export function createThreeSceneViewport(
     ...(authoring === undefined ? {} : { authoring }),
   });
   return viewport as unknown as SceneViewer | AuthoringSceneViewer;
+}
+
+function awaitGeneration(
+  operation: Promise<RuntimeGeneration>,
+  signal: AbortSignal,
+): Promise<RuntimeGeneration> {
+  return new Promise((resolve, reject) => {
+    let cancelled = false;
+    const cleanup = (): void => signal.removeEventListener("abort", abort);
+    const abort = (): void => {
+      cancelled = true;
+      cleanup();
+      reject(abortError());
+    };
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+    operation.then(
+      (generation) => {
+        cleanup();
+        if (cancelled) {
+          try {
+            generation.dispose();
+          } catch {
+            /* Cancelled work has no live diagnostic authority. */
+          }
+        } else resolve(generation);
+      },
+      (error: unknown) => {
+        cleanup();
+        reject(error);
+      },
+    );
+  });
+}
+
+function abortableLoad(operation: Promise<void>, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const cleanup = (): void => signal.removeEventListener("abort", abort);
+    const abort = (): void => {
+      cleanup();
+      reject(abortError());
+    };
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+    operation.then(
+      () => {
+        cleanup();
+        resolve();
+      },
+      (error: unknown) => {
+        cleanup();
+        reject(error);
+      },
+    );
+  });
 }

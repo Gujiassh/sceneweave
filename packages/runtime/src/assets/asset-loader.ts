@@ -3,6 +3,7 @@ import { GLTFLoader, type GLTF } from "three/addons/loaders/GLTFLoader.js";
 import { Group, Mesh, type Object3D } from "three";
 
 import { disposeObject3D } from "./dispose-object";
+import { selfContainedLoadingManager, validateSelfContainedGltf } from "./gltf-resource-policy";
 import {
   describeImportedPunctualLights,
   replaceImportedPunctualLights,
@@ -76,7 +77,11 @@ export async function loadGltfAsset(
 
   let gltf: GLTF;
   try {
-    gltf = await new GLTFLoader().parseAsync(bytes, basePath(resolved));
+    const parseInput = validateSelfContainedGltf(bytes, asset.mediaType);
+    gltf = await new GLTFLoader(selfContainedLoadingManager()).parseAsync(
+      parseInput,
+      basePath(resolved),
+    );
   } catch (error) {
     throw diagnosticError(
       diagnostic("ASSET_LOAD_FAILED", "asset", "error", "GLTFLoader could not parse the asset.", {

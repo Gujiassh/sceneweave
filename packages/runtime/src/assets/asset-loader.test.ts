@@ -61,7 +61,7 @@ describe("loadGltfAsset", () => {
   });
 
   it("expands formal node identity across primitive meshes and nested formal nodes", async () => {
-    const bytes = Uint8Array.from([4, 3, 2, 1]);
+    const bytes = new Uint8Array(glbBytes({ asset: { version: "2.0" } }));
     const scene = new Group();
     const parentNode = new Group();
     const firstPrimitive = new Mesh(new BoxGeometry(), new MeshBasicMaterial());
@@ -296,7 +296,7 @@ describe("loadGltfAsset", () => {
   });
 
   it("disposes a parsed scene when the load is aborted after parsing", async () => {
-    const bytes = Uint8Array.from([1, 2, 3, 4]);
+    const bytes = new Uint8Array(glbBytes({ asset: { version: "2.0" } }));
     const controller = new AbortController();
     const root = new Group();
     const geometry = new BoxGeometry();
@@ -447,7 +447,7 @@ async function loadMockedAsset(
   scene: Group,
   associations: Map<Object3D, Record<string, number>>,
 ) {
-  const bytes = new TextEncoder().encode(id);
+  const bytes = new Uint8Array(glbBytes({ asset: { version: "2.0" }, extras: { id } }));
   const parse = vi.spyOn(GLTFLoader.prototype, "parseAsync").mockResolvedValue({
     parser: { associations },
     scene,

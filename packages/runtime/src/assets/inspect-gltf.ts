@@ -8,11 +8,14 @@ import {
   inspectImportedPunctualLights,
 } from "./imported-punctual-lights";
 import { sha256Hex } from "./asset-loader";
+import {
+  GltfResourcePolicyError,
+  selfContainedLoadingManager,
+  validateSelfContainedGltf,
+} from "./gltf-resource-policy";
 
 export const MAX_GLTF_INSPECTION_BYTES = 50 * 1024 * 1024;
-const GLB_HEADER_BYTES = 12;
 const GLB_MAGIC = 0x46546c67;
-const GLB_VERSION = 2;
 const NEAR_LIMIT_WARNING_BYTES = 45 * 1024 * 1024;
 
 export interface GltfInspectionSummary {
@@ -46,13 +49,19 @@ export async function inspectGltf(
   }
 
   const mediaType = detectMediaType(name, bytes);
-  const parseInput =
-    mediaType === "model/gltf-binary" ? validateGlb(bytes) : validateGltfJson(bytes);
+  let parseInput: ArrayBuffer | string;
+  try {
+    parseInput = validateSelfContainedGltf(bytes, mediaType);
+  } catch (error) {
+    if (error instanceof GltfResourcePolicyError)
+      throw new InspectGltfError(`INSPECT_${error.code}`, error.message, { cause: error });
+    throw error;
+  }
   const sha256 = await sha256Hex(bytes);
 
   let gltf: GLTF | undefined;
   try {
-    gltf = await new GLTFLoader().parseAsync(parseInput, "");
+    gltf = await new GLTFLoader(selfContainedLoadingManager()).parseAsync(parseInput, "");
     assertSingleScene(gltf);
 
     const stats = collectStats(gltf);
@@ -87,63 +96,6 @@ function detectMediaType(name: string, bytes: ArrayBuffer): SceneAsset["mediaTyp
     "INSPECT_GLTF_TYPE_UNSUPPORTED",
     `Model ${name} is not recognizable as GLB or glTF.`,
   );
-}
-
-function validateGlb(bytes: ArrayBuffer): ArrayBuffer {
-  if (bytes.byteLength < GLB_HEADER_BYTES) {
-    throw new InspectGltfError("INSPECT_GLB_HEADER_INVALID", "GLB header is incomplete.");
-  }
-  const header = new DataView(bytes, 0, GLB_HEADER_BYTES);
-  if (header.getUint32(0, true) !== GLB_MAGIC) {
-    throw new InspectGltfError("INSPECT_GLB_HEADER_INVALID", "GLB magic is invalid.");
-  }
-  if (header.getUint32(4, true) !== GLB_VERSION) {
-    throw new InspectGltfError(
-      "INSPECT_GLB_VERSION_UNSUPPORTED",
-      `GLB version must be ${GLB_VERSION}.`,
-    );
-  }
-  if (header.getUint32(8, true) !== bytes.byteLength) {
-    throw new InspectGltfError(
-      "INSPECT_GLB_LENGTH_MISMATCH",
-      "GLB declared length does not match the file length.",
-    );
-  }
-  return bytes;
-}
-
-function validateGltfJson(bytes: ArrayBuffer): string {
-  const text = decodeUtf8(bytes);
-  let document: GltfJsonDocument;
-  try {
-    document = JSON.parse(text) as GltfJsonDocument;
-  } catch (error) {
-    throw new InspectGltfError("INSPECT_GLTF_JSON_INVALID", "glTF JSON is invalid.", {
-      cause: error,
-    });
-  }
-
-  if (document === null || typeof document !== "object" || Array.isArray(document)) {
-    throw new InspectGltfError("INSPECT_GLTF_JSON_INVALID", "glTF JSON must be an object.");
-  }
-
-  assertNoExternalUris(document.buffers, "buffer");
-  assertNoExternalUris(document.images, "image");
-  return text;
-}
-
-function assertNoExternalUris(
-  items: readonly { readonly uri?: string }[] | undefined,
-  kind: "buffer" | "image",
-): void {
-  for (const item of items ?? []) {
-    if (item?.uri === undefined) continue;
-    if (/^data:/i.test(item.uri)) continue;
-    throw new InspectGltfError(
-      "INSPECT_GLTF_EXTERNAL_URI_UNSUPPORTED",
-      `glTF ${kind} uses unsupported external URI ${item.uri}.`,
-    );
-  }
 }
 
 function assertSingleScene(gltf: GLTF): void {
@@ -235,11 +187,6 @@ function decodeUtf8(bytes: ArrayBuffer): string {
 
 interface Association {
   readonly nodes?: number;
-}
-
-interface GltfJsonDocument {
-  readonly buffers?: readonly { readonly uri?: string }[];
-  readonly images?: readonly { readonly uri?: string }[];
 }
 
 interface ParserLike {

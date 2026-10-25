@@ -128,14 +128,14 @@ describe("inspectGltf", () => {
     });
   });
 
-  it("rejects a damaged GLB when GLTFLoader cannot parse it", async () => {
+  it("rejects damaged GLB JSON before GLTFLoader can parse it", async () => {
     const file = await readFile(assetUrl);
     const damaged = new Uint8Array(toArrayBuffer(file));
     const jsonChunkOffset = 20;
     damaged.fill(0xff, jsonChunkOffset, jsonChunkOffset + 32);
 
     await expect(inspectGltf("damaged.glb", damaged.buffer)).rejects.toMatchObject({
-      code: "INSPECT_GLTF_PARSE_FAILED",
+      code: "INSPECT_GLTF_JSON_INVALID",
     });
   });
 
@@ -295,12 +295,7 @@ function fakeGltf(input: {
 }
 
 function fakeGlbBytes(): Uint8Array {
-  const bytes = new Uint8Array(12);
-  const view = new DataView(bytes.buffer);
-  view.setUint32(0, 0x46546c67, true);
-  view.setUint32(4, 2, true);
-  view.setUint32(8, bytes.byteLength, true);
-  return bytes;
+  return new Uint8Array(glbBytes({ asset: { version: "2.0" } }));
 }
 
 function gltfJsonBytes(value: unknown): ArrayBuffer {

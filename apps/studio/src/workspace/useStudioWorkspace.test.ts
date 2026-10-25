@@ -93,7 +93,10 @@ beforeEach(async () => {
     }),
     markExported: vi.fn(async (id: string, revision: number) => {
       const current = saved.get(id)!;
-      const record = { ...current.record, lastExportedRevision: revision };
+      const record = {
+        ...current.record,
+        lastExportedRevision: Math.max(current.record.lastExportedRevision ?? -1, revision),
+      };
       saved.set(id, { ...current, record });
       return record;
     }),
@@ -208,14 +211,9 @@ describe("workspace async authority", () => {
     expect(HTMLAnchorElement.prototype.click).not.toHaveBeenCalled();
     expect(workspace.diagnostics.at(-1)).toContain("disk full");
   });
-  it("keeps export metadata monotonic when acknowledgement responses arrive in reverse order", async () => {
-    const first = deferred<StudioProjectSnapshot["record"]>();
-    vi.mocked(
-      harness.repository.markExported as (
-        id: string,
-        revision: number,
-      ) => Promise<StudioProjectSnapshot["record"]>,
-    ).mockImplementationOnce(() => first.promise);
+  it("keeps export metadata monotonic when an older artifact finishes after a newer export", async () => {
+    const first = deferred<Uint8Array>();
+    harness.archive.mockReturnValueOnce(first.promise);
     let oldExport!: Promise<void>;
     await act(async () => {
       oldExport = workspace.exportArchive();
@@ -223,7 +221,7 @@ describe("workspace async authority", () => {
     await act(async () => workspace.renameProject("New A"));
     await act(async () => workspace.exportArchive());
     expect(workspace.session?.lastExportedRevision).toBe(1);
-    first.resolve({ ...saved.get("A")!.record, lastExportedRevision: 0, lastSavedRevision: 0 });
+    first.resolve(new Uint8Array([1]));
     await act(async () => oldExport);
     expect(workspace.session?.lastExportedRevision).toBe(1);
     expect(workspace.project?.record.lastExportedRevision).toBe(1);

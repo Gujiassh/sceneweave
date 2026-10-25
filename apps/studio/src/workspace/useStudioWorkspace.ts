@@ -54,6 +54,11 @@ import {
   type StudioSessionState,
 } from "../session/session-state";
 import type { StudioCommandOutcome } from "./command-outcome";
+import {
+  createProjectWriteAuthority,
+  projectForPersistence,
+  type ProjectWriteAuthority,
+} from "./project-write-authority";
 import { initializeRepository } from "./initialize-repository";
 
 export type ModelImportState =
@@ -78,6 +83,10 @@ interface InterceptableNavigationEvent extends Event {
 }
 
 export interface StudioWorkspace {
+  readonly saveConflict: string | null;
+  readonly copying: boolean;
+  readonly copySaved: boolean;
+  readonly saveCopy: () => Promise<void>;
   readonly loading: boolean;
   readonly project: StudioProjectSnapshot | null;
   readonly history: DocumentHistoryState | null;
@@ -119,6 +128,10 @@ export interface StudioWorkspace {
 
 export function useStudioWorkspace(): StudioWorkspace {
   const { formatters, t } = useStudioI18n();
+  const authorityRef = useRef<ProjectWriteAuthority | null>(null);
+  const [saveConflict, setSaveConflict] = useState<string | null>(null);
+  const [copying, setCopying] = useState(false);
+  const [copySaved, setCopySaved] = useState(false);
   const repositoryRef = useRef<StudioProjectRepository | null>(null);
   const autosaveRef = useRef<AutosaveController | null>(null);
   const importCandidateRef = useRef<ImportCandidate | null>(null);
@@ -149,6 +162,41 @@ export function useStudioWorkspace(): StudioWorkspace {
     [],
   );
 
+  const reportConflict = useCallback(
+    (authority: ProjectWriteAuthority | null, error: unknown) => {
+      if (
+        authority === null ||
+        authorityRef.current !== authority ||
+        !isStudioAppError(error) ||
+        error.code !== "PROJECT_SAVE_CONFLICT"
+      )
+        return;
+      const message = presentError(error);
+      setSaveConflict(message);
+      autosaveRef.current?.clearPending();
+      setSession((current) =>
+        current === null || authorityRef.current !== authority
+          ? current
+          : reduceStudioSession(current, {
+              type: "save-failed",
+              revision: current.documentRevision,
+              message,
+            }),
+      );
+    },
+    [presentError],
+  );
+
+  useEffect(() => {
+    if (saveConflict === null) return;
+    const warn = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [saveConflict]);
+
   useEffect(() => {
     let active = true;
     let repository: StudioProjectRepository;
@@ -160,10 +208,15 @@ export function useStudioWorkspace(): StudioWorkspace {
       return;
     }
     repositoryRef.current = repository;
+    let closingAuthority: ProjectWriteAuthority | null = null;
+    let savingAuthority: ProjectWriteAuthority | null = null;
     const autosave = createAutosaveController({
       async save(snapshot) {
-        const saved = await repository.save(snapshot);
-        if (!active) return;
+        const authority = active ? authorityRef.current : closingAuthority;
+        if (authority === null || authority.projectId !== snapshot.record.id)
+          throw studioAppErrors.projectSaveConflict(snapshot.record.id);
+        const saved = await authority.save(snapshot);
+        if (!active || authorityRef.current !== authority) return;
         const current = projectRef.current;
         if (current?.record.id === saved.record.id) {
           const next = withSavedProjectRecord(current, saved.record);
@@ -171,7 +224,7 @@ export function useStudioWorkspace(): StudioWorkspace {
           setProject(next);
         }
         void repository.listRecent().then((items) => {
-          if (!active) return;
+          if (!active || authorityRef.current !== authority) return;
           const current = projectRef.current;
           setRecent(
             current === null
@@ -181,9 +234,15 @@ export function useStudioWorkspace(): StudioWorkspace {
         });
       },
       onStateChange(state) {
-        if (!active) return;
+        if (state.status === "saving") savingAuthority = authorityRef.current;
+        const authority = savingAuthority;
+        if (!active || authority === null || authorityRef.current !== authority) return;
+        if (state.status === "failed" && authority.conflicted) {
+          reportConflict(authority, studioAppErrors.projectSaveConflict(authority.projectId));
+          autosave.clearPending();
+        }
         setSession((current) => {
-          if (current === null) return current;
+          if (current === null || authorityRef.current !== authority) return current;
           if (state.status === "saving") {
             return reduceStudioSession(current, {
               type: "save-started",
@@ -252,6 +311,7 @@ export function useStudioWorkspace(): StudioWorkspace {
     })
       .then(({ current, items }) => {
         if (!active) return;
+        authorityRef.current = createProjectWriteAuthority(repository, current);
         projectRef.current = current;
         activateProject(current, setProject, setHistory, setSession);
         setRecent(items);
@@ -264,18 +324,22 @@ export function useStudioWorkspace(): StudioWorkspace {
       });
 
     return () => {
+      closingAuthority = authorityRef.current;
       active = false;
       replacementRef.current++;
       importRequestRef.current++;
       initializationAbort.abort();
       browserNavigation?.removeEventListener("navigate", flushBeforeNavigation);
       window.removeEventListener("pagehide", flushBeforePageExit);
-      if (repositoryRef.current === repository) repositoryRef.current = null;
+      if (repositoryRef.current === repository) {
+        repositoryRef.current = null;
+        authorityRef.current = null;
+      }
       if (autosaveRef.current === autosave) autosaveRef.current = null;
       importCandidateRef.current = null;
       void autosave.close().finally(() => repository.close());
     };
-  }, [addDiagnostic, initializationAttempt, presentError]);
+  }, [addDiagnostic, initializationAttempt, presentError, reportConflict]);
 
   const retryInitialization = useCallback(() => {
     if (projectRef.current !== null) return;
@@ -285,10 +349,10 @@ export function useStudioWorkspace(): StudioWorkspace {
   }, []);
 
   useEffect(() => {
-    if (project === null || session === null) return;
+    if (project === null || session === null || saveConflict !== null) return;
     if (project.document.revision <= session.save.revision) return;
     autosaveRef.current?.schedule(project);
-  }, [project, session]);
+  }, [project, session, saveConflict]);
 
   const execute = useCallback(
     (command: DocumentCommand): StudioCommandOutcome => {
@@ -459,7 +523,8 @@ export function useStudioWorkspace(): StudioWorkspace {
   );
 
   const confirmImport = useCallback(async () => {
-    if (committingRef.current || replacingRef.current) return;
+    const authority = authorityRef.current;
+    if (authority === null || committingRef.current || replacingRef.current) return;
     const candidate = importCandidateRef.current;
     const repository = repositoryRef.current;
     if (
@@ -504,11 +569,12 @@ export function useStudioWorkspace(): StudioWorkspace {
             },
           ];
       await requireAutosave(autosaveRef.current).flush(project);
-      const saved = await repository.save({
+      const saved = await authority.save({
         ...project,
         document: nextHistory.document,
         assets: pendingAssets,
       });
+      if (authorityRef.current !== authority) return;
       projectRef.current = { ...saved, assets: pendingAssets };
       setHistory({ ...nextHistory, document: saved.document });
       setProject({ ...saved, assets: pendingAssets });
@@ -534,13 +600,22 @@ export function useStudioWorkspace(): StudioWorkspace {
       importCandidateRef.current = null;
       setImportState(null);
     } catch (error) {
+      reportConflict(authority, error);
       const message = presentError(error);
       addDiagnostic(message);
       setImportState({ status: "failed", fileName: summary.fileName, message });
     } finally {
       committingRef.current = false;
     }
-  }, [addDiagnostic, history, presentError, project, session, t.defaults.importedModel]);
+  }, [
+    addDiagnostic,
+    history,
+    presentError,
+    project,
+    reportConflict,
+    session,
+    t.defaults.importedModel,
+  ]);
 
   const closeImport = useCallback(() => {
     if (committingRef.current) return;
@@ -568,6 +643,9 @@ export function useStudioWorkspace(): StudioWorkspace {
           const repository = requireRepository(repositoryRef.current);
           const next = await load(repository);
           if (request !== replacementRef.current) return false;
+          authorityRef.current = createProjectWriteAuthority(repository, next);
+          setSaveConflict(null);
+          setCopySaved(false);
           projectRef.current = next;
           activateProject(next, setProject, setHistory, setSession);
           const items = await repository.listRecent();
@@ -667,10 +745,63 @@ export function useStudioWorkspace(): StudioWorkspace {
     [replaceProject],
   );
 
+  const saveCopy = useCallback(async () => {
+    const current = projectRef.current;
+    const authority = authorityRef.current;
+    if (current === null || authority === null || committingRef.current || replacingRef.current)
+      return;
+    committingRef.current = true;
+    setCopying(true);
+    try {
+      const repository = requireRepository(repositoryRef.current);
+      const now = new Date().toISOString();
+      const candidate: StudioProjectSnapshot = {
+        ...current,
+        record: {
+          id: `project-${crypto.randomUUID()}`,
+          name: current.document.name,
+          createdAt: now,
+          updatedAt: now,
+          lastOpenedAt: now,
+          lastSavedRevision: current.document.revision,
+          lastExportedRevision: null,
+        },
+      };
+      const saved = await repository.save(projectForPersistence(candidate));
+      if (authorityRef.current !== authority) return;
+      autosaveRef.current?.clearPending();
+      const next = { ...saved, assets: current.assets };
+      const copiedAuthority = createProjectWriteAuthority(repository, saved);
+      authorityRef.current = copiedAuthority;
+      projectRef.current = next;
+      setProject(next);
+      setSession((live) =>
+        live === null
+          ? live
+          : {
+              ...live,
+              save: { status: "saved", revision: saved.document.revision },
+              lastExportedRevision: null,
+            },
+      );
+      setSaveConflict(null);
+      setCopySaved(true);
+      const items = await repository.listRecent();
+      if (authorityRef.current === copiedAuthority) setRecent(items);
+    } catch (error) {
+      addDiagnostic(presentError(error));
+    } finally {
+      committingRef.current = false;
+      setCopying(false);
+    }
+  }, [addDiagnostic, presentError]);
+
   const exportProject = useCallback(
     async (format: "json" | "archive") => {
       const captured = projectRef.current;
-      if (captured === null || committingRef.current || replacingRef.current) return;
+      const authority = authorityRef.current;
+      if (authority === null || captured === null || committingRef.current || replacingRef.current)
+        return;
       try {
         const repository = requireRepository(repositoryRef.current);
         await requireAutosave(autosaveRef.current).flush(captured);
@@ -681,11 +812,11 @@ export function useStudioWorkspace(): StudioWorkspace {
           `${formatters.safeFileStem(captured.document.name, t.defaults.fileNameScene)}.${extension}`,
           format === "json" ? "application/json" : "application/zip",
         );
-        const record = await repository.markExported(
-          captured.record.id,
-          captured.document.revision,
-        );
-        if (projectRef.current?.record.id === captured.record.id) {
+        const record = await authority.markExported(captured.document.revision);
+        if (
+          authorityRef.current === authority &&
+          projectRef.current?.record.id === captured.record.id
+        ) {
           const current = projectRef.current;
           const exportedRevision = Math.max(
             current.record.lastExportedRevision ?? -1,
@@ -707,10 +838,11 @@ export function useStudioWorkspace(): StudioWorkspace {
           );
         }
       } catch (error) {
+        reportConflict(authority, error);
         addDiagnostic(presentError(error));
       }
     },
-    [addDiagnostic, formatters, presentError, replacing, t.defaults.fileNameScene],
+    [addDiagnostic, formatters, presentError, replacing, reportConflict, t.defaults.fileNameScene],
   );
   const exportJson = useCallback(() => exportProject("json"), [exportProject]);
   const exportArchive = useCallback(() => exportProject("archive"), [exportProject]);
@@ -775,6 +907,10 @@ export function useStudioWorkspace(): StudioWorkspace {
   );
 
   return {
+    saveConflict,
+    copying,
+    copySaved,
+    saveCopy,
     loading,
     project,
     history,
@@ -785,7 +921,8 @@ export function useStudioWorkspace(): StudioWorkspace {
     assetResolver,
     dirty: session === null ? false : isDirty(session),
     exportOutdated: session === null ? true : isExportOutdated(session),
-    canEdit: session?.mode === "edit" && importState?.status !== "committing" && !replacing,
+    canEdit:
+      session?.mode === "edit" && importState?.status !== "committing" && !replacing && !copying,
     execute,
     undo,
     redo,

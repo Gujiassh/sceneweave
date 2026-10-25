@@ -38,13 +38,84 @@ describe("createIndexedDbProjectRepository", () => {
     vi.restoreAllMocks();
   });
 
+  it("rejects stale and equal-revision forks from two real connections", async () => {
+    for (const equalRevision of [false, true]) {
+      const dbName = createDbName();
+      const clock = new FixedClock("2026-10-25T00:00:00.000Z");
+      const first = createIndexedDbProjectRepository({ dbName, clock });
+      const second = createIndexedDbProjectRepository({ dbName, clock });
+      const initial = await createFixtureProject({ clock, projectId: "cas-project", revision: 1 });
+      await first.save(initial);
+      const a = await first.open(initial.record.id);
+      const b = await second.open(initial.record.id);
+      const winner = await first.save({
+        ...a,
+        document: { ...a.document, name: "Winner", revision: equalRevision ? 2 : 3 },
+      });
+      const fork = await createFixtureProject({
+        clock,
+        projectId: initial.record.id,
+        revision: 2,
+        projectName: "Fork",
+        assetContents: "fork-only-asset",
+      });
+      const before = await readStoredProjects(dbName);
+      await expect(second.save({ ...fork, record: b.record })).rejects.toMatchObject({
+        code: "PROJECT_SAVE_CONFLICT",
+      });
+      expect(await readStoredProjects(dbName)).toEqual(before);
+      expect((await first.open(initial.record.id)).document).toEqual(winner.document);
+      await expect(first.resolveAsset(`asset://${fork.assets[0]!.sha256}`)).rejects.toThrow();
+      await first.close();
+      await second.close();
+    }
+  });
+
+  it("establishes one legacy token and checks CAS before accepting identical bytes", async () => {
+    const dbName = createDbName();
+    await seedStoredProjects(dbName, [
+      nonCanonicalCurrentStoredProject(
+        legacyStoredProject("legacy-cas", "Legacy", "2026-07-14T12:30:00.000Z", 1),
+      ),
+    ]);
+    const a = createIndexedDbProjectRepository({ dbName });
+    const b = createIndexedDbProjectRepository({ dbName });
+    const first = await a.open("legacy-cas");
+    const stale = await b.open("legacy-cas");
+    expect(first.record.storageVersion).toBeNull();
+    const asset = first.document.assets[0]!;
+    const bytes = readFileSync(
+      resolve(process.cwd(), "tests/fixtures/m0-factory/public/m0-factory-cell.glb"),
+    );
+    const saved = await a.save({
+      ...first,
+      assets: [
+        {
+          sha256: asset.sha256,
+          mediaType: asset.mediaType,
+          blob: new Blob([Uint8Array.from(bytes)], { type: asset.mediaType }),
+        },
+      ],
+    });
+    expect(saved.record.storageVersion).toEqual(expect.any(String));
+    await expect(b.save(stale)).rejects.toMatchObject({ code: "PROJECT_SAVE_CONFLICT" });
+    const noOp = await a.save(saved);
+    expect(noOp.record.storageVersion).toBe(saved.record.storageVersion);
+    await a.markExported(saved.record.id, saved.document.revision, saved.record.storageVersion!);
+    const afterMetadata = await a.save(noOp);
+    expect(afterMetadata.record.storageVersion).toBe(saved.record.storageVersion);
+    expect(afterMetadata.record.lastExportedRevision).toBe(saved.document.revision);
+    await a.close();
+    await b.close();
+  });
+
   it("acknowledges exports atomically without changing documents or active-project metadata", async () => {
     const dbName = createDbName();
     const clock = new FixedClock("2026-10-25T00:00:00.000Z");
     const repository = createIndexedDbProjectRepository({ dbName, clock });
     const a = await createFixtureProject({ clock, projectId: "export-a", revision: 4 });
     const b = await createFixtureProject({ clock, projectId: "export-b", revision: 1 });
-    await repository.save(a);
+    const savedA = await repository.save(a);
     await repository.save(b);
     const before = await readStoredProjects(dbName);
     const recentBefore = await repository.listRecent();
@@ -55,8 +126,8 @@ describe("createIndexedDbProjectRepository", () => {
     };
     expect((await readLast()).value).toBe("export-b");
     await Promise.all([
-      repository.markExported("export-a", 4),
-      repository.markExported("export-a", 2),
+      repository.markExported("export-a", 4, savedA.record.storageVersion!),
+      repository.markExported("export-a", 2, savedA.record.storageVersion!),
     ]);
     const after = await readStoredProjects(dbName);
     const original = before.records.find((record) => record.id === "export-a")!;
@@ -68,12 +139,18 @@ describe("createIndexedDbProjectRepository", () => {
     expect((await repository.listRecent()).map((record) => record.id)).toEqual(
       recentBefore.map((record) => record.id),
     );
-    const newer = { ...a, document: { ...a.document, revision: 5 } };
-    await Promise.all([repository.save(newer), repository.markExported("export-a", 3)]);
+    await Promise.all([
+      repository.save(savedA),
+      repository.markExported("export-a", 3, savedA.record.storageVersion!),
+    ]);
+    const newer = { ...savedA, document: { ...a.document, revision: 5 } };
+    const savedNewer = await repository.save(newer);
     const reopened = await repository.open("export-a");
     expect(reopened.document.revision).toBe(5);
     expect(reopened.record.lastExportedRevision).toBe(4);
-    await expect(repository.markExported("export-a", 6)).rejects.toThrow("saved document revision");
+    await expect(
+      repository.markExported("export-a", 6, savedNewer.record.storageVersion!),
+    ).rejects.toThrow("saved document revision");
     expect((await repository.open("export-a")).document.revision).toBe(5);
     db.close();
     await repository.close();
@@ -390,7 +467,7 @@ describe("createIndexedDbProjectRepository", () => {
     });
 
     const initial = await createFixtureProject({ clock, revision: 1 });
-    await repository.save(initial);
+    const savedInitial = await repository.save(initial);
 
     const originalPut = IDBObjectStore.prototype.put;
     let shouldFailProjectWrite = true;
@@ -417,7 +494,9 @@ describe("createIndexedDbProjectRepository", () => {
     });
     const failingAssetUri = failing.document.assets[0]!.uri;
     expect(failingAssetUri).not.toBe(initial.document.assets[0]!.uri);
-    await expect(repository.save(failing)).rejects.toThrow(/write failed/);
+    await expect(repository.save({ ...failing, record: savedInitial.record })).rejects.toThrow(
+      /write failed/,
+    );
     expect(putSpy).toHaveBeenCalled();
 
     const reopened = await repository.open(initial.record.id);

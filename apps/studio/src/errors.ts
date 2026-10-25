@@ -7,6 +7,7 @@ export interface StudioErrorDiagnosticDetails {
 }
 
 export interface StudioAppErrorDetailsByCode {
+  readonly PROJECT_SAVE_CONFLICT: { readonly projectId: string };
   readonly EXPORT_REVISION_NOT_SAVED: EmptyDetails;
   readonly LOCAL_SAVE_FAILED: EmptyDetails;
   readonly IMPORT_COMMITTING: EmptyDetails;
@@ -106,6 +107,10 @@ function createStudioAppError<TCode extends StudioAppErrorCode>(
 }
 
 export const studioAppErrors = {
+  projectSaveConflict: (projectId: string) =>
+    createStudioAppError("PROJECT_SAVE_CONFLICT", "Another connection has saved this project.", {
+      projectId,
+    }),
   exportRevisionNotSaved: () =>
     createStudioAppError(
       "EXPORT_REVISION_NOT_SAVED",

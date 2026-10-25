@@ -2,6 +2,7 @@ import type { SceneDocument } from "@web3d/document";
 
 export interface ProjectRecord {
   readonly id: string;
+  readonly storageVersion?: string | null;
   readonly name: string;
   readonly createdAt: string;
   readonly updatedAt: string;
@@ -24,7 +25,11 @@ export interface StudioProjectSnapshot {
 
 export interface StudioProjectRepository {
   save(snapshot: StudioProjectSnapshot): Promise<StudioProjectSnapshot>;
-  markExported(projectId: string, revision: number): Promise<ProjectRecord>;
+  markExported(
+    projectId: string,
+    revision: number,
+    expectedStorageVersion: string | null,
+  ): Promise<ProjectRecord>;
   open(projectId: string): Promise<StudioProjectSnapshot>;
   listRecent(limit?: number): Promise<readonly ProjectRecord[]>;
   delete(projectId: string): Promise<void>;

@@ -84,6 +84,7 @@ export function createIndexedDbProjectRepository(
         const existing = await request<PersistedProjectRecord | undefined>(
           projectStore.get(snapshot.record.id),
         );
+        assertStorageVersion(existing, snapshot.record.storageVersion, snapshot.record.id);
         const providedAssetHashes = new Set(persistedAssets.map((asset) => asset.sha256));
 
         for (const asset of document.assets) {
@@ -103,6 +104,10 @@ export function createIndexedDbProjectRepository(
         const recentIds = await readRecentIds(settingsStore);
         const record: PersistedProjectRecord = {
           id: snapshot.record.id,
+          storageVersion:
+            existing?.storageVersion && existing.documentJson === serializedDocument
+              ? existing.storageVersion
+              : globalThis.crypto.randomUUID(),
           name: document.name,
           createdAt: existing?.createdAt ?? snapshot.record.createdAt,
           updatedAt: nowIso,
@@ -132,7 +137,7 @@ export function createIndexedDbProjectRepository(
         throw error;
       }
     },
-    markExported: async (projectId, revision) => {
+    markExported: async (projectId, revision, expectedStorageVersion) => {
       assertOpen(closed);
       const db = await openDatabase();
       const tx = db.transaction(PROJECTS_STORE, "readwrite");
@@ -141,6 +146,7 @@ export function createIndexedDbProjectRepository(
         const store = tx.objectStore(PROJECTS_STORE);
         const existing = await request<PersistedProjectRecord | undefined>(store.get(projectId));
         if (!existing) throw studioAppErrors.projectNotFound(projectId);
+        assertStorageVersion(existing, expectedStorageVersion, projectId);
         if (!Number.isInteger(revision) || revision < 0 || revision > existing.lastSavedRevision) {
           throw studioAppErrors.exportRevisionNotSaved();
         }
@@ -396,6 +402,7 @@ function browserStorageEstimate(): (() => Promise<RepositoryStorageEstimate>) | 
 function stripDocumentJson(record: PersistedProjectRecord): ProjectRecord {
   return {
     id: record.id,
+    storageVersion: record.storageVersion ?? null,
     name: record.name,
     createdAt: record.createdAt,
     updatedAt: record.updatedAt,
@@ -503,4 +510,16 @@ async function abortAndWaitForTransaction(
 async function sha256Hex(buffer: ArrayBuffer): Promise<string> {
   const digest = await globalThis.crypto.subtle.digest("SHA-256", buffer);
   return [...new Uint8Array(digest)].map((value) => value.toString(16).padStart(2, "0")).join("");
+}
+
+function assertStorageVersion(
+  existing: PersistedProjectRecord | undefined,
+  expected: string | null | undefined,
+  projectId: string,
+): void {
+  const matches =
+    expected === undefined
+      ? existing === undefined
+      : existing !== undefined && (existing.storageVersion ?? null) === expected;
+  if (!matches) throw studioAppErrors.projectSaveConflict(projectId);
 }

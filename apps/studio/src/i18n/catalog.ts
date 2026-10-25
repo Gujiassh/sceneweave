@@ -4,6 +4,12 @@ import type { StudioAppErrorDetailsByCode } from "../errors";
 
 export const english = {
   app: {
+    persistence: {
+      saveCopy: "Save a copy",
+      copying: "Saving copy…",
+      copySaved: "A separate copy was saved. Continue editing it or rename it.",
+      renameCopy: "Rename copy",
+    },
     brandName: "SceneWeave",
     documentTitle: "SceneWeave",
     sizeGate: "Studio requires a 1280px desktop viewport.",
@@ -683,6 +689,8 @@ export const english = {
   },
   errors: {
     localSaveFailed: "Local save failed.",
+    projectSaveConflict:
+      "Another tab saved this project. Your changes remain here; save a copy to keep them.",
     exportRevisionNotSaved: "Save this document revision before acknowledging export.",
     importCommitting: "Import is being committed.",
     projectRepositoryNotReady: "Project repository is not ready.",
@@ -750,6 +758,12 @@ export const english = {
 
 export const chinese: CatalogShape<typeof english> = {
   app: {
+    persistence: {
+      saveCopy: "另存副本",
+      copying: "正在保存副本…",
+      copySaved: "已保存为独立副本，可以继续编辑或重命名。",
+      renameCopy: "重命名副本",
+    },
     brandName: "SceneWeave",
     documentTitle: "SceneWeave 场景编辑器",
     sizeGate: "Studio 需要至少 1280px 的桌面视口。",
@@ -1413,6 +1427,7 @@ export const chinese: CatalogShape<typeof english> = {
   },
   errors: {
     localSaveFailed: "本地保存失败。",
+    projectSaveConflict: "其他标签页已保存此项目。你的修改仍保留在这里，请另存副本。",
     exportRevisionNotSaved: "请先保存此文档修订，再确认导出完成。",
     importCommitting: "模型正在导入中。",
     projectRepositoryNotReady: "项目仓库尚未就绪。",

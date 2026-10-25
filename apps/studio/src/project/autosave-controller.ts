@@ -11,6 +11,7 @@ export interface AutosaveControllerOptions {
 export interface AutosaveController {
   schedule(snapshot: StudioProjectSnapshot): void;
   flush(snapshot?: StudioProjectSnapshot): Promise<void>;
+  clearPending(): void;
   close(): Promise<void>;
 }
 
@@ -49,6 +50,12 @@ export function createAutosaveController(options: AutosaveControllerOptions): Au
         timer = null;
       }
       await flushPending();
+    },
+    clearPending() {
+      if (timer) clock.clearTimeout(timer);
+      timer = null;
+      pendingSnapshot = null;
+      failedSnapshot = null;
     },
     close() {
       closePromise ??= closeController();

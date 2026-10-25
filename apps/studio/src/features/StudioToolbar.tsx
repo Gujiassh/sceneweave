@@ -49,6 +49,7 @@ interface StudioToolbarProps {
   readonly onOpenProjectMenu: () => void;
   readonly onUndo: () => void;
   readonly onRedo: () => void;
+  readonly saveDisabled?: boolean;
   readonly onSave: () => void;
   readonly onModeChange: (mode: StudioMode) => void;
   readonly onToolChange: (tool: AuthoringTool) => void;
@@ -128,7 +129,12 @@ export function StudioToolbar(props: StudioToolbarProps) {
           icon={<Redo2 size={16} />}
           onClick={props.onRedo}
         />
-        <IconCommand label={t.toolbar.save} icon={<Save size={16} />} onClick={props.onSave} />
+        <IconCommand
+          label={t.toolbar.save}
+          icon={<Save size={16} />}
+          disabled={props.saveDisabled ?? false}
+          onClick={props.onSave}
+        />
         <IconCommand
           description={props.duplicateDisabledReason}
           disabled={!props.canEdit || !props.hasSelection || !props.canDuplicate}

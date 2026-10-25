@@ -1,0 +1,127 @@
+{
+  "state": "source-frozen-for-independent-review",
+  "baseline": "0c5de5d92712ffbb76be7330fe54896040d0ad31",
+  "recordedAtUtc": "2026-10-25T09:07:01.271Z",
+  "fileCount": 18,
+  "combinedSourceSha256": "24f7ef5ec704d45eb5a7806a91a57b75aaeecb22a0928562a6c7b23cd118fe33",
+  "files": [
+    {
+      "path": "apps/studio/src/App.tsx",
+      "byteLength": 36527,
+      "sha256": "1ce49b41a495dfc083f58041c188aff5afb2e882b44a6d35cc64747f19003688"
+    },
+    {
+      "path": "apps/studio/src/errors.ts",
+      "byteLength": 8555,
+      "sha256": "364aa6f0a4b555e968e3180d5e19030f174ca1d6833a1e3ef881b4406fd38621"
+    },
+    {
+      "path": "apps/studio/src/features/PersistenceNotice.tsx",
+      "byteLength": 1124,
+      "sha256": "85c701ac286492cf82f856a04ebfd3358ab1112002799e1b0ec9357f5f61846a"
+    },
+    {
+      "path": "apps/studio/src/features/StudioToolbar.tsx",
+      "byteLength": 9872,
+      "sha256": "9227301006e1d9e8021c5985c2e142bf0f0b66e38ccfefe6734804267b9688aa"
+    },
+    {
+      "path": "apps/studio/src/features/persistence-notice.css",
+      "byteLength": 418,
+      "sha256": "0c7b64914ab039e67d3e4c9ec3689b46bc5e52a51eee5625c530e8fda40f2001"
+    },
+    {
+      "path": "apps/studio/src/i18n/catalog.ts",
+      "byteLength": 56781,
+      "sha256": "00a02a7896bb87a39e33c712099eebc774a72a0d395a34165c4fd986b6f882dc"
+    },
+    {
+      "path": "apps/studio/src/i18n/error-presentation.ts",
+      "byteLength": 2946,
+      "sha256": "ba190314039641ec28c65784a314919d8f7089b8dc895c6a9da57e59aed71094"
+    },
+    {
+      "path": "apps/studio/src/project/autosave-controller.ts",
+      "byteLength": 3942,
+      "sha256": "47ea8e88b85596bf5e8a6b3e8644d73cca51ce19533bd5e14ddb909dbf1f85b8"
+    },
+    {
+      "path": "apps/studio/src/project/indexeddb-project-repository.test.ts",
+      "byteLength": 35112,
+      "sha256": "29cb886fe2a97bc665c770aa4070f3845d9f249fc77f1f0c3605eecd6e8fde59"
+    },
+    {
+      "path": "apps/studio/src/project/indexeddb-project-repository.ts",
+      "byteLength": 18592,
+      "sha256": "cb81dcf6975729f809ea55dc11d211ef47a7e852c64bf3a82503b687703ab402"
+    },
+    {
+      "path": "apps/studio/src/project/types.ts",
+      "byteLength": 1861,
+      "sha256": "ad305523ddc6ca823bba364e6cb6af03b8a79bc583e735e1f98ac7731f7a456e"
+    },
+    {
+      "path": "apps/studio/src/workspace/project-write-authority.test.ts",
+      "byteLength": 2134,
+      "sha256": "f229f71a2d25befa521438ba281f1af6855108fb9cc823314f2112a6eb0f5b0f"
+    },
+    {
+      "path": "apps/studio/src/workspace/project-write-authority.ts",
+      "byteLength": 2029,
+      "sha256": "71ba02ea7cef57d1fab5d153cba18b1a07616fce43d1dd05e575b0830f3610dd"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.integration.test.ts",
+      "byteLength": 15214,
+      "sha256": "fe6fe3d19b62fbb31595214c2e9f8750feba2df7192fcf2a15e3688460ccba8d"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.test.ts",
+      "byteLength": 13080,
+      "sha256": "d13c2156d23a7a48889c5afeecad06b9dc2e241a0225c8a7506a65d8aa79a3b0"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.ts",
+      "byteLength": 35221,
+      "sha256": "f5ced5674f8b8ae8734f77ab071218564ab81fa34c36e735fbcf0e175e9381fb"
+    },
+    {
+      "path": "tests/e2e/save-safety.config.ts",
+      "byteLength": 426,
+      "sha256": "06729f8e94c265c9a7be80218136cbdcadd9dc1e78c834b715535426107ea125"
+    },
+    {
+      "path": "tests/e2e/save-safety.spec.ts",
+      "byteLength": 6882,
+      "sha256": "f32f7ea8f5ff9bc36fdce1890a5a3e82750d8924ec1cda8d280dd2bf7e593970"
+    }
+  ],
+  "checks": {
+    "focused": "57 passed / 8 files; no act warnings",
+    "visibleChrome": "2 passed before lifecycle-only cleanup rework; unchanged ordinary editing/copy flows",
+    "Studio tsc": "passed",
+    "E2E tsc": "passed",
+    "scoped ESLint": "passed",
+    "i18n": "passed",
+    "OpenSpec strict": "passed",
+    "unmount": "real-repository red then green",
+    "effect reactivation": "StrictMode/Activity old-owner drain and new-authority isolation passed"
+  },
+  "pending": [
+    "whole-repository integration checks",
+    "independent save review",
+    "independent visible acceptance"
+  ],
+  "supersedesImplementationSnapshot": "8178aeb85436636675677fd754b12a77b2be0698cc0b86707b8f191066837caf",
+  "combinedSourceSha256Encoding": "SHA-256 of UTF-8 JSON.stringify(files), in listed order",
+  "formatOnlyUpdate": {
+    "formattedPaths": [
+      "apps/studio/src/project/indexeddb-project-repository.test.ts",
+      "apps/studio/src/workspace/project-write-authority.ts",
+      "apps/studio/src/workspace/useStudioWorkspace.test.ts",
+      "apps/studio/src/workspace/useStudioWorkspace.ts",
+      "tests/e2e/save-safety.spec.ts"
+    ],
+    "verification": "Each current source file is exactly Prettier 3.9.5 output of its preserved pre-format bytes; remaining 13 source files unchanged."
+  }
+}

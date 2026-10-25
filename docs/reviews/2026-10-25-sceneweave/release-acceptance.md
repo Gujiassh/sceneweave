@@ -46,3 +46,16 @@ SceneDocument 1.4、JSON/ZIP 含义、确定性导出主路径、hash/nodeIndex�
 正式需求、过程、结果、返工和产出已在[项目审查索引](README.md)、[改造日志](remediation-log.md)、[浏览器报告](browser-verification.md)、[集成记录](integration-verification.md)及三个 OpenSpec 互相链接。原始外部长日志不是项目唯一证据。
 
 归档证据由 scoped Prettier 排除与 Git JSON `-text` 共同保护，原始下载 SHA 不受格式器或 checkout 行尾转换破坏；源码 596 项是执行时字节身份，跨 EOL/后续修改只作为可选对照，不是永久质量门禁。
+
+## 推送回执（2026-10-25）
+
+用户明确要求推送后，本批已推送至现有 `https://github.com/Gujiassh/sceneweave.git` 的 `main`，远端成功接受 `0c5de5d..ff284ba` 的正常快进。没有新建仓库、强制推送、合并或 cherry-pick。上文未提交状态为本地验收时的历史快照，由本回执更新。
+
+| 提交      | 内容                                           |
+| --------- | ---------------------------------------------- |
+| `2c826c4` | 保存投影、写入版本冲突保护、恢复 UI 与回归测试 |
+| `2ce6c3f` | glTF 外链政策与有界 ZIP 解码                   |
+| `4f8df7b` | runtime dispose 和普通属性编辑增量路径         |
+| `ff284ba` | 架构审查、独审、验收与原始证据归档             |
+
+推送前重新核验 28 项归档文件、20 项 JSON、2 项原始下载及 596 项源码身份全部通过；未重新启动浏览器或下载验收。已有 907 测试及其验收边界保持原记录。本回执随单独文档提交同步；其提交身份由 Git 历史提供。

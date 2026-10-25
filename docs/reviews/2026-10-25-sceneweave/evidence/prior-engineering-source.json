@@ -1,0 +1,219 @@
+{
+  "frozenAtUtc": "2026-10-25T06:10:26.719601+00:00",
+  "baseline": "b92b25c7445d09935be054d4b8375293601cb827",
+  "engineeringFileCount": 42,
+  "combinedEngineeringSha256": "5e6606efbb68ea875b1099af4817db8555f2c5ba062baf60304d000a492e5d06",
+  "scope": "Historical accepted engineering snapshot; later changes require separate review",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "byteLength": 416,
+      "sha256": "7ec61f096fbd4f54296870e6481229b8ae11e2a30260b5a9e1c68941187c9d02"
+    },
+    {
+      "path": "AGENTS.md",
+      "byteLength": 1267,
+      "sha256": "b7f7ab6a8c9205cc52ebab3e135202039b08d576e287ba66a1d441f316396e0c"
+    },
+    {
+      "path": "apps/studio/src/App.scene-settings.test.ts",
+      "byteLength": 24548,
+      "sha256": "9c6412befdc81e5df2f698bbe99eef9c267e24a9c3f91f427830b2746bd946ed"
+    },
+    {
+      "path": "apps/studio/src/App.tsx",
+      "byteLength": 35347,
+      "sha256": "9e144da79e82987d1047343d46fd277126e9ea127d8fa0f2a7fe111e3f40ebe8"
+    },
+    {
+      "path": "apps/studio/src/errors.ts",
+      "byteLength": 8320,
+      "sha256": "537147a939d2dd28e53d4d4b04607d08cf44878b7c02b88b3bd613df4335a3ae"
+    },
+    {
+      "path": "apps/studio/src/features/ImportDialog.tsx",
+      "byteLength": 5316,
+      "sha256": "cfa97dc623130d4c730071403c2179222958a916f9a31814e40ddd02be1b62c4"
+    },
+    {
+      "path": "apps/studio/src/features/ProjectMenu.test.ts",
+      "byteLength": 1330,
+      "sha256": "c1f7ea6fa4e14c3fcb7621c1b78b9c21edac3a31a602eb7c3a6e95ab0547f6fd"
+    },
+    {
+      "path": "apps/studio/src/features/SceneNameDialog.test.ts",
+      "byteLength": 1005,
+      "sha256": "ef021d6d37c3e85c9b9a08879cf5ebe0127cb5fd8511b6b040383e00a6b438c1"
+    },
+    {
+      "path": "apps/studio/src/features/SceneTree.test.ts",
+      "byteLength": 3359,
+      "sha256": "abd86721bd6eeca3205873cd2f474326cac81a2a756c4ce7b4e8f17b7d6e5d6d"
+    },
+    {
+      "path": "apps/studio/src/features/StudioToolbar.tsx",
+      "byteLength": 9750,
+      "sha256": "fe63cc80f830ccf1c4762336225497c3dda422c66ed1000d426810663216c1c1"
+    },
+    {
+      "path": "apps/studio/src/features/ViewportCommands.tsx",
+      "byteLength": 3184,
+      "sha256": "992baaab27405bf0d317c2a71bc5ce82b16a4b34ae4911c66d3fc96e7aa2e34c"
+    },
+    {
+      "path": "apps/studio/src/i18n/catalog.ts",
+      "byteLength": 56127,
+      "sha256": "a8b2005cf83ba8193821b0c59a2dcfa2d27f7d774c405c3a370c9b7f838d69ad"
+    },
+    {
+      "path": "apps/studio/src/i18n/error-presentation.ts",
+      "byteLength": 2873,
+      "sha256": "5936671efd9a78be1a21f8bcf50eecce96f38759e0b50a60bdac77ca76326b21"
+    },
+    {
+      "path": "apps/studio/src/layout/SceneLayoutPanel.test.ts",
+      "byteLength": 6512,
+      "sha256": "598c2337c0325c8eb9ff71a495674b628a2e7dfe625dac9473242150cdf4f0f9"
+    },
+    {
+      "path": "apps/studio/src/project/indexeddb-project-repository.test.ts",
+      "byteLength": 31694,
+      "sha256": "16b4220c18210ab65ee4e9ce4d74002001c82b1d3828c5c7ce28e374735ee50d"
+    },
+    {
+      "path": "apps/studio/src/project/indexeddb-project-repository.ts",
+      "byteLength": 17771,
+      "sha256": "85554a73845b1d121a74019a57369b11bf7ea3ade041d42b273ebe5c3d10b9c2"
+    },
+    {
+      "path": "apps/studio/src/project/types.ts",
+      "byteLength": 1762,
+      "sha256": "f3fc1782bb5946288ab7950f013a5c105561d891b3029bbd4d9a525c359a8ad5"
+    },
+    {
+      "path": "apps/studio/src/styles.css",
+      "byteLength": 24599,
+      "sha256": "42ccd2e97bbd18342803579c9b176eb40f9aa00f844783383e18683046a34e28"
+    },
+    {
+      "path": "apps/studio/src/workspace/initialize-repository.test.ts",
+      "byteLength": 5236,
+      "sha256": "210122733cd839013d414985f70aac6d7eba1e0f447f524425ccac8bf3fe6ec8"
+    },
+    {
+      "path": "apps/studio/src/workspace/project-transfer.ts",
+      "byteLength": 3265,
+      "sha256": "1a244c0a55ed727cbb833a4c988b63e7066ba58f14bd029890798ef1a9d5636a"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.test.ts",
+      "byteLength": 13236,
+      "sha256": "c341fa8bfa159adc2057de2ce0e317f67f2efe31c46573e14c565c9131eea550"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.ts",
+      "byteLength": 30176,
+      "sha256": "757c1ed91a92ebd9358427a4fe0750f235ba06bccd980981a34195b6f54c8b7e"
+    },
+    {
+      "path": "assets/licenses/ibm-plex-mono-OFL-1.1.txt",
+      "byteLength": 5299,
+      "sha256": "23b0a9d0c6d3f140a0b77e483c5cfa6bba574325ef5cb189ed9f2fec4884533f"
+    },
+    {
+      "path": "assets/licenses/ibm-plex-sans-OFL-1.1.txt",
+      "byteLength": 4429,
+      "sha256": "d0283623ef57e722fd0eb688a8041589670c608ab780cd3612d06ba6f153d3fd"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/acceptance.md",
+      "byteLength": 11040,
+      "sha256": "dfca5cc59593ce8bc987369038817907fd0b1d48a4aecda447e6553fa1a13bda"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/design.md",
+      "byteLength": 6584,
+      "sha256": "a6a8a2a9cbde398d1bd28d9174ffbe38418a82b6f1096fa1077405dd17ebc937"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/implementation-design.md",
+      "byteLength": 3790,
+      "sha256": "a7da6fd14d65184e30f89b127258b2780b061bdc32582d564581a934fa78e0dd"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/proposal.md",
+      "byteLength": 2423,
+      "sha256": "19d51272928783f79145fd16491204aa8db5a31d9a2f17b31f30f1dc22cf089f"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/specs/editor-quality/spec.md",
+      "byteLength": 2806,
+      "sha256": "d77dbf1df760133dc07ab0f2a69f13ce8d6ca3fcede675f8b3344ab728ee4476"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/specs/export-completion/spec.md",
+      "byteLength": 3358,
+      "sha256": "3ccde7cd8455b5f28adc04f7672a1bd212705a54061a4eb86cd3923b8158f9b3"
+    },
+    {
+      "path": "openspec/changes/editor-quality-refresh/tasks.md",
+      "byteLength": 1986,
+      "sha256": "9dd2ba90a98173c3947cabe2c123eddd6af99b6036352c2005bda0033de26aa4"
+    },
+    {
+      "path": "openspec/config.yaml",
+      "byteLength": 949,
+      "sha256": "7c486b9378ff0ca7d49b20b3f6e8f885506fa3491a94ceba8218373ab632ea9d"
+    },
+    {
+      "path": "openspec/specs/.gitkeep",
+      "byteLength": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "openspec/specs/README.md",
+      "byteLength": 3734,
+      "sha256": "2a44db3dacaec74d91edf448d15b61a8fd32a6bd283e9a2c1ff56b0e967893f6"
+    },
+    {
+      "path": "packages/document/src/archive/archive.test.ts",
+      "byteLength": 17793,
+      "sha256": "b351e9128a3b6fe5ef042c06c347335abba96a3ab446cf5cd8e316597e85ae41"
+    },
+    {
+      "path": "packages/runtime/src/authoring/authoring-scene-viewer.test.ts",
+      "byteLength": 83923,
+      "sha256": "f439d330e2f64768682f42e497ac421ab4295ac005c707fc8febfdfeafb1491a"
+    },
+    {
+      "path": "packages/runtime/src/viewer/three-scene-viewport.ts",
+      "byteLength": 46136,
+      "sha256": "952e47627936463bdf39800a898d2819fab8f40003634f053120b9478887231a"
+    },
+    {
+      "path": "tests/e2e/editor-quality.config.ts",
+      "byteLength": 575,
+      "sha256": "9f9ed4d169ad5f7479cc518915f98222dd13de8bca8a4c27261cdca6e42d9786"
+    },
+    {
+      "path": "tests/e2e/editor-quality.spec.ts",
+      "byteLength": 11238,
+      "sha256": "34dd0f975f47ed367fa44fe9a4f0a5957794b289823c3c6e72d8837f24bfd294"
+    },
+    {
+      "path": "tests/e2e/feature009-global-setup.ts",
+      "byteLength": 1311,
+      "sha256": "dc583c0e0e23f4cd46f73d965b2c94ef1ccd94fce76feaa0bbce25f007186117"
+    },
+    {
+      "path": "tests/fixtures/006b-light-performance-pbr/LICENSE-CC0.txt",
+      "byteLength": 250,
+      "sha256": "de84631b5c5a3524cec1d16bf1230b6181cd75420bf8af60184d0c2a8cbf6ddc"
+    },
+    {
+      "path": "tests/fixtures/m0-factory/LICENSE-CC0.txt",
+      "byteLength": 250,
+      "sha256": "de84631b5c5a3524cec1d16bf1230b6181cd75420bf8af60184d0c2a8cbf6ddc"
+    }
+  ]
+}

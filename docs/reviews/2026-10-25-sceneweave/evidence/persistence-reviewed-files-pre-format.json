@@ -1,0 +1,113 @@
+{
+  "status": "PASS: scoped independent persistence code/contract review after closed unmount rework",
+  "baseline": "0c5de5d92712ffbb76be7330fe54896040d0ad31",
+  "recordedAtUtc": "2026-10-25T09:00:45.0297945Z",
+  "fileCount": 18,
+  "combinedSourceSha256": "8178aeb85436636675677fd754b12a77b2be0698cc0b86707b8f191066837caf",
+  "files": [
+    {
+      "path": "apps/studio/src/App.tsx",
+      "byteLength": 36527,
+      "sha256": "1ce49b41a495dfc083f58041c188aff5afb2e882b44a6d35cc64747f19003688"
+    },
+    {
+      "path": "apps/studio/src/errors.ts",
+      "byteLength": 8555,
+      "sha256": "364aa6f0a4b555e968e3180d5e19030f174ca1d6833a1e3ef881b4406fd38621"
+    },
+    {
+      "path": "apps/studio/src/features/persistence-notice.css",
+      "byteLength": 418,
+      "sha256": "0c7b64914ab039e67d3e4c9ec3689b46bc5e52a51eee5625c530e8fda40f2001"
+    },
+    {
+      "path": "apps/studio/src/features/PersistenceNotice.tsx",
+      "byteLength": 1124,
+      "sha256": "85c701ac286492cf82f856a04ebfd3358ab1112002799e1b0ec9357f5f61846a"
+    },
+    {
+      "path": "apps/studio/src/features/StudioToolbar.tsx",
+      "byteLength": 9872,
+      "sha256": "9227301006e1d9e8021c5985c2e142bf0f0b66e38ccfefe6734804267b9688aa"
+    },
+    {
+      "path": "apps/studio/src/i18n/catalog.ts",
+      "byteLength": 56781,
+      "sha256": "00a02a7896bb87a39e33c712099eebc774a72a0d395a34165c4fd986b6f882dc"
+    },
+    {
+      "path": "apps/studio/src/i18n/error-presentation.ts",
+      "byteLength": 2946,
+      "sha256": "ba190314039641ec28c65784a314919d8f7089b8dc895c6a9da57e59aed71094"
+    },
+    {
+      "path": "apps/studio/src/project/autosave-controller.ts",
+      "byteLength": 3942,
+      "sha256": "47ea8e88b85596bf5e8a6b3e8644d73cca51ce19533bd5e14ddb909dbf1f85b8"
+    },
+    {
+      "path": "apps/studio/src/project/indexeddb-project-repository.test.ts",
+      "byteLength": 35975,
+      "sha256": "6587c8ee6e040025ee93a3ae3467319d5cb8578d51fdd7fbf5f173ac2587710d"
+    },
+    {
+      "path": "apps/studio/src/project/indexeddb-project-repository.ts",
+      "byteLength": 18592,
+      "sha256": "cb81dcf6975729f809ea55dc11d211ef47a7e852c64bf3a82503b687703ab402"
+    },
+    {
+      "path": "apps/studio/src/project/types.ts",
+      "byteLength": 1861,
+      "sha256": "ad305523ddc6ca823bba364e6cb6af03b8a79bc583e735e1f98ac7731f7a456e"
+    },
+    {
+      "path": "apps/studio/src/workspace/project-write-authority.test.ts",
+      "byteLength": 2134,
+      "sha256": "f229f71a2d25befa521438ba281f1af6855108fb9cc823314f2112a6eb0f5b0f"
+    },
+    {
+      "path": "apps/studio/src/workspace/project-write-authority.ts",
+      "byteLength": 2082,
+      "sha256": "2fd3c70701670324ae46e0adccc6c0899a98f49417a706c9ccc00af220146055"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.integration.test.ts",
+      "byteLength": 15214,
+      "sha256": "fe6fe3d19b62fbb31595214c2e9f8750feba2df7192fcf2a15e3688460ccba8d"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.test.ts",
+      "byteLength": 13386,
+      "sha256": "3d4a310d4092773bc4620ab0f876995c44896603100afcfedc69e31e4c7c6b66"
+    },
+    {
+      "path": "apps/studio/src/workspace/useStudioWorkspace.ts",
+      "byteLength": 36228,
+      "sha256": "3556ef314882fe1ec02ac62504aebea41c0b28e789742a308f097572cf0cb095"
+    },
+    {
+      "path": "tests/e2e/save-safety.config.ts",
+      "byteLength": 426,
+      "sha256": "06729f8e94c265c9a7be80218136cbdcadd9dc1e78c834b715535426107ea125"
+    },
+    {
+      "path": "tests/e2e/save-safety.spec.ts",
+      "byteLength": 6887,
+      "sha256": "3ae36e562da2e547d7e96dadd062b0c35be01ece66b12cc70dad888713561691"
+    }
+  ],
+  "verification": {
+    "focused": "57 passed / 8 files, independently rerun",
+    "wholeRepoGate": "controller-owned, outside this scoped review",
+    "independentExternalRepository": "3 passed",
+    "visibleEvidence": "read headful Chrome engineering test source/log and conflict/reopened screenshots; no separate reviewer browser run",
+    "unmountRework": "RED then GREEN, closed",
+    "independentExternalWorkspace": "2 passed",
+    "finalFreezeReplay": "6 integration + 3 independent repo + 2 independent workspace passed at 17:02:16; no act warnings"
+  },
+  "independentPathHashDigestSha256": "ac58e037f9e72138607548d1613ca573096d42d35367c77e506c52f4e5e2c2b8",
+  "independentDigestDefinition": "SHA256 UTF8 of path:sha256 rows sorted by path, joined with LF, no final LF",
+  "implementationSnapshot": "openspec/changes/persistence-safety/implementation-snapshot.json",
+  "exactFreezeComparison": "18/18 per-file bytes+SHA256 match official freeze and current disk; 0 mismatches at final check",
+  "snapshotPhase": "Independent reviewed behavior after unmount rework, before formatting-only refresh; not final delivery identity"
+}

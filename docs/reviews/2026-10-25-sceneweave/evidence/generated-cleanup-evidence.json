@@ -1,0 +1,96 @@
+[
+  {
+    "path": "packages/document/src/generated/scene-document-1.0.validator.d.ts",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.0.validator.js",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.1.validator.d.ts",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.1.validator.js",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.2.validator.d.ts",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.2.validator.js",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.3.validator.d.ts",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document-1.3.validator.js",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document.validator.d.ts",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "packages/document/src/generated/scene-document.validator.js",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "examples/minimal-host/public/fixture-report.json",
+    "onlyZipDigestChanged": true,
+    "beforeZipSHA256": "a769c6a4b75af84876c8f18fd9167e1eafa3cfd78968695372ecbbbabafe4ded",
+    "generatedZipSHA256": "4a5730eca3c62590df817a4ad94764d403a61ec89612a10272d7a684335b0937"
+  },
+  {
+    "path": "examples/minimal-host/public/published-factory.web3d.zip",
+    "beforeSHA256": "a769c6a4b75af84876c8f18fd9167e1eafa3cfd78968695372ecbbbabafe4ded",
+    "generatedSHA256": "4a5730eca3c62590df817a4ad94764d403a61ec89612a10272d7a684335b0937",
+    "allPayloadsEqual": true,
+    "timestampsBefore": [
+      [1980, 1, 1, 9, 0, 0],
+      [1980, 1, 1, 9, 0, 0],
+      [1980, 1, 1, 9, 0, 0]
+    ],
+    "timestampsAfter": [
+      [1980, 1, 1, 8, 0, 0],
+      [1980, 1, 1, 8, 0, 0],
+      [1980, 1, 1, 8, 0, 0]
+    ]
+  },
+  {
+    "path": "examples/minimal-host/public/published/publish-manifest.json",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  },
+  {
+    "path": "examples/minimal-host/public/published/scene.json",
+    "normalizedBytesEqual": true,
+    "headCRLF": 0,
+    "generatedCRLF": 0
+  }
+]

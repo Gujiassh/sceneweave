@@ -1,0 +1,124 @@
+{
+  "baseline": "0c5de5d92712ffbb76be7330fe54896040d0ad31",
+  "reviewed_owned_files": [
+    {
+      "path": "benchmarks/runtime-edit-profile/README.md",
+      "sha256": "dacda1cfb1574854d1bb5e34e613b09dcd5c8b148bc931360d49f709442f875c"
+    },
+    {
+      "path": "benchmarks/runtime-edit-profile/measurements.json",
+      "sha256": "6d44d665ab5838739d91f8e6e47aa19c2d20fc9b5218e1f621aa900d3ffef8a6"
+    },
+    {
+      "path": "benchmarks/runtime-edit-profile/profile.test.ts",
+      "sha256": "b1eeb660ddf4a94ee8830999ee6ffab1c0331a520370ae733dd57e5ba082f3cd"
+    },
+    {
+      "path": "benchmarks/runtime-edit-profile/vitest.config.mjs",
+      "sha256": "6d816617aa82c51b40d6a2c460f755e204affa06a442e5849cf536d80f6c0469"
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "a8efe0f893e82762a7322bcb7cd42772d66882a79a3349fef0ce473ca5625030"
+    },
+    {
+      "path": "openspec/changes/runtime-edit-lifecycle/acceptance.md",
+      "sha256": "05915ec2fa529e8383fa873ec370bb8aea11d8e3138184732a1952297b083ce0"
+    },
+    {
+      "path": "openspec/changes/runtime-edit-lifecycle/delivery-ledger.md",
+      "sha256": "6c4b5d8ee72f44b19158f4512c50ea8a72b94f99a21f0144161a14a248430076"
+    },
+    {
+      "path": "openspec/changes/runtime-edit-lifecycle/design.md",
+      "sha256": "42857defaa712a5d0423456409a54057093cf29d715c00b9ea46d408e92d511a"
+    },
+    {
+      "path": "openspec/changes/runtime-edit-lifecycle/proposal.md",
+      "sha256": "090f49b8b114e677185d62fa2d658bff99e6701dbd1c04f142abb280722ce560"
+    },
+    {
+      "path": "openspec/changes/runtime-edit-lifecycle/specs/runtime-edit-lifecycle/spec.md",
+      "sha256": "cb616728cfabbfff928cc06877d336a12a65145fe45711bb541a455edad81eef"
+    },
+    {
+      "path": "openspec/changes/runtime-edit-lifecycle/tasks.md",
+      "sha256": "20e7df2dcb0047037be506bccea3d93459c1580ae2608dd7a283fcb2683eb7ab"
+    },
+    {
+      "path": "packages/runtime/src/authoring/authoring-scene-viewer.test.ts",
+      "sha256": "a1a21388ea2cd3b349f17515140d2115786c24a3972e0c24577386db6d7002c2"
+    },
+    {
+      "path": "packages/runtime/src/viewer/entity-property-source-update.test.ts",
+      "sha256": "47bda6049253e4e2f13991753dc2343c65eb26c77a5717bee56de1ac43e2bef3"
+    },
+    {
+      "path": "packages/runtime/src/viewer/entity-property-source-update.ts",
+      "sha256": "777c40b4a30788e3fbf0c4a4dc06afc6e58868142250ba46ef87f2741ca0df46"
+    },
+    {
+      "path": "packages/runtime/src/viewer/light-only-source-update.ts",
+      "sha256": "930c37133c8e1e9d950ff8473d429c61ec06e9bac8f0cf84a548129a01ec0e28"
+    },
+    {
+      "path": "packages/runtime/src/viewer/runtime-generation.test.ts",
+      "sha256": "34e82dc4092e683d55fabe8e891ce0980d9612ae5df9af11834a44934b086951"
+    },
+    {
+      "path": "packages/runtime/src/viewer/runtime-generation.ts",
+      "sha256": "359ac897f9033fc02f50cf7eb2cba3e4c46c22cde7f419730a7b60b55d08f9c3"
+    },
+    {
+      "path": "packages/runtime/src/viewer/scene-viewer.test.ts",
+      "sha256": "a8d7d8ba3e7f3415b00ef5e10f524f78c96b8ab921bb777e5186e34955f668ef"
+    },
+    {
+      "path": "packages/runtime/src/viewer/source-state.ts",
+      "sha256": "1b8eb7ddfd28c2f93b1d680e1a6d0da1bccd746a6bf9b3f8e98cb560dac4ed2f"
+    },
+    {
+      "path": "packages/runtime/src/viewer/three-scene-viewport.ts",
+      "sha256": "83652bf4f6682b8c4b5132afcd0cb6fe454ad7200eedc3c16387baa4b30afe35"
+    }
+  ],
+  "supporting_callers_read": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "fba88d2fe912f090a49a8a154332c3a1a45cc076350791803fd7919cb627864e"
+    },
+    {
+      "path": "openspec/specs/README.md",
+      "sha256": "dbeb57081bd129481f475565bba5d672c9e7adbe66fc61d20f32762a04ce710f"
+    },
+    {
+      "path": "packages/runtime/src/viewer/adapter-runtime.ts",
+      "sha256": "ea19df53327b99d4ef985d71a5218b554978ac1558bcd330e035477d2db80a69"
+    },
+    {
+      "path": "packages/runtime/src/viewer/data-runtime-controller.ts",
+      "sha256": "26e54746245857d3daf5fc2de6036aa92d268fe3880c4cdcab15575f98c18517"
+    },
+    {
+      "path": "packages/runtime/src/viewer/object-picker.ts",
+      "sha256": "76e9c24d3e95923809b5b0c5da9591774a6abe5452f512c6fb45f0a2b0671f07"
+    },
+    {
+      "path": "packages/runtime/src/authoring/transform-authoring-controller.ts",
+      "sha256": "a670042e9783bc1cb7f0426b3f0212b8490cd3ccc765c9ee9f414e19070301f3"
+    },
+    {
+      "path": "packages/runtime/src/hotspots/surface-index.ts",
+      "sha256": "7643bcbee28ac85c27da6340d09078c4fad9c47e1134fba7733541b96f77e32d"
+    },
+    {
+      "path": "packages/runtime/src/hotspots/hotspot-runtime-controller.ts",
+      "sha256": "9d95cdf5c6d818a0a77a4a388be7885980f31398214d0d54dc62f5616bbc0fe4"
+    },
+    {
+      "path": "packages/react/src/AuthoringScene.tsx",
+      "sha256": "bd07e4df3284c741f2852c2f1bed3663a9731559ce813d9a1a876bc32c0413f5"
+    }
+  ],
+  "owned_freeze_mismatches": []
+}

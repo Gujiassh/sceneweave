@@ -1,0 +1,69 @@
+{
+  "time": "2026-10-25T09:09:52.734Z",
+  "runnerExit": 1,
+  "results": [
+    {
+      "name": "fresh-home",
+      "status": "PASS"
+    },
+    {
+      "name": "import-undo-save-edit-export-switch-reopen-and-redo",
+      "status": "PASS"
+    },
+    {
+      "name": "two-tab-conflict-copy-history-refresh",
+      "status": "PASS"
+    },
+    {
+      "name": "embedded-image-and-input-failure-recovery",
+      "status": "PASS"
+    },
+    {
+      "name": "retained-edit-gizmo-visibility-lock-run-and-refresh",
+      "status": "FAIL"
+    }
+  ],
+  "events": [
+    {
+      "scope": "fresh-home",
+      "type": "pageerror",
+      "message": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+    },
+    {
+      "scope": "import-undo-save-edit-export-switch-reopen-and-redo",
+      "type": "pageerror",
+      "message": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+    },
+    {
+      "scope": "two-tab-conflict-copy-history-refresh",
+      "type": "pageerror",
+      "message": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+    },
+    {
+      "scope": "two-tab-conflict-copy-history-refresh",
+      "type": "pageerror",
+      "message": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+    },
+    {
+      "scope": "embedded-image-and-input-failure-recovery",
+      "type": "pageerror",
+      "message": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+    },
+    {
+      "scope": "retained-edit-gizmo-visibility-lock-run-and-refresh",
+      "type": "pageerror",
+      "message": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document."
+    }
+  ],
+  "eventAttribution": {
+    "originalStacksSaved": false,
+    "reason": "Unconditional localStorage preference init script on new blank-origin pages",
+    "controlledProbe": "headless-smoke.json blankOriginReadProbe",
+    "subsequentApplicationScope": "One origin-guarded no-download headless fresh/Run/Edit only; zero errors does not rewrite visible-session errors"
+  },
+  "downloads": {
+    "json": 16,
+    "zip": 2
+  },
+  "repeatedFiveE2E": "not started after download disruption; not product-test PASS"
+}

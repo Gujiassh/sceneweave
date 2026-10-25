@@ -1,0 +1,26 @@
+[
+  {
+    "path": "evidence/prior-home-1440.png",
+    "sha256": "644a4d53619171a8604731193ad7f782077a5dbc7a9397a0fc4379f317dc92cf",
+    "bytes": 153029,
+    "scope": "historical desktop Chrome delivery; 2026-10-25 14:09-14:16 Asia/Shanghai"
+  },
+  {
+    "path": "evidence/prior-sofa-focus-1280.png",
+    "sha256": "07fa800cf7684fa4971e2b9dc9d4b6254aecc47e0269ea821915c4a2d6458cef",
+    "bytes": 146226,
+    "scope": "historical desktop Chrome delivery; 2026-10-25 14:09-14:16 Asia/Shanghai"
+  },
+  {
+    "path": "evidence/prior-import-added.png",
+    "sha256": "21a6f2aa1c80e1f5849feb9e1da20f9f4805a7836f70572caa7fb7c98e3cc79c",
+    "bytes": 159469,
+    "scope": "historical desktop Chrome delivery; 2026-10-25 14:09-14:16 Asia/Shanghai"
+  },
+  {
+    "path": "evidence/prior-run-online.png",
+    "sha256": "007992c39962978cd4609ff08a18c573e7a939faa9ff4f4dd1d5afbfd97d9aac",
+    "bytes": 141560,
+    "scope": "historical desktop Chrome delivery; 2026-10-25 14:09-14:16 Asia/Shanghai"
+  }
+]

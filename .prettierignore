@@ -6,3 +6,6 @@ test-results/
 packages/document/src/generated/
 examples/minimal-host/public/published/*.json
 pnpm-lock.yaml
+
+# Archived verification evidence includes byte-exact UI downloads; validate JSON/hashes separately.
+docs/reviews/**/evidence/

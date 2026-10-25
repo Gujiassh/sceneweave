@@ -1,0 +1,32 @@
+[
+  {
+    "name": "fresh-home-1440.png",
+    "bytes": 153029,
+    "sha256": "644a4d53619171a8604731193ad7f782077a5dbc7a9397a0fc4379f317dc92cf",
+    "inspected": true
+  },
+  {
+    "name": "r2-conflicting-live-copy.png",
+    "bytes": 162495,
+    "sha256": "68db07038394bbc5517384350a42858cc216dd6d2555a865d52effe68bbcd50a",
+    "inspected": true
+  },
+  {
+    "name": "r2-copy-reopened.png",
+    "bytes": 154054,
+    "sha256": "dfa636e5692285a6f28b5f38762c5fbcbf88c947e34369144c8b69a2bc3812aa",
+    "inspected": true
+  },
+  {
+    "name": "input-embedded-image-visible.png",
+    "bytes": 128121,
+    "sha256": "ee003739e0a56a2f0956db71bbc5857ed9b0fba6150e3b8ac546dabab8e360d4",
+    "inspected": true
+  },
+  {
+    "name": "runtime-moved.png",
+    "bytes": 149576,
+    "sha256": "9de56810797d1a52b715ad0cd677dc70b6a5cd5efa63964398130945c83197cf",
+    "inspected": true
+  }
+]

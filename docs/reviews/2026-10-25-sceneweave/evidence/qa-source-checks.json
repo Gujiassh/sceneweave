@@ -1,0 +1,30 @@
+[
+  {
+    "phase": "before",
+    "time": "2026-10-25T09:09:00.250Z",
+    "files": 596,
+    "matches": 596,
+    "mismatches": []
+  },
+  {
+    "phase": "after",
+    "time": "2026-10-25T09:09:52.786Z",
+    "files": 596,
+    "matches": 596,
+    "mismatches": []
+  },
+  {
+    "phase": "headless-before",
+    "time": "2026-10-25T09:13:28.256Z",
+    "files": 596,
+    "matches": 596,
+    "mismatches": []
+  },
+  {
+    "phase": "headless-after",
+    "time": "2026-10-25T09:13:29.710Z",
+    "files": 596,
+    "matches": 596,
+    "mismatches": []
+  }
+]

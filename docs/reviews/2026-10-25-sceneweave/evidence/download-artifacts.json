@@ -1,0 +1,245 @@
+{
+  "source": "Already completed visible UI downloads; no new downloads were performed for documentation",
+  "jsonCount": 16,
+  "zipCount": 2,
+  "files": [
+    {
+      "name": "r1-initial.json",
+      "type": "json",
+      "bytes": 73397,
+      "sha256": "aece3d7d4b1bef0337cbb47848fbe8f3ae35eaad7225acbbb03443bf82472eba",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 1,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "r1-imported.json",
+      "type": "json",
+      "bytes": 74710,
+      "sha256": "723acdbd7fbff9bd3f97be18cf68045483ee76fefb2c65034e37bad46d61997e",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 2,
+        "assets": 50,
+        "entities": 80
+      }
+    },
+    {
+      "name": "r1-undone-saved.json",
+      "type": "json",
+      "bytes": 73397,
+      "sha256": "5828cb987bc5ec214e22027ba3ef27dcfa11beaa93ff46d5374b36130eb499df",
+      "retainedInRepository": true,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 3,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "r1-redone-saved.json",
+      "type": "json",
+      "bytes": 74710,
+      "sha256": "b38c07bf6698326dcaffcd34f2a333573c2f208d047d60c3a69829a8108be572",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 4,
+        "assets": 50,
+        "entities": 80
+      }
+    },
+    {
+      "name": "r1-edited-after-undo.json",
+      "type": "json",
+      "bytes": 73383,
+      "sha256": "780c2e2a7e81155a83458ae69cdbe845293324b9eb615c7e4e2029feeeb70b13",
+      "retainedInRepository": true,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "QA Undo Saved Home",
+        "revision": 6,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "r1-reopened.json",
+      "type": "json",
+      "bytes": 73383,
+      "sha256": "780c2e2a7e81155a83458ae69cdbe845293324b9eb615c7e4e2029feeeb70b13",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "QA Undo Saved Home",
+        "revision": 6,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "r2-b-import-seed.json",
+      "type": "json",
+      "bytes": 74710,
+      "sha256": "79e418e7a1c3d924508b958f333047132e59108ee689dc61ac579d5046ec81df",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 2,
+        "assets": 50,
+        "entities": 80
+      }
+    },
+    {
+      "name": "r2-winner-reopened.json",
+      "type": "json",
+      "bytes": 74692,
+      "sha256": "e901e25b70fe82e91bf6f8967d83f9485398140b5868d96379892f841089816c",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "QA Winner Home",
+        "revision": 3,
+        "assets": 50,
+        "entities": 80
+      }
+    },
+    {
+      "name": "input-before.json",
+      "type": "json",
+      "bytes": 73397,
+      "sha256": "aece3d7d4b1bef0337cbb47848fbe8f3ae35eaad7225acbbb03443bf82472eba",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 1,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "input-embedded.json",
+      "type": "json",
+      "bytes": 74701,
+      "sha256": "41f2f7727b331291eb3fc8f6b5d7a5a4d4b90ca22f95659ab0a82ad248941296",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 2,
+        "assets": 50,
+        "entities": 80
+      }
+    },
+    {
+      "name": "input-recovered.json",
+      "type": "json",
+      "bytes": 74701,
+      "sha256": "41f2f7727b331291eb3fc8f6b5d7a5a4d4b90ca22f95659ab0a82ad248941296",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 2,
+        "assets": 50,
+        "entities": 80
+      }
+    },
+    {
+      "name": "runtime-before-move.json",
+      "type": "json",
+      "bytes": 73388,
+      "sha256": "bc5a27e1a6f809e7ab0f4bd1bf57457c8dc474900817cd2ea84eeae4c52c251d",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 2,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "runtime-moved.json",
+      "type": "json",
+      "bytes": 73402,
+      "sha256": "12b894c425b9e3d134d52055372ace60f4b2fe04c74b50a704ceb776de0c8dec",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 3,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "runtime-undone.json",
+      "type": "json",
+      "bytes": 73388,
+      "sha256": "403a29a1ab3b3d7820f29d6efed6e0861ac42b4a64d2aaf926875a7b516f727e",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 4,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "runtime-redone.json",
+      "type": "json",
+      "bytes": 73402,
+      "sha256": "03eb3a340fb8a927b3657f1823453210e8be4658750e07e903b547a2df71f606",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 5,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "runtime-pre-run.json",
+      "type": "json",
+      "bytes": 73402,
+      "sha256": "c6c9b3cc4d0af938b4fc216b383ee596448c73a90c2ca1ffd4e69e854b9abf09",
+      "retainedInRepository": false,
+      "document": {
+        "id": "free-home-90sqm",
+        "name": "90 m² • Sage & Oak Smart Home",
+        "revision": 9,
+        "assets": 49,
+        "entities": 79
+      }
+    },
+    {
+      "name": "r1-edited-after-undo.scene.zip",
+      "type": "zip",
+      "bytes": 1045450,
+      "sha256": "3f13d393ecdf1445837e38099a5e7ac08e53e49431cb72a90306b1f4e1166ebe",
+      "retainedInRepository": false
+    },
+    {
+      "name": "input-legal.scene.zip",
+      "type": "zip",
+      "bytes": 1048163,
+      "sha256": "d00d145b3a904251cbe74392965afc8827e483b39f5abb0e13755e04759030dd",
+      "retainedInRepository": false
+    }
+  ]
+}

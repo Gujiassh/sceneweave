@@ -1,0 +1,63 @@
+{
+  "r1": {
+    "newAssetHashes": [
+      "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53"
+    ],
+    "newEntityIds": [
+      "entity-c991d278-07a7-4dfc-baa9-a038ee527938"
+    ],
+    "undoAssetListEqualInitial": true,
+    "undoHasNoImportedEntity": true,
+    "editedAfterUndoEqualsReopened": true,
+    "undoRevision": 3,
+    "reopenedRevision": 6
+  },
+  "input": {
+    "embeddedDocumentEqualsRecovered": true
+  },
+  "runtime": {
+    "sofaBefore": {
+      "position": [
+        -4.25,
+        0,
+        2.2
+      ],
+      "rotation": [
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "sofaMoved": {
+      "position": [
+        -3.8900000107288357,
+        0,
+        2.2
+      ],
+      "rotation": [
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865476
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    "undoRestores": true,
+    "redoRestores": true,
+    "renameCanvasROI": {
+      "changedPixelsOver10": 0,
+      "total": 461760,
+      "ratio": 0
+    }
+  }
+}

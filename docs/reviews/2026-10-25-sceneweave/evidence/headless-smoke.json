@@ -1,0 +1,36 @@
+{
+  "started": "2026-10-25T09:13:28.219Z",
+  "mode": "headless-only-no-download",
+  "events": [],
+  "downloads": 0,
+  "steps": [
+    "fresh-real-starter",
+    "localized-Run-online-values",
+    "localized-Edit-author-document-preserved"
+  ],
+  "blankOriginReadProbe": {
+    "href": "about:blank",
+    "name": "SecurityError",
+    "message": "Failed to read the 'localStorage' property from 'Window': Access is denied for this document.",
+    "stack": "SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:305:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+  },
+  "runPreview": "数据源\n在线\nSmart Home Demo Source\nsmart-home-demo-source\n绑定值\nready\n良好\n/channels/channel-a/status\nalarm\n良好\n/channels/channel-c/status\noffline\n良好\n/channels/channel-b/status\nready\n良好\n/channels/channel-a/status\nready\n良好\n/channels/channel-a/status\n活动告警\n2\nDevice alarm\nentry-access-status\nDevice offline\nliving-climate-status\n运行诊断\n0\n无",
+  "authorDocument": {
+    "beforeRevision": 1,
+    "afterRevision": 1,
+    "documentJsonEqual": true,
+    "storageVersionUnchanged": true,
+    "visibleRevisionUnchanged": true
+  },
+  "device": {
+    "browser": "156.0.8078.48",
+    "headless": true,
+    "viewport": [
+      1280,
+      720
+    ],
+    "dpr": 1
+  },
+  "status": "PASS",
+  "completed": "2026-10-25T09:13:29.538Z"
+}

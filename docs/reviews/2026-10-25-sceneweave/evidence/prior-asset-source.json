@@ -1,0 +1,985 @@
+{
+  "archiveSha256": "85259024fddc28a5c0b52b2c4defb6dc25505c412ac60af61750202fbc6ee3f6",
+  "fileCount": 111,
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "6376b114cb71893a533eacaabc4bb299817bcd380f1663bae6b6a52ca0ac75a6",
+      "indexSha256": "6c661c52303e865d1862a3b84ead45a164219d8fe2a8d9eb7b10288729f6781f",
+      "byteLength": 223,
+      "indexByteLength": 210
+    },
+    {
+      "path": "apps/studio/public/starter/descriptor.json",
+      "sha256": "44e1e5a4cf49d9dd0333d98e31805c3ac266408b1fafeb8ad222ad5f59811fef",
+      "indexSha256": "44e1e5a4cf49d9dd0333d98e31805c3ac266408b1fafeb8ad222ad5f59811fef",
+      "byteLength": 238,
+      "indexByteLength": 238
+    },
+    {
+      "path": "apps/studio/public/starter/free-home-90sqm.web3d.zip",
+      "sha256": "85259024fddc28a5c0b52b2c4defb6dc25505c412ac60af61750202fbc6ee3f6",
+      "indexSha256": "85259024fddc28a5c0b52b2c4defb6dc25505c412ac60af61750202fbc6ee3f6",
+      "byteLength": 1045464,
+      "indexByteLength": 1045464
+    },
+    {
+      "path": "assets/free-home/AUTHORED-LICENSE.txt",
+      "sha256": "280c0ca89bef8b8f90082763532ed16d37ea50472a9ede9912a4e65535911af4",
+      "indexSha256": "280c0ca89bef8b8f90082763532ed16d37ea50472a9ede9912a4e65535911af4",
+      "byteLength": 510,
+      "indexByteLength": 510
+    },
+    {
+      "path": "assets/free-home/manifest.json",
+      "sha256": "e191348df362a6a35461993e2d2de62de1c15eae029c8d79341f74ccd4dec638",
+      "indexSha256": "e191348df362a6a35461993e2d2de62de1c15eae029c8d79341f74ccd4dec638",
+      "byteLength": 35451,
+      "indexByteLength": 35451
+    },
+    {
+      "path": "assets/free-home/models/air_purifier.glb",
+      "sha256": "42b4a9dc97443d39734b444920c8707e0d3023c8aca9b1e897f8c28d92c6ca7b",
+      "indexSha256": "42b4a9dc97443d39734b444920c8707e0d3023c8aca9b1e897f8c28d92c6ca7b",
+      "byteLength": 73524,
+      "indexByteLength": 73524
+    },
+    {
+      "path": "assets/free-home/models/balcony_sliding_door.glb",
+      "sha256": "9312f996b856e5c1f15b2bbaef605936305845f2ec031b13af96ed3c9ea786a2",
+      "indexSha256": "9312f996b856e5c1f15b2bbaef605936305845f2ec031b13af96ed3c9ea786a2",
+      "byteLength": 10136,
+      "indexByteLength": 10136
+    },
+    {
+      "path": "assets/free-home/models/bathroom_vanity.glb",
+      "sha256": "fa8801dddc8c24f6547b806b78102e6b27090492f60532f3554f6d23d8b9c169",
+      "indexSha256": "fa8801dddc8c24f6547b806b78102e6b27090492f60532f3554f6d23d8b9c169",
+      "byteLength": 15392,
+      "indexByteLength": 15392
+    },
+    {
+      "path": "assets/free-home/models/bedrug.glb",
+      "sha256": "0ba54af71308f317985be4a013bda4e29a16d6f628b73902825f31e25dbec08b",
+      "indexSha256": "0ba54af71308f317985be4a013bda4e29a16d6f628b73902825f31e25dbec08b",
+      "byteLength": 3400,
+      "indexByteLength": 3400
+    },
+    {
+      "path": "assets/free-home/models/bedside_table.glb",
+      "sha256": "d2cf568ac7b28b118107067b81f92009671446d37dc245dd2757e11f32db3399",
+      "indexSha256": "d2cf568ac7b28b118107067b81f92009671446d37dc245dd2757e11f32db3399",
+      "byteLength": 16348,
+      "indexByteLength": 16348
+    },
+    {
+      "path": "assets/free-home/models/books.glb",
+      "sha256": "7b6ffd49d397ab9cf24e3160c3561163ad4016eda185a8c5762f1dc4e2cdfa16",
+      "indexSha256": "7b6ffd49d397ab9cf24e3160c3561163ad4016eda185a8c5762f1dc4e2cdfa16",
+      "byteLength": 7144,
+      "indexByteLength": 7144
+    },
+    {
+      "path": "assets/free-home/models/casement_window.glb",
+      "sha256": "ce6c5c02f6ed53e7ff6f7e65d6796bbbdfc73eaf4ead50fc166c949f3977a1d0",
+      "indexSha256": "ce6c5c02f6ed53e7ff6f7e65d6796bbbdfc73eaf4ead50fc166c949f3977a1d0",
+      "byteLength": 10064,
+      "indexByteLength": 10064
+    },
+    {
+      "path": "assets/free-home/models/ceiling_light.glb",
+      "sha256": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "indexSha256": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "byteLength": 22784,
+      "indexByteLength": 22784
+    },
+    {
+      "path": "assets/free-home/models/coffee_table.glb",
+      "sha256": "975e24b1f4fff9b69a579e9cbd3c150e1b920e0e88908d8c65ca543ade4409be",
+      "indexSha256": "975e24b1f4fff9b69a579e9cbd3c150e1b920e0e88908d8c65ca543ade4409be",
+      "byteLength": 8500,
+      "indexByteLength": 8500
+    },
+    {
+      "path": "assets/free-home/models/desk.glb",
+      "sha256": "8b920121ddd3a3fed1f13d5e29a8b29eaffb0744e2fca7cf354b966711a52e50",
+      "indexSha256": "8b920121ddd3a3fed1f13d5e29a8b29eaffb0744e2fca7cf354b966711a52e50",
+      "byteLength": 15304,
+      "indexByteLength": 15304
+    },
+    {
+      "path": "assets/free-home/models/dining_chair.glb",
+      "sha256": "9c048afd5fac9be085b21fcd191bad1d6e15055b3b1c23d5175a5203c41a61f5",
+      "indexSha256": "9c048afd5fac9be085b21fcd191bad1d6e15055b3b1c23d5175a5203c41a61f5",
+      "byteLength": 7596,
+      "indexByteLength": 7596
+    },
+    {
+      "path": "assets/free-home/models/dining_table.glb",
+      "sha256": "6bc6ea7600d084244e10f7af11e39072450dc2be9bf5a2f4745b22295460b90d",
+      "indexSha256": "6bc6ea7600d084244e10f7af11e39072450dc2be9bf5a2f4745b22295460b90d",
+      "byteLength": 6648,
+      "indexByteLength": 6648
+    },
+    {
+      "path": "assets/free-home/models/doormat.glb",
+      "sha256": "1e4c06238c29f65bbdf08ad48a91c587a46aba20eb68cafe0daad41c7b34d577",
+      "indexSha256": "1e4c06238c29f65bbdf08ad48a91c587a46aba20eb68cafe0daad41c7b34d577",
+      "byteLength": 13992,
+      "indexByteLength": 13992
+    },
+    {
+      "path": "assets/free-home/models/double_bed.glb",
+      "sha256": "1ab8c7e4d2de40e73ad86ad9e8119b836c62fa1470ef2787f6b1275f86562455",
+      "indexSha256": "1ab8c7e4d2de40e73ad86ad9e8119b836c62fa1470ef2787f6b1275f86562455",
+      "byteLength": 23684,
+      "indexByteLength": 23684
+    },
+    {
+      "path": "assets/free-home/models/entrance_door.glb",
+      "sha256": "957f72d09f853b555befc20d8e5d72057d0b61777d9aff6c8ee4700fc6a78d67",
+      "indexSha256": "957f72d09f853b555befc20d8e5d72057d0b61777d9aff6c8ee4700fc6a78d67",
+      "byteLength": 13340,
+      "indexByteLength": 13340
+    },
+    {
+      "path": "assets/free-home/models/home_shell.glb",
+      "sha256": "597f5d8d3df8d16312f1a83eaa8393f5c49ec99ae86cbabe434898d06b303c85",
+      "indexSha256": "597f5d8d3df8d16312f1a83eaa8393f5c49ec99ae86cbabe434898d06b303c85",
+      "byteLength": 128476,
+      "indexByteLength": 128476
+    },
+    {
+      "path": "assets/free-home/models/induction_cooktop.glb",
+      "sha256": "ded0073b31ccf4f74f634c9e3745f183b8bffcc3eb7d157c4628d2b775596547",
+      "indexSha256": "ded0073b31ccf4f74f634c9e3745f183b8bffcc3eb7d157c4628d2b775596547",
+      "byteLength": 18928,
+      "indexByteLength": 18928
+    },
+    {
+      "path": "assets/free-home/models/interior_door.glb",
+      "sha256": "7b9f2e2e56d7197ada91a654d3ae1d1bdb10adb98521b7f377ed64a88f0dfbcb",
+      "indexSha256": "7b9f2e2e56d7197ada91a654d3ae1d1bdb10adb98521b7f377ed64a88f0dfbcb",
+      "byteLength": 3452,
+      "indexByteLength": 3452
+    },
+    {
+      "path": "assets/free-home/models/kitchen_cabinet.glb",
+      "sha256": "ad1a0a594e0896e5496af1cd7319c1b72d73c9e15d42078ef3174910a58bdee9",
+      "indexSha256": "ad1a0a594e0896e5496af1cd7319c1b72d73c9e15d42078ef3174910a58bdee9",
+      "byteLength": 15620,
+      "indexByteLength": 15620
+    },
+    {
+      "path": "assets/free-home/models/lamp.glb",
+      "sha256": "12d19eedd8c3bbe3f3ac9a486cf296666c4744e4c5986233ea7333af7e4f131d",
+      "indexSha256": "12d19eedd8c3bbe3f3ac9a486cf296666c4744e4c5986233ea7333af7e4f131d",
+      "byteLength": 6828,
+      "indexByteLength": 6828
+    },
+    {
+      "path": "assets/free-home/models/laptop.glb",
+      "sha256": "20a2603949a86d007a1b3b36e23756bd2d465783b7b42135cbf87557e18155e8",
+      "indexSha256": "20a2603949a86d007a1b3b36e23756bd2d465783b7b42135cbf87557e18155e8",
+      "byteLength": 5780,
+      "indexByteLength": 5780
+    },
+    {
+      "path": "assets/free-home/models/microwave_oven.glb",
+      "sha256": "dd10078ba5ffda84a98559b40213055dc5d71db57eb8f1ad96ac58ad19e5491f",
+      "indexSha256": "dd10078ba5ffda84a98559b40213055dc5d71db57eb8f1ad96ac58ad19e5491f",
+      "byteLength": 11540,
+      "indexByteLength": 11540
+    },
+    {
+      "path": "assets/free-home/models/mirror.glb",
+      "sha256": "f68ef56544b8d1c442caef2b05dd6d45cb2bd7e464840d939ba0abd0b0c53d00",
+      "indexSha256": "f68ef56544b8d1c442caef2b05dd6d45cb2bd7e464840d939ba0abd0b0c53d00",
+      "byteLength": 7088,
+      "indexByteLength": 7088
+    },
+    {
+      "path": "assets/free-home/models/motorized_curtain.glb",
+      "sha256": "0aa5bd9a26c620d5e233661c3323a8c8366390f5681e9f32f107e19842a75f8d",
+      "indexSha256": "0aa5bd9a26c620d5e233661c3323a8c8366390f5681e9f32f107e19842a75f8d",
+      "byteLength": 21648,
+      "indexByteLength": 21648
+    },
+    {
+      "path": "assets/free-home/models/office_chair.glb",
+      "sha256": "3cecbe2ff88b47389f7857637201537cd52688a3fb4c21d354899a35e90375b6",
+      "indexSha256": "3cecbe2ff88b47389f7857637201537cd52688a3fb4c21d354899a35e90375b6",
+      "byteLength": 39216,
+      "indexByteLength": 39216
+    },
+    {
+      "path": "assets/free-home/models/plant.glb",
+      "sha256": "608d1bc50dba9cd079c5974b0ab1890873b8e39c28231ac51635f7e070ff6267",
+      "indexSha256": "608d1bc50dba9cd079c5974b0ab1890873b8e39c28231ac51635f7e070ff6267",
+      "byteLength": 7836,
+      "indexByteLength": 7836
+    },
+    {
+      "path": "assets/free-home/models/robot_vacuum_dock.glb",
+      "sha256": "ddd33b25921690c37bf8b8ea4a3bf46d68c47d5aab2e01245f435e2e848828c5",
+      "indexSha256": "ddd33b25921690c37bf8b8ea4a3bf46d68c47d5aab2e01245f435e2e848828c5",
+      "byteLength": 6848,
+      "indexByteLength": 6848
+    },
+    {
+      "path": "assets/free-home/models/robot_vacuum.glb",
+      "sha256": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "indexSha256": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "byteLength": 38336,
+      "indexByteLength": 38336
+    },
+    {
+      "path": "assets/free-home/models/rug.glb",
+      "sha256": "13dbaabb7d606d6f2a91ee08f20c57f2a4cab08b2d68f3b173046dba6e4ee61a",
+      "indexSha256": "13dbaabb7d606d6f2a91ee08f20c57f2a4cab08b2d68f3b173046dba6e4ee61a",
+      "byteLength": 11104,
+      "indexByteLength": 11104
+    },
+    {
+      "path": "assets/free-home/models/shoe_cabinet.glb",
+      "sha256": "0116d5d9a8b56fc816abf4c6e9912cdcef4d3326d3a94b08e62003b75c618101",
+      "indexSha256": "0116d5d9a8b56fc816abf4c6e9912cdcef4d3326d3a94b08e62003b75c618101",
+      "byteLength": 23312,
+      "indexByteLength": 23312
+    },
+    {
+      "path": "assets/free-home/models/shower.glb",
+      "sha256": "56bf308a451ed28766e71dd184596866943bcb15dcfa3cde4add0022f12183a6",
+      "indexSha256": "56bf308a451ed28766e71dd184596866943bcb15dcfa3cde4add0022f12183a6",
+      "byteLength": 72340,
+      "indexByteLength": 72340
+    },
+    {
+      "path": "assets/free-home/models/single_bed.glb",
+      "sha256": "d141a8957db1b4b4dfd6337d69c2dd4d7c990eebf32e5d57cd4e2475111d56b4",
+      "indexSha256": "d141a8957db1b4b4dfd6337d69c2dd4d7c990eebf32e5d57cd4e2475111d56b4",
+      "byteLength": 18972,
+      "indexByteLength": 18972
+    },
+    {
+      "path": "assets/free-home/models/small_plant.glb",
+      "sha256": "2de6bf90e08da181086b04ce189555cf0958919059cfdfc1d1831ce4627714b4",
+      "indexSha256": "2de6bf90e08da181086b04ce189555cf0958919059cfdfc1d1831ce4627714b4",
+      "byteLength": 8420,
+      "indexByteLength": 8420
+    },
+    {
+      "path": "assets/free-home/models/smart_control_panel.glb",
+      "sha256": "42d53426d34eb911b4d3cc7994153d9c392c0a33435c0a0df04990e8ace15708",
+      "indexSha256": "42d53426d34eb911b4d3cc7994153d9c392c0a33435c0a0df04990e8ace15708",
+      "byteLength": 5208,
+      "indexByteLength": 5208
+    },
+    {
+      "path": "assets/free-home/models/smart_door_lock.glb",
+      "sha256": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "indexSha256": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "byteLength": 21540,
+      "indexByteLength": 21540
+    },
+    {
+      "path": "assets/free-home/models/smart_range_hood.glb",
+      "sha256": "67405ef833664ddecaf52ee199d82d9b5c27b8339b83f71c13f5f45d9a8126f8",
+      "indexSha256": "67405ef833664ddecaf52ee199d82d9b5c27b8339b83f71c13f5f45d9a8126f8",
+      "byteLength": 4176,
+      "indexByteLength": 4176
+    },
+    {
+      "path": "assets/free-home/models/smart_refrigerator.glb",
+      "sha256": "535957effddbb7b1e67f23c7edf3a55f920874801fff8d5ec232fc38a6b7984e",
+      "indexSha256": "535957effddbb7b1e67f23c7edf3a55f920874801fff8d5ec232fc38a6b7984e",
+      "byteLength": 20392,
+      "indexByteLength": 20392
+    },
+    {
+      "path": "assets/free-home/models/smart_sink_faucet.glb",
+      "sha256": "efa59f43a09cc8f55c57d8c955021a0c015ebc8889f60297ce578a673b6fc311",
+      "indexSha256": "efa59f43a09cc8f55c57d8c955021a0c015ebc8889f60297ce578a673b6fc311",
+      "byteLength": 23768,
+      "indexByteLength": 23768
+    },
+    {
+      "path": "assets/free-home/models/smart_trash_bin.glb",
+      "sha256": "588e53c8b2f2c2cb617f16afcf2ace557b55c4e884132e754fd8688e02ffce58",
+      "indexSha256": "588e53c8b2f2c2cb617f16afcf2ace557b55c4e884132e754fd8688e02ffce58",
+      "byteLength": 6740,
+      "indexByteLength": 6740
+    },
+    {
+      "path": "assets/free-home/models/smart_tv.glb",
+      "sha256": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "indexSha256": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "byteLength": 6800,
+      "indexByteLength": 6800
+    },
+    {
+      "path": "assets/free-home/models/smart_wall_switch.glb",
+      "sha256": "4df05d57990bd902424de00e04737e2edc28e833a0a21edfefb2578076f981bf",
+      "indexSha256": "4df05d57990bd902424de00e04737e2edc28e833a0a21edfefb2578076f981bf",
+      "byteLength": 5208,
+      "indexByteLength": 5208
+    },
+    {
+      "path": "assets/free-home/models/sofa_3seat.glb",
+      "sha256": "18d067a407a30c0dde0bdc069dc18184944473525a912ff95f1eaca358ebab83",
+      "indexSha256": "18d067a407a30c0dde0bdc069dc18184944473525a912ff95f1eaca358ebab83",
+      "byteLength": 9360,
+      "indexByteLength": 9360
+    },
+    {
+      "path": "assets/free-home/models/toilet.glb",
+      "sha256": "7c28cbfdc3c9361c414d18723f628e36e07a64e0f1dbed8ae0d96e344a421cf3",
+      "indexSha256": "7c28cbfdc3c9361c414d18723f628e36e07a64e0f1dbed8ae0d96e344a421cf3",
+      "byteLength": 18384,
+      "indexByteLength": 18384
+    },
+    {
+      "path": "assets/free-home/models/tv_console.glb",
+      "sha256": "12f9e521efc34c2457c824e92a932e44b726d26dc3628f497cae8ec98099a58f",
+      "indexSha256": "12f9e521efc34c2457c824e92a932e44b726d26dc3628f497cae8ec98099a58f",
+      "byteLength": 17136,
+      "indexByteLength": 17136
+    },
+    {
+      "path": "assets/free-home/models/upper_cabinet.glb",
+      "sha256": "ba93595f7dec6595c61c1f189322202a6774bf67d692be277d1ec080b755d2b2",
+      "indexSha256": "ba93595f7dec6595c61c1f189322202a6774bf67d692be277d1ec080b755d2b2",
+      "byteLength": 18424,
+      "indexByteLength": 18424
+    },
+    {
+      "path": "assets/free-home/models/video_doorbell.glb",
+      "sha256": "0f58a9a0f7630f3f2aad518df85183c1b1a7720eb1664a15e657c11d93c2dd01",
+      "indexSha256": "0f58a9a0f7630f3f2aad518df85183c1b1a7720eb1664a15e657c11d93c2dd01",
+      "byteLength": 10780,
+      "indexByteLength": 10780
+    },
+    {
+      "path": "assets/free-home/models/wall_air_conditioner.glb",
+      "sha256": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "indexSha256": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "byteLength": 15012,
+      "indexByteLength": 15012
+    },
+    {
+      "path": "assets/free-home/models/wardrobe.glb",
+      "sha256": "9fa9483d9e3e3d2567baaf194170dbb5cb7c17e7a4ada3f0b2b9ba5ee2e31e9b",
+      "indexSha256": "9fa9483d9e3e3d2567baaf194170dbb5cb7c17e7a4ada3f0b2b9ba5ee2e31e9b",
+      "byteLength": 22844,
+      "indexByteLength": 22844
+    },
+    {
+      "path": "assets/free-home/models/washer_dryer.glb",
+      "sha256": "b34fed3e9a50bf9eea6200e781588188f9a1c44b06da6634180dbd42ae4ca847",
+      "indexSha256": "b34fed3e9a50bf9eea6200e781588188f9a1c44b06da6634180dbd42ae4ca847",
+      "byteLength": 48388,
+      "indexByteLength": 48388
+    },
+    {
+      "path": "assets/free-home/README.md",
+      "sha256": "237c957dd12d1537ce98cf73c48e9bce0243911df5d8e2154b74ff210ea876c5",
+      "indexSha256": "237c957dd12d1537ce98cf73c48e9bce0243911df5d8e2154b74ff210ea876c5",
+      "byteLength": 3976,
+      "indexByteLength": 3976
+    },
+    {
+      "path": "assets/free-home/scene.json",
+      "sha256": "d358aa2f68c027d78102f42b8789f9daf4960f877eb5483c96dc7683739713d9",
+      "indexSha256": "d358aa2f68c027d78102f42b8789f9daf4960f877eb5483c96dc7683739713d9",
+      "byteLength": 57046,
+      "indexByteLength": 57046
+    },
+    {
+      "path": "assets/free-home/semantic-map.json",
+      "sha256": "90c77fdc22f3a787ed08ff8962e9774521a250616b09e2a37a3affc0025400d5",
+      "indexSha256": "90c77fdc22f3a787ed08ff8962e9774521a250616b09e2a37a3affc0025400d5",
+      "byteLength": 1130,
+      "indexByteLength": 1130
+    },
+    {
+      "path": "assets/free-home/source-lock.json",
+      "sha256": "9b8215af76bbc8fa8ace5149587d002381f5cfa18a6e2e78fafa2c05f2837f0d",
+      "indexSha256": "9b8215af76bbc8fa8ace5149587d002381f5cfa18a6e2e78fafa2c05f2837f0d",
+      "byteLength": 5418,
+      "indexByteLength": 5418
+    },
+    {
+      "path": "assets/free-home/source/KENNEY-LICENSE.txt",
+      "sha256": "bc0de1a0742cb490f9ed4bae0bd284286ebb27e23149b9917c7d8c0d590b8b29",
+      "indexSha256": "bc0de1a0742cb490f9ed4bae0bd284286ebb27e23149b9917c7d8c0d590b8b29",
+      "byteLength": 614,
+      "indexByteLength": 614
+    },
+    {
+      "path": "assets/free-home/source/kenney/bathroomMirror.glb",
+      "sha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+      "indexSha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+      "byteLength": 6792,
+      "indexByteLength": 6792
+    },
+    {
+      "path": "assets/free-home/source/kenney/bathroomSinkSquare.glb",
+      "sha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+      "indexSha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+      "byteLength": 15108,
+      "indexByteLength": 15108
+    },
+    {
+      "path": "assets/free-home/source/kenney/bedDouble.glb",
+      "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "indexSha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+      "byteLength": 23368,
+      "indexByteLength": 23368
+    },
+    {
+      "path": "assets/free-home/source/kenney/bedSingle.glb",
+      "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "indexSha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+      "byteLength": 18636,
+      "indexByteLength": 18636
+    },
+    {
+      "path": "assets/free-home/source/kenney/bookcaseClosedDoors.glb",
+      "sha256": "ff33f535acdb1825c0e958a293642b39665adcae0b1317b650e83d2bb687f4e2",
+      "indexSha256": "ff33f535acdb1825c0e958a293642b39665adcae0b1317b650e83d2bb687f4e2",
+      "byteLength": 22644,
+      "indexByteLength": 22644
+    },
+    {
+      "path": "assets/free-home/source/kenney/bookcaseClosedWide.glb",
+      "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "indexSha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+      "byteLength": 23140,
+      "indexByteLength": 23140
+    },
+    {
+      "path": "assets/free-home/source/kenney/books.glb",
+      "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "indexSha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+      "byteLength": 6864,
+      "indexByteLength": 6864
+    },
+    {
+      "path": "assets/free-home/source/kenney/cabinetBedDrawer.glb",
+      "sha256": "e3dfd2e120af3d4d29b66509e317452cd15bd3f57ac8945575462c582adc6de8",
+      "indexSha256": "e3dfd2e120af3d4d29b66509e317452cd15bd3f57ac8945575462c582adc6de8",
+      "byteLength": 16088,
+      "indexByteLength": 16088
+    },
+    {
+      "path": "assets/free-home/source/kenney/cabinetTelevisionDoors.glb",
+      "sha256": "8959347bfe26b1ac7e44c476f05789466bb84bcd2ad8b0fb40286005399bfcfc",
+      "indexSha256": "8959347bfe26b1ac7e44c476f05789466bb84bcd2ad8b0fb40286005399bfcfc",
+      "byteLength": 16876,
+      "indexByteLength": 16876
+    },
+    {
+      "path": "assets/free-home/source/kenney/chairDesk.glb",
+      "sha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+      "indexSha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+      "byteLength": 39016,
+      "indexByteLength": 39016
+    },
+    {
+      "path": "assets/free-home/source/kenney/chairModernCushion.glb",
+      "sha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+      "indexSha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+      "byteLength": 7376,
+      "indexByteLength": 7376
+    },
+    {
+      "path": "assets/free-home/source/kenney/desk.glb",
+      "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "indexSha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+      "byteLength": 15048,
+      "indexByteLength": 15048
+    },
+    {
+      "path": "assets/free-home/source/kenney/doorwayFront.glb",
+      "sha256": "b5b8e4c14ee1f2ffa10ef5c69badc995ae6fbcc868abac240221c61b8c593b0e",
+      "indexSha256": "b5b8e4c14ee1f2ffa10ef5c69badc995ae6fbcc868abac240221c61b8c593b0e",
+      "byteLength": 13016,
+      "indexByteLength": 13016
+    },
+    {
+      "path": "assets/free-home/source/kenney/doorwayOpen.glb",
+      "sha256": "cf05e165ea26dbbeaab4dc6296c143ef5f5a001e2ab5af9cd4fd65739408317e",
+      "indexSha256": "cf05e165ea26dbbeaab4dc6296c143ef5f5a001e2ab5af9cd4fd65739408317e",
+      "byteLength": 3256,
+      "indexByteLength": 3256
+    },
+    {
+      "path": "assets/free-home/source/kenney/hoodModern.glb",
+      "sha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+      "indexSha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+      "byteLength": 3968,
+      "indexByteLength": 3968
+    },
+    {
+      "path": "assets/free-home/source/kenney/kitchenCabinetDrawer.glb",
+      "sha256": "6f784807e3cadb15b4d2d3db726d93357ea5e6c4f2b6e4c9c064048a2d1d9cfc",
+      "indexSha256": "6f784807e3cadb15b4d2d3db726d93357ea5e6c4f2b6e4c9c064048a2d1d9cfc",
+      "byteLength": 15384,
+      "indexByteLength": 15384
+    },
+    {
+      "path": "assets/free-home/source/kenney/kitchenCabinetUpperDouble.glb",
+      "sha256": "7b2abd976f2e8f1727d6ba23490aaf5fe18db9c5ac66e729ef6fe8de835c039e",
+      "indexSha256": "7b2abd976f2e8f1727d6ba23490aaf5fe18db9c5ac66e729ef6fe8de835c039e",
+      "byteLength": 18184,
+      "indexByteLength": 18184
+    },
+    {
+      "path": "assets/free-home/source/kenney/kitchenFridge.glb",
+      "sha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+      "indexSha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+      "byteLength": 20116,
+      "indexByteLength": 20116
+    },
+    {
+      "path": "assets/free-home/source/kenney/kitchenMicrowave.glb",
+      "sha256": "dd6a6c919f4bebc6e2080fe419262cf97a0d6461ead3f3998aa3c9edf4d2bd27",
+      "indexSha256": "dd6a6c919f4bebc6e2080fe419262cf97a0d6461ead3f3998aa3c9edf4d2bd27",
+      "byteLength": 11248,
+      "indexByteLength": 11248
+    },
+    {
+      "path": "assets/free-home/source/kenney/kitchenSink.glb",
+      "sha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+      "indexSha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+      "byteLength": 23480,
+      "indexByteLength": 23480
+    },
+    {
+      "path": "assets/free-home/source/kenney/kitchenStoveElectric.glb",
+      "sha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+      "indexSha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+      "byteLength": 18604,
+      "indexByteLength": 18604
+    },
+    {
+      "path": "assets/free-home/source/kenney/lampRoundFloor.glb",
+      "sha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+      "indexSha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+      "byteLength": 6600,
+      "indexByteLength": 6600
+    },
+    {
+      "path": "assets/free-home/source/kenney/laptop.glb",
+      "sha256": "5fa8a1f4a71ab8d82ef64da77a6973ffd350c6d4557516069a4ffd4bb8d808af",
+      "indexSha256": "5fa8a1f4a71ab8d82ef64da77a6973ffd350c6d4557516069a4ffd4bb8d808af",
+      "byteLength": 5540,
+      "indexByteLength": 5540
+    },
+    {
+      "path": "assets/free-home/source/kenney/loungeDesignSofa.glb",
+      "sha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+      "indexSha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+      "byteLength": 9128,
+      "indexByteLength": 9128
+    },
+    {
+      "path": "assets/free-home/source/kenney/plantSmall1.glb",
+      "sha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+      "indexSha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+      "byteLength": 8224,
+      "indexByteLength": 8224
+    },
+    {
+      "path": "assets/free-home/source/kenney/pottedPlant.glb",
+      "sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15",
+      "indexSha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15",
+      "byteLength": 7576,
+      "indexByteLength": 7576
+    },
+    {
+      "path": "assets/free-home/source/kenney/rugDoormat.glb",
+      "sha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+      "indexSha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+      "byteLength": 13812,
+      "indexByteLength": 13812
+    },
+    {
+      "path": "assets/free-home/source/kenney/rugRectangle.glb",
+      "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "indexSha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+      "byteLength": 3188,
+      "indexByteLength": 3188
+    },
+    {
+      "path": "assets/free-home/source/kenney/rugRounded.glb",
+      "sha256": "2ef5cc634bb1060a1a5774cfcaf6e11c235791c99d6b59da5fdbc09edfb95a68",
+      "indexSha256": "2ef5cc634bb1060a1a5774cfcaf6e11c235791c99d6b59da5fdbc09edfb95a68",
+      "byteLength": 10876,
+      "indexByteLength": 10876
+    },
+    {
+      "path": "assets/free-home/source/kenney/showerRound.glb",
+      "sha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+      "indexSha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+      "byteLength": 72048,
+      "indexByteLength": 72048
+    },
+    {
+      "path": "assets/free-home/source/kenney/tableCoffee.glb",
+      "sha256": "e38bea760fbd514efbb75528d09b4752c91af44677bbb97e6d4386c263525179",
+      "indexSha256": "e38bea760fbd514efbb75528d09b4752c91af44677bbb97e6d4386c263525179",
+      "byteLength": 8256,
+      "indexByteLength": 8256
+    },
+    {
+      "path": "assets/free-home/source/kenney/tableRound.glb",
+      "sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+      "indexSha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+      "byteLength": 6444,
+      "indexByteLength": 6444
+    },
+    {
+      "path": "assets/free-home/source/kenney/toilet.glb",
+      "sha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+      "indexSha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+      "byteLength": 18112,
+      "indexByteLength": 18112
+    },
+    {
+      "path": "assets/free-home/source/kenney/trashcan.glb",
+      "sha256": "e0ccc1fe50cbd05386477fdff527171d1cf7c0de2ba7ff3233f8d9561feb2561",
+      "indexSha256": "e0ccc1fe50cbd05386477fdff527171d1cf7c0de2ba7ff3233f8d9561feb2561",
+      "byteLength": 6452,
+      "indexByteLength": 6452
+    },
+    {
+      "path": "assets/free-home/source/kenney/washer.glb",
+      "sha256": "0c9704df1817d2699b72305b96cde097c9558bacabaef2fd5ab1ff4c03b81abf",
+      "indexSha256": "0c9704df1817d2699b72305b96cde097c9558bacabaef2fd5ab1ff4c03b81abf",
+      "byteLength": 48104,
+      "indexByteLength": 48104
+    },
+    {
+      "path": "openspec/changes/free-home-starter/design.md",
+      "sha256": "718f37e7b43b914c9586829764047f7bd9bdd252118115052f74d5c5f318e40f",
+      "indexSha256": "718f37e7b43b914c9586829764047f7bd9bdd252118115052f74d5c5f318e40f",
+      "byteLength": 4932,
+      "indexByteLength": 4932
+    },
+    {
+      "path": "openspec/changes/free-home-starter/evidence.md",
+      "sha256": "246c0552bcd4d4e2a98d3473e77588381ff2b96195cbf332fd638c041559f7d0",
+      "indexSha256": "246c0552bcd4d4e2a98d3473e77588381ff2b96195cbf332fd638c041559f7d0",
+      "byteLength": 2632,
+      "indexByteLength": 2632
+    },
+    {
+      "path": "openspec/changes/free-home-starter/proposal.md",
+      "sha256": "f8c85f056c1cea6672c35b752f03c04975dd310f6580ff1b02955f2b4459bf4a",
+      "indexSha256": "f8c85f056c1cea6672c35b752f03c04975dd310f6580ff1b02955f2b4459bf4a",
+      "byteLength": 1004,
+      "indexByteLength": 1004
+    },
+    {
+      "path": "openspec/changes/free-home-starter/specs/free-home-starter/spec.md",
+      "sha256": "66cba286b785bde135293ac5f8357cd14fba8027cf3ac4b131288b3eb375f505",
+      "indexSha256": "66cba286b785bde135293ac5f8357cd14fba8027cf3ac4b131288b3eb375f505",
+      "byteLength": 2615,
+      "indexByteLength": 2615
+    },
+    {
+      "path": "openspec/changes/free-home-starter/tasks.md",
+      "sha256": "1f0dadb9d31cd2278288fd079b686c42323cc0b2e5497f031854aea2671e81bf",
+      "indexSha256": "1f0dadb9d31cd2278288fd079b686c42323cc0b2e5497f031854aea2671e81bf",
+      "byteLength": 1284,
+      "indexByteLength": 1284
+    },
+    {
+      "path": "README.md",
+      "sha256": "76cd714f5404785e547b079446a0e5fb3a3724cfd3203e699a30f0a019ada404",
+      "indexSha256": "315d957d7f654d4f2f2bd2d02087cd5f3cbc8aa3942f7d5888437a354ce42368",
+      "byteLength": 10210,
+      "indexByteLength": 10030
+    },
+    {
+      "path": "scripts/free-home/authored.mjs",
+      "sha256": "fbb5fb9545a5a7bd816a8ca726cd26c50f2fe1b6e9a4705ca98b7282373483b3",
+      "indexSha256": "fbb5fb9545a5a7bd816a8ca726cd26c50f2fe1b6e9a4705ca98b7282373483b3",
+      "byteLength": 7219,
+      "indexByteLength": 7219
+    },
+    {
+      "path": "scripts/free-home/free-home.test.mjs",
+      "sha256": "f32c6775bce9daf55a9e8f9e34b48a2d675288afb418a961ba22f4900bf3ceaa",
+      "indexSha256": "f32c6775bce9daf55a9e8f9e34b48a2d675288afb418a961ba22f4900bf3ceaa",
+      "byteLength": 4249,
+      "indexByteLength": 4249
+    },
+    {
+      "path": "scripts/free-home/generate.mjs",
+      "sha256": "983aaf3440563eba5f5ceb02f832b47761092da2fd8ca36944afa1786f0f75f5",
+      "indexSha256": "983aaf3440563eba5f5ceb02f832b47761092da2fd8ca36944afa1786f0f75f5",
+      "byteLength": 9282,
+      "indexByteLength": 9282
+    },
+    {
+      "path": "scripts/free-home/glb.mjs",
+      "sha256": "fc77ace8dfc614c187bc0cd7e52252433285dd2d0642db015b8a12116c73d0e1",
+      "indexSha256": "fc77ace8dfc614c187bc0cd7e52252433285dd2d0642db015b8a12116c73d0e1",
+      "byteLength": 7850,
+      "indexByteLength": 7850
+    },
+    {
+      "path": "scripts/free-home/layout.mjs",
+      "sha256": "97e56fc08ee760cdd9a02ec083653f6af929c60686ea3a947eaea40b184134d4",
+      "indexSha256": "97e56fc08ee760cdd9a02ec083653f6af929c60686ea3a947eaea40b184134d4",
+      "byteLength": 5022,
+      "indexByteLength": 5022
+    },
+    {
+      "path": "scripts/free-home/preview.html",
+      "sha256": "41b8d4cdd14dc409984d187f18f5e87009b59df469c2d2bf399c7064581f414c",
+      "indexSha256": "41b8d4cdd14dc409984d187f18f5e87009b59df469c2d2bf399c7064581f414c",
+      "byteLength": 675,
+      "indexByteLength": 675
+    },
+    {
+      "path": "scripts/free-home/preview.mjs",
+      "sha256": "0e8fc356b9a45f2384817e4659140fc4192e657bdfe66d69b993e4bb19ebd5e9",
+      "indexSha256": "0e8fc356b9a45f2384817e4659140fc4192e657bdfe66d69b993e4bb19ebd5e9",
+      "byteLength": 2674,
+      "indexByteLength": 2674
+    },
+    {
+      "path": "scripts/free-home/serve-preview.mjs",
+      "sha256": "03342ea96e4e1041bc7385c407fbbbf9454a3018e73f8121f1950d700c2d5433",
+      "indexSha256": "03342ea96e4e1041bc7385c407fbbbf9454a3018e73f8121f1950d700c2d5433",
+      "byteLength": 321,
+      "indexByteLength": 321
+    },
+    {
+      "path": "scripts/release/asset-audit.mjs",
+      "sha256": "5d6d094ccb3caef8fb84d61c75e1d3e44fdd0531ec906cbc9abc3f61cbd06098",
+      "indexSha256": "0afbb608127e5e0d03b062ac5df779cc4df080088d032b56cda5f9479923952c",
+      "byteLength": 5887,
+      "indexByteLength": 5736
+    },
+    {
+      "path": "scripts/release/asset-audit.test.mjs",
+      "sha256": "1058255ee29ee4c9096d984efc99ff1804b34e87bd333f3e8df6995236177a39",
+      "indexSha256": "1058255ee29ee4c9096d984efc99ff1804b34e87bd333f3e8df6995236177a39",
+      "byteLength": 2247,
+      "indexByteLength": 2247
+    },
+    {
+      "path": "scripts/release/tracked-assets.json",
+      "sha256": "12e0396aa233ca5f74b4b34aaa6f1f3ebd2ee1ac35de28ef1be177e659d64049",
+      "indexSha256": "12e0396aa233ca5f74b4b34aaa6f1f3ebd2ee1ac35de28ef1be177e659d64049",
+      "byteLength": 36182,
+      "indexByteLength": 36182
+    }
+  ],
+  "indexedModelCount": 87,
+  "indexedModels": [
+    "assets/free-home/models/air_purifier.glb",
+    "assets/free-home/models/balcony_sliding_door.glb",
+    "assets/free-home/models/bathroom_vanity.glb",
+    "assets/free-home/models/bedrug.glb",
+    "assets/free-home/models/bedside_table.glb",
+    "assets/free-home/models/books.glb",
+    "assets/free-home/models/casement_window.glb",
+    "assets/free-home/models/ceiling_light.glb",
+    "assets/free-home/models/coffee_table.glb",
+    "assets/free-home/models/desk.glb",
+    "assets/free-home/models/dining_chair.glb",
+    "assets/free-home/models/dining_table.glb",
+    "assets/free-home/models/doormat.glb",
+    "assets/free-home/models/double_bed.glb",
+    "assets/free-home/models/entrance_door.glb",
+    "assets/free-home/models/home_shell.glb",
+    "assets/free-home/models/induction_cooktop.glb",
+    "assets/free-home/models/interior_door.glb",
+    "assets/free-home/models/kitchen_cabinet.glb",
+    "assets/free-home/models/lamp.glb",
+    "assets/free-home/models/laptop.glb",
+    "assets/free-home/models/microwave_oven.glb",
+    "assets/free-home/models/mirror.glb",
+    "assets/free-home/models/motorized_curtain.glb",
+    "assets/free-home/models/office_chair.glb",
+    "assets/free-home/models/plant.glb",
+    "assets/free-home/models/robot_vacuum.glb",
+    "assets/free-home/models/robot_vacuum_dock.glb",
+    "assets/free-home/models/rug.glb",
+    "assets/free-home/models/shoe_cabinet.glb",
+    "assets/free-home/models/shower.glb",
+    "assets/free-home/models/single_bed.glb",
+    "assets/free-home/models/small_plant.glb",
+    "assets/free-home/models/smart_control_panel.glb",
+    "assets/free-home/models/smart_door_lock.glb",
+    "assets/free-home/models/smart_range_hood.glb",
+    "assets/free-home/models/smart_refrigerator.glb",
+    "assets/free-home/models/smart_sink_faucet.glb",
+    "assets/free-home/models/smart_trash_bin.glb",
+    "assets/free-home/models/smart_tv.glb",
+    "assets/free-home/models/smart_wall_switch.glb",
+    "assets/free-home/models/sofa_3seat.glb",
+    "assets/free-home/models/toilet.glb",
+    "assets/free-home/models/tv_console.glb",
+    "assets/free-home/models/upper_cabinet.glb",
+    "assets/free-home/models/video_doorbell.glb",
+    "assets/free-home/models/wall_air_conditioner.glb",
+    "assets/free-home/models/wardrobe.glb",
+    "assets/free-home/models/washer_dryer.glb",
+    "assets/free-home/source/kenney/bathroomMirror.glb",
+    "assets/free-home/source/kenney/bathroomSinkSquare.glb",
+    "assets/free-home/source/kenney/bedDouble.glb",
+    "assets/free-home/source/kenney/bedSingle.glb",
+    "assets/free-home/source/kenney/bookcaseClosedDoors.glb",
+    "assets/free-home/source/kenney/bookcaseClosedWide.glb",
+    "assets/free-home/source/kenney/books.glb",
+    "assets/free-home/source/kenney/cabinetBedDrawer.glb",
+    "assets/free-home/source/kenney/cabinetTelevisionDoors.glb",
+    "assets/free-home/source/kenney/chairDesk.glb",
+    "assets/free-home/source/kenney/chairModernCushion.glb",
+    "assets/free-home/source/kenney/desk.glb",
+    "assets/free-home/source/kenney/doorwayFront.glb",
+    "assets/free-home/source/kenney/doorwayOpen.glb",
+    "assets/free-home/source/kenney/hoodModern.glb",
+    "assets/free-home/source/kenney/kitchenCabinetDrawer.glb",
+    "assets/free-home/source/kenney/kitchenCabinetUpperDouble.glb",
+    "assets/free-home/source/kenney/kitchenFridge.glb",
+    "assets/free-home/source/kenney/kitchenMicrowave.glb",
+    "assets/free-home/source/kenney/kitchenSink.glb",
+    "assets/free-home/source/kenney/kitchenStoveElectric.glb",
+    "assets/free-home/source/kenney/lampRoundFloor.glb",
+    "assets/free-home/source/kenney/laptop.glb",
+    "assets/free-home/source/kenney/loungeDesignSofa.glb",
+    "assets/free-home/source/kenney/plantSmall1.glb",
+    "assets/free-home/source/kenney/pottedPlant.glb",
+    "assets/free-home/source/kenney/rugDoormat.glb",
+    "assets/free-home/source/kenney/rugRectangle.glb",
+    "assets/free-home/source/kenney/rugRounded.glb",
+    "assets/free-home/source/kenney/showerRound.glb",
+    "assets/free-home/source/kenney/tableCoffee.glb",
+    "assets/free-home/source/kenney/tableRound.glb",
+    "assets/free-home/source/kenney/toilet.glb",
+    "assets/free-home/source/kenney/trashcan.glb",
+    "assets/free-home/source/kenney/washer.glb",
+    "examples/minimal-host/public/published/assets/e123f3d64ec60f136d8673478eb2fd2ce28f56bcb5fb94cef5a7377b9605efe8.glb",
+    "tests/fixtures/006b-light-performance-pbr/public/006b-light-performance-pbr.glb",
+    "tests/fixtures/m0-factory/public/m0-factory-cell.glb"
+  ],
+  "stagedOwnedPaths": [
+    ".gitignore",
+    "README.md",
+    "apps/studio/public/starter/descriptor.json",
+    "apps/studio/public/starter/free-home-90sqm.web3d.zip",
+    "assets/free-home/AUTHORED-LICENSE.txt",
+    "assets/free-home/README.md",
+    "assets/free-home/manifest.json",
+    "assets/free-home/models/air_purifier.glb",
+    "assets/free-home/models/balcony_sliding_door.glb",
+    "assets/free-home/models/bathroom_vanity.glb",
+    "assets/free-home/models/bedrug.glb",
+    "assets/free-home/models/bedside_table.glb",
+    "assets/free-home/models/books.glb",
+    "assets/free-home/models/casement_window.glb",
+    "assets/free-home/models/ceiling_light.glb",
+    "assets/free-home/models/coffee_table.glb",
+    "assets/free-home/models/desk.glb",
+    "assets/free-home/models/dining_chair.glb",
+    "assets/free-home/models/dining_table.glb",
+    "assets/free-home/models/doormat.glb",
+    "assets/free-home/models/double_bed.glb",
+    "assets/free-home/models/entrance_door.glb",
+    "assets/free-home/models/home_shell.glb",
+    "assets/free-home/models/induction_cooktop.glb",
+    "assets/free-home/models/interior_door.glb",
+    "assets/free-home/models/kitchen_cabinet.glb",
+    "assets/free-home/models/lamp.glb",
+    "assets/free-home/models/laptop.glb",
+    "assets/free-home/models/microwave_oven.glb",
+    "assets/free-home/models/mirror.glb",
+    "assets/free-home/models/motorized_curtain.glb",
+    "assets/free-home/models/office_chair.glb",
+    "assets/free-home/models/plant.glb",
+    "assets/free-home/models/robot_vacuum.glb",
+    "assets/free-home/models/robot_vacuum_dock.glb",
+    "assets/free-home/models/rug.glb",
+    "assets/free-home/models/shoe_cabinet.glb",
+    "assets/free-home/models/shower.glb",
+    "assets/free-home/models/single_bed.glb",
+    "assets/free-home/models/small_plant.glb",
+    "assets/free-home/models/smart_control_panel.glb",
+    "assets/free-home/models/smart_door_lock.glb",
+    "assets/free-home/models/smart_range_hood.glb",
+    "assets/free-home/models/smart_refrigerator.glb",
+    "assets/free-home/models/smart_sink_faucet.glb",
+    "assets/free-home/models/smart_trash_bin.glb",
+    "assets/free-home/models/smart_tv.glb",
+    "assets/free-home/models/smart_wall_switch.glb",
+    "assets/free-home/models/sofa_3seat.glb",
+    "assets/free-home/models/toilet.glb",
+    "assets/free-home/models/tv_console.glb",
+    "assets/free-home/models/upper_cabinet.glb",
+    "assets/free-home/models/video_doorbell.glb",
+    "assets/free-home/models/wall_air_conditioner.glb",
+    "assets/free-home/models/wardrobe.glb",
+    "assets/free-home/models/washer_dryer.glb",
+    "assets/free-home/scene.json",
+    "assets/free-home/semantic-map.json",
+    "assets/free-home/source-lock.json",
+    "assets/free-home/source/KENNEY-LICENSE.txt",
+    "assets/free-home/source/kenney/bathroomMirror.glb",
+    "assets/free-home/source/kenney/bathroomSinkSquare.glb",
+    "assets/free-home/source/kenney/bedDouble.glb",
+    "assets/free-home/source/kenney/bedSingle.glb",
+    "assets/free-home/source/kenney/bookcaseClosedDoors.glb",
+    "assets/free-home/source/kenney/bookcaseClosedWide.glb",
+    "assets/free-home/source/kenney/books.glb",
+    "assets/free-home/source/kenney/cabinetBedDrawer.glb",
+    "assets/free-home/source/kenney/cabinetTelevisionDoors.glb",
+    "assets/free-home/source/kenney/chairDesk.glb",
+    "assets/free-home/source/kenney/chairModernCushion.glb",
+    "assets/free-home/source/kenney/desk.glb",
+    "assets/free-home/source/kenney/doorwayFront.glb",
+    "assets/free-home/source/kenney/doorwayOpen.glb",
+    "assets/free-home/source/kenney/hoodModern.glb",
+    "assets/free-home/source/kenney/kitchenCabinetDrawer.glb",
+    "assets/free-home/source/kenney/kitchenCabinetUpperDouble.glb",
+    "assets/free-home/source/kenney/kitchenFridge.glb",
+    "assets/free-home/source/kenney/kitchenMicrowave.glb",
+    "assets/free-home/source/kenney/kitchenSink.glb",
+    "assets/free-home/source/kenney/kitchenStoveElectric.glb",
+    "assets/free-home/source/kenney/lampRoundFloor.glb",
+    "assets/free-home/source/kenney/laptop.glb",
+    "assets/free-home/source/kenney/loungeDesignSofa.glb",
+    "assets/free-home/source/kenney/plantSmall1.glb",
+    "assets/free-home/source/kenney/pottedPlant.glb",
+    "assets/free-home/source/kenney/rugDoormat.glb",
+    "assets/free-home/source/kenney/rugRectangle.glb",
+    "assets/free-home/source/kenney/rugRounded.glb",
+    "assets/free-home/source/kenney/showerRound.glb",
+    "assets/free-home/source/kenney/tableCoffee.glb",
+    "assets/free-home/source/kenney/tableRound.glb",
+    "assets/free-home/source/kenney/toilet.glb",
+    "assets/free-home/source/kenney/trashcan.glb",
+    "assets/free-home/source/kenney/washer.glb",
+    "openspec/changes/free-home-starter/design.md",
+    "openspec/changes/free-home-starter/evidence.md",
+    "openspec/changes/free-home-starter/proposal.md",
+    "openspec/changes/free-home-starter/specs/free-home-starter/spec.md",
+    "openspec/changes/free-home-starter/tasks.md",
+    "scripts/free-home/authored.mjs",
+    "scripts/free-home/free-home.test.mjs",
+    "scripts/free-home/generate.mjs",
+    "scripts/free-home/glb.mjs",
+    "scripts/free-home/layout.mjs",
+    "scripts/free-home/preview.html",
+    "scripts/free-home/preview.mjs",
+    "scripts/free-home/serve-preview.mjs",
+    "scripts/release/asset-audit.test.mjs",
+    "scripts/release/tracked-assets.json"
+  ]
+}

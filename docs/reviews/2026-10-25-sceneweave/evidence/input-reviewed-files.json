@@ -1,0 +1,34 @@
+[
+  {
+    "path": "packages/document/src/archive/zip.ts",
+    "sha256": "34b303f96b2cbcab4e21b5f72cd7b2ec64c400de7a562955d28ed42c283c4701"
+  },
+  {
+    "path": "packages/document/src/archive/zip.test.ts",
+    "sha256": "68bcf604e32a5d535e707bd14b5b40de76f9bc306387692f0be8df77f4aa8094"
+  },
+  {
+    "path": "packages/runtime/src/assets/gltf-resource-policy.ts",
+    "sha256": "4f9f444a6b025e6d2921ffef98a78903dd8dbe1a8acab93b234b0a0d064ed883"
+  },
+  {
+    "path": "packages/runtime/src/assets/gltf-resource-policy.test.ts",
+    "sha256": "273a3aa03f11714a0989b4dea8923dd0b572d8ac047ce767f6ab8915b2ffc651"
+  },
+  {
+    "path": "packages/runtime/src/assets/inspect-gltf.ts",
+    "sha256": "dda5b9f925e6b5b73917f9e25ae0da53499174e2b8534a39a2e43d3824c81384"
+  },
+  {
+    "path": "packages/runtime/src/assets/inspect-gltf.test.ts",
+    "sha256": "4d8d14b2116470196b0d13684dd0cde068c53f254298c0916a60a950c26168cc"
+  },
+  {
+    "path": "packages/runtime/src/assets/asset-loader.ts",
+    "sha256": "023d2543fb457cbac92c58ef7b956a72a42c0958a53c30b4f9e4ea03d5eec25d"
+  },
+  {
+    "path": "packages/runtime/src/assets/asset-loader.test.ts",
+    "sha256": "20c2027df6bce446fa26f64a3bd28d03e85eef88c0965affe4264729cf543620"
+  }
+]

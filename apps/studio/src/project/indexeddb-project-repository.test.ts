@@ -38,6 +38,47 @@ describe("createIndexedDbProjectRepository", () => {
     vi.restoreAllMocks();
   });
 
+  it("acknowledges exports atomically without changing documents or active-project metadata", async () => {
+    const dbName = createDbName();
+    const clock = new FixedClock("2026-10-25T00:00:00.000Z");
+    const repository = createIndexedDbProjectRepository({ dbName, clock });
+    const a = await createFixtureProject({ clock, projectId: "export-a", revision: 4 });
+    const b = await createFixtureProject({ clock, projectId: "export-b", revision: 1 });
+    await repository.save(a);
+    await repository.save(b);
+    const before = await readStoredProjects(dbName);
+    const recentBefore = await repository.listRecent();
+    const db = await openRawDatabase(dbName);
+    const readLast = async () => {
+      const tx = db.transaction("settings", "readonly");
+      return rawRequest<{ value: string }>(tx.objectStore("settings").get("last-project-id"));
+    };
+    expect((await readLast()).value).toBe("export-b");
+    await Promise.all([
+      repository.markExported("export-a", 4),
+      repository.markExported("export-a", 2),
+    ]);
+    const after = await readStoredProjects(dbName);
+    const original = before.records.find((record) => record.id === "export-a")!;
+    expect(after.records.find((record) => record.id === "export-a")).toEqual({
+      ...original,
+      lastExportedRevision: 4,
+    });
+    expect((await readLast()).value).toBe("export-b");
+    expect((await repository.listRecent()).map((record) => record.id)).toEqual(
+      recentBefore.map((record) => record.id),
+    );
+    const newer = { ...a, document: { ...a.document, revision: 5 } };
+    await Promise.all([repository.save(newer), repository.markExported("export-a", 3)]);
+    const reopened = await repository.open("export-a");
+    expect(reopened.document.revision).toBe(5);
+    expect(reopened.record.lastExportedRevision).toBe(4);
+    await expect(repository.markExported("export-a", 6)).rejects.toThrow("saved document revision");
+    expect((await repository.open("export-a")).document.revision).toBe(5);
+    db.close();
+    await repository.close();
+  });
+
   it("rewrites every legacy project to 1.4 in one transaction and leaves current bytes untouched", async () => {
     const dbName = createDbName();
     const currentSeed = {

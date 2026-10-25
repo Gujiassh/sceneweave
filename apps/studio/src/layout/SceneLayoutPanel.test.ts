@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { LightEntity } from "@web3d/document";
 
@@ -8,6 +8,9 @@ import { StudioI18nProvider } from "../i18n/I18nProvider";
 import { SceneLayoutPanel } from "./SceneLayoutPanel";
 import { DISABLED_TRANSFORM_SETTINGS } from "./types";
 import type { StudioSceneLayout } from "./useStudioSceneLayout";
+
+beforeEach(() => vi.stubGlobal("navigator", { languages: ["en"], language: "en" }));
+afterEach(() => vi.unstubAllGlobals());
 
 describe("SceneLayoutPanel", () => {
   it("links disabled reasons and invalid snap drafts to accessible controls", () => {

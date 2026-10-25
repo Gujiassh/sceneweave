@@ -133,6 +133,7 @@ function fakeRepository(options: {
   readonly saved?: StudioProjectSnapshot;
 }): StudioProjectRepository {
   return {
+    markExported: vi.fn(),
     save: vi.fn(async (value) => options.saved ?? value),
     open: vi.fn(async () => options.opened ?? snapshot("opened")),
     listRecent: vi.fn(async () => options.recent),

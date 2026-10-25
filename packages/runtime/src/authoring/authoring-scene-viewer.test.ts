@@ -303,6 +303,32 @@ describe("createAuthoringSceneViewer", () => {
     await viewer.dispose();
   });
 
+  it("preserves the focused camera across same-document generations and applies views on document change", async () => {
+    const { asset, scene } = await fixture();
+    const viewer = createAuthoringSceneViewer(fakeContainer(), {
+      assetResolver: { resolve: () => Promise.resolve(new Blob([asset])) },
+    });
+    const source: SceneDocument = {
+      ...scene,
+      views: [
+        { id: "initial", name: "Initial", position: [20, 12, 20], target: [10, 0, 10], fov: 45 },
+      ],
+    };
+    await viewer.load(source);
+    const initial = viewer.getLightCreationFrame();
+    await viewer.focusEntity("factory-cell", { durationMs: 0 });
+    const focused = viewer.getLightCreationFrame();
+    expect(focused).not.toEqual(initial);
+    await viewer.load({ ...source, revision: source.revision + 1, name: "Renamed scene" });
+    expect(viewer.getLightCreationFrame()).toEqual(focused);
+    await viewer.setView("initial");
+    expect(viewer.getLightCreationFrame()).toEqual(initial);
+    await viewer.focusEntity("factory-cell", { durationMs: 0 });
+    await viewer.load({ ...source, id: "different-document" });
+    expect(viewer.getLightCreationFrame()).toEqual(initial);
+    await viewer.dispose();
+  });
+
   it("exposes a deeply immutable finite creation frame only while ready", async () => {
     const { asset, scene } = await fixture();
     const replacement = deferred<Blob>();

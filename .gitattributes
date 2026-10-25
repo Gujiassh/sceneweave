@@ -1,0 +1,11 @@
+tests/fixtures/006b-light-performance-pbr/LICENSE-CC0.txt text eol=lf
+
+tests/fixtures/m0-factory/LICENSE-CC0.txt text eol=lf
+
+assets/licenses/ibm-plex-mono-OFL-1.1.txt text eol=lf
+
+assets/licenses/ibm-plex-sans-OFL-1.1.txt text eol=lf
+assets/free-home/source/KENNEY-LICENSE.txt -text
+assets/free-home/AUTHORED-LICENSE.txt text eol=lf
+assets/free-home/**/*.glb -text
+apps/studio/public/starter/*.zip -text

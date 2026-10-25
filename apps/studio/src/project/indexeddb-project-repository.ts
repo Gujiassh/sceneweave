@@ -108,7 +108,16 @@ export function createIndexedDbProjectRepository(
           updatedAt: nowIso,
           lastOpenedAt: nowIso,
           lastSavedRevision: document.revision,
-          lastExportedRevision: snapshot.record.lastExportedRevision,
+          lastExportedRevision:
+            Math.max(
+              existing?.lastExportedRevision ?? -1,
+              snapshot.record.lastExportedRevision ?? -1,
+            ) < 0
+              ? null
+              : Math.max(
+                  existing?.lastExportedRevision ?? -1,
+                  snapshot.record.lastExportedRevision ?? -1,
+                ),
           documentJson: serializedDocument,
         };
         projectStore.put(record);
@@ -118,6 +127,30 @@ export function createIndexedDbProjectRepository(
         settingsStore.put(settingRecord(LAST_PROJECT_KEY, record.id));
         await done;
         return toStudioProject(record, document, persistedAssets);
+      } catch (error) {
+        await abortAndWaitForTransaction(tx, done);
+        throw error;
+      }
+    },
+    markExported: async (projectId, revision) => {
+      assertOpen(closed);
+      const db = await openDatabase();
+      const tx = db.transaction(PROJECTS_STORE, "readwrite");
+      const done = transactionComplete(tx);
+      try {
+        const store = tx.objectStore(PROJECTS_STORE);
+        const existing = await request<PersistedProjectRecord | undefined>(store.get(projectId));
+        if (!existing) throw studioAppErrors.projectNotFound(projectId);
+        if (!Number.isInteger(revision) || revision < 0 || revision > existing.lastSavedRevision) {
+          throw studioAppErrors.exportRevisionNotSaved();
+        }
+        const record = {
+          ...existing,
+          lastExportedRevision: Math.max(existing.lastExportedRevision ?? -1, revision),
+        };
+        store.put(record);
+        await done;
+        return stripDocumentJson(record);
       } catch (error) {
         await abortAndWaitForTransaction(tx, done);
         throw error;

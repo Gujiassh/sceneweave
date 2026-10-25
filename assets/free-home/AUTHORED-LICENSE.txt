@@ -1,0 +1,5 @@
+SceneWeave contributors dedicate the original geometry authored in scripts/free-home/authored.mjs and its generated models to the public domain under CC0 1.0 Universal.
+SPDX-License-Identifier: CC0-1.0
+Full legal terms: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+The original architecture is a new 12 x 7.5 metre reconstruction. It is not derived from any unavailable proprietary model or floorplan.
+Kenney source models retain their separate bundled CC0 license in source/KENNEY-LICENSE.txt.

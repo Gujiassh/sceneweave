@@ -1,0 +1,18 @@
+schema: spec-driven
+
+context: |
+  SceneWeave is a local-first desktop-width web editor for portable Three.js scenes.
+  Existing contracts remain authoritative under specs/001-* through specs/014-*;
+  openspec/specs/README.md indexes them without copying their requirements.
+  Document persistence, runtime transient state, React lifecycle, and published bundles
+  have separate package ownership. Preserve existing layout and binding meaning.
+rules:
+  proposal:
+    - Identify the observed user problem, affected capabilities, and acceptance evidence.
+  design:
+    - Record existing contract invariants, state ownership, failure recovery, and verification limits.
+  specs:
+    - Describe observable behavior using SHALL requirements and WHEN/THEN scenarios.
+    - Reference existing authoritative requirements instead of duplicating them.
+  tasks:
+    - Separate baseline findings, implementation, automated checks, and visible browser acceptance.

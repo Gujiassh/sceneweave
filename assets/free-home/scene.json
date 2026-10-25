@@ -1,0 +1,1636 @@
+{
+  "schemaVersion": "1.4.0",
+  "id": "free-home-90sqm",
+  "name": "90 m² • Sage & Oak Smart Home",
+  "revision": 1,
+  "assets": [
+    {
+      "id": "sofa_3seat",
+      "name": "sofa 3seat",
+      "uri": "asset://18d067a407a30c0dde0bdc069dc18184944473525a912ff95f1eaca358ebab83",
+      "mediaType": "model/gltf-binary",
+      "sha256": "18d067a407a30c0dde0bdc069dc18184944473525a912ff95f1eaca358ebab83",
+      "byteLength": 9360,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 116 }
+    },
+    {
+      "id": "coffee_table",
+      "name": "coffee table",
+      "uri": "asset://975e24b1f4fff9b69a579e9cbd3c150e1b920e0e88908d8c65ca543ade4409be",
+      "mediaType": "model/gltf-binary",
+      "sha256": "975e24b1f4fff9b69a579e9cbd3c150e1b920e0e88908d8c65ca543ade4409be",
+      "byteLength": 8500,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 124 }
+    },
+    {
+      "id": "tv_console",
+      "name": "tv console",
+      "uri": "asset://12f9e521efc34c2457c824e92a932e44b726d26dc3628f497cae8ec98099a58f",
+      "mediaType": "model/gltf-binary",
+      "sha256": "12f9e521efc34c2457c824e92a932e44b726d26dc3628f497cae8ec98099a58f",
+      "byteLength": 17136,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 2, "triangleCount": 210 }
+    },
+    {
+      "id": "dining_table",
+      "name": "dining table",
+      "uri": "asset://6bc6ea7600d084244e10f7af11e39072450dc2be9bf5a2f4745b22295460b90d",
+      "mediaType": "model/gltf-binary",
+      "sha256": "6bc6ea7600d084244e10f7af11e39072450dc2be9bf5a2f4745b22295460b90d",
+      "byteLength": 6648,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 80 }
+    },
+    {
+      "id": "dining_chair",
+      "name": "dining chair",
+      "uri": "asset://9c048afd5fac9be085b21fcd191bad1d6e15055b3b1c23d5175a5203c41a61f5",
+      "mediaType": "model/gltf-binary",
+      "sha256": "9c048afd5fac9be085b21fcd191bad1d6e15055b3b1c23d5175a5203c41a61f5",
+      "byteLength": 7596,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 92 }
+    },
+    {
+      "id": "double_bed",
+      "name": "double bed",
+      "uri": "asset://1ab8c7e4d2de40e73ad86ad9e8119b836c62fa1470ef2787f6b1275f86562455",
+      "mediaType": "model/gltf-binary",
+      "sha256": "1ab8c7e4d2de40e73ad86ad9e8119b836c62fa1470ef2787f6b1275f86562455",
+      "byteLength": 23684,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 264 }
+    },
+    {
+      "id": "single_bed",
+      "name": "single bed",
+      "uri": "asset://d141a8957db1b4b4dfd6337d69c2dd4d7c990eebf32e5d57cd4e2475111d56b4",
+      "mediaType": "model/gltf-binary",
+      "sha256": "d141a8957db1b4b4dfd6337d69c2dd4d7c990eebf32e5d57cd4e2475111d56b4",
+      "byteLength": 18972,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 4, "triangleCount": 214 }
+    },
+    {
+      "id": "bedside_table",
+      "name": "bedside table",
+      "uri": "asset://d2cf568ac7b28b118107067b81f92009671446d37dc245dd2757e11f32db3399",
+      "mediaType": "model/gltf-binary",
+      "sha256": "d2cf568ac7b28b118107067b81f92009671446d37dc245dd2757e11f32db3399",
+      "byteLength": 16348,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 182 }
+    },
+    {
+      "id": "wardrobe",
+      "name": "wardrobe",
+      "uri": "asset://9fa9483d9e3e3d2567baaf194170dbb5cb7c17e7a4ada3f0b2b9ba5ee2e31e9b",
+      "mediaType": "model/gltf-binary",
+      "sha256": "9fa9483d9e3e3d2567baaf194170dbb5cb7c17e7a4ada3f0b2b9ba5ee2e31e9b",
+      "byteLength": 22844,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 2, "triangleCount": 296 }
+    },
+    {
+      "id": "desk",
+      "name": "desk",
+      "uri": "asset://8b920121ddd3a3fed1f13d5e29a8b29eaffb0744e2fca7cf354b966711a52e50",
+      "mediaType": "model/gltf-binary",
+      "sha256": "8b920121ddd3a3fed1f13d5e29a8b29eaffb0744e2fca7cf354b966711a52e50",
+      "byteLength": 15304,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 2, "triangleCount": 198 }
+    },
+    {
+      "id": "office_chair",
+      "name": "office chair",
+      "uri": "asset://3cecbe2ff88b47389f7857637201537cd52688a3fb4c21d354899a35e90375b6",
+      "mediaType": "model/gltf-binary",
+      "sha256": "3cecbe2ff88b47389f7857637201537cd52688a3fb4c21d354899a35e90375b6",
+      "byteLength": 39216,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 2, "triangleCount": 588 }
+    },
+    {
+      "id": "kitchen_cabinet",
+      "name": "kitchen cabinet",
+      "uri": "asset://ad1a0a594e0896e5496af1cd7319c1b72d73c9e15d42078ef3174910a58bdee9",
+      "mediaType": "model/gltf-binary",
+      "sha256": "ad1a0a594e0896e5496af1cd7319c1b72d73c9e15d42078ef3174910a58bdee9",
+      "byteLength": 15620,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 174 }
+    },
+    {
+      "id": "smart_refrigerator",
+      "name": "smart refrigerator",
+      "uri": "asset://535957effddbb7b1e67f23c7edf3a55f920874801fff8d5ec232fc38a6b7984e",
+      "mediaType": "model/gltf-binary",
+      "sha256": "535957effddbb7b1e67f23c7edf3a55f920874801fff8d5ec232fc38a6b7984e",
+      "byteLength": 20392,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 4, "triangleCount": 250 }
+    },
+    {
+      "id": "washer_dryer",
+      "name": "washer dryer",
+      "uri": "asset://b34fed3e9a50bf9eea6200e781588188f9a1c44b06da6634180dbd42ae4ca847",
+      "mediaType": "model/gltf-binary",
+      "sha256": "b34fed3e9a50bf9eea6200e781588188f9a1c44b06da6634180dbd42ae4ca847",
+      "byteLength": 48388,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 6, "triangleCount": 720 }
+    },
+    {
+      "id": "induction_cooktop",
+      "name": "induction cooktop",
+      "uri": "asset://ded0073b31ccf4f74f634c9e3745f183b8bffcc3eb7d157c4628d2b775596547",
+      "mediaType": "model/gltf-binary",
+      "sha256": "ded0073b31ccf4f74f634c9e3745f183b8bffcc3eb7d157c4628d2b775596547",
+      "byteLength": 18928,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 6, "triangleCount": 338 }
+    },
+    {
+      "id": "smart_range_hood",
+      "name": "smart range hood",
+      "uri": "asset://67405ef833664ddecaf52ee199d82d9b5c27b8339b83f71c13f5f45d9a8126f8",
+      "mediaType": "model/gltf-binary",
+      "sha256": "67405ef833664ddecaf52ee199d82d9b5c27b8339b83f71c13f5f45d9a8126f8",
+      "byteLength": 4176,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 28 }
+    },
+    {
+      "id": "microwave_oven",
+      "name": "microwave oven",
+      "uri": "asset://dd10078ba5ffda84a98559b40213055dc5d71db57eb8f1ad96ac58ad19e5491f",
+      "mediaType": "model/gltf-binary",
+      "sha256": "dd10078ba5ffda84a98559b40213055dc5d71db57eb8f1ad96ac58ad19e5491f",
+      "byteLength": 11540,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 4, "triangleCount": 152 }
+    },
+    {
+      "id": "smart_sink_faucet",
+      "name": "smart sink faucet",
+      "uri": "asset://efa59f43a09cc8f55c57d8c955021a0c015ebc8889f60297ce578a673b6fc311",
+      "mediaType": "model/gltf-binary",
+      "sha256": "efa59f43a09cc8f55c57d8c955021a0c015ebc8889f60297ce578a673b6fc311",
+      "byteLength": 23768,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 6, "triangleCount": 318 }
+    },
+    {
+      "id": "smart_trash_bin",
+      "name": "smart trash bin",
+      "uri": "asset://588e53c8b2f2c2cb617f16afcf2ace557b55c4e884132e754fd8688e02ffce58",
+      "mediaType": "model/gltf-binary",
+      "sha256": "588e53c8b2f2c2cb617f16afcf2ace557b55c4e884132e754fd8688e02ffce58",
+      "byteLength": 6740,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 68 }
+    },
+    {
+      "id": "bathroom_vanity",
+      "name": "bathroom vanity",
+      "uri": "asset://fa8801dddc8c24f6547b806b78102e6b27090492f60532f3554f6d23d8b9c169",
+      "mediaType": "model/gltf-binary",
+      "sha256": "fa8801dddc8c24f6547b806b78102e6b27090492f60532f3554f6d23d8b9c169",
+      "byteLength": 15392,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 3, "triangleCount": 234 }
+    },
+    {
+      "id": "shoe_cabinet",
+      "name": "shoe cabinet",
+      "uri": "asset://0116d5d9a8b56fc816abf4c6e9912cdcef4d3326d3a94b08e62003b75c618101",
+      "mediaType": "model/gltf-binary",
+      "sha256": "0116d5d9a8b56fc816abf4c6e9912cdcef4d3326d3a94b08e62003b75c618101",
+      "byteLength": 23312,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 372 }
+    },
+    {
+      "id": "interior_door",
+      "name": "interior door",
+      "uri": "asset://7b9f2e2e56d7197ada91a654d3ae1d1bdb10adb98521b7f377ed64a88f0dfbcb",
+      "mediaType": "model/gltf-binary",
+      "sha256": "7b9f2e2e56d7197ada91a654d3ae1d1bdb10adb98521b7f377ed64a88f0dfbcb",
+      "byteLength": 3452,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 28 }
+    },
+    {
+      "id": "entrance_door",
+      "name": "entrance door",
+      "uri": "asset://957f72d09f853b555befc20d8e5d72057d0b61777d9aff6c8ee4700fc6a78d67",
+      "mediaType": "model/gltf-binary",
+      "sha256": "957f72d09f853b555befc20d8e5d72057d0b61777d9aff6c8ee4700fc6a78d67",
+      "byteLength": 13340,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 4, "triangleCount": 156 }
+    },
+    {
+      "id": "toilet",
+      "name": "toilet",
+      "uri": "asset://7c28cbfdc3c9361c414d18723f628e36e07a64e0f1dbed8ae0d96e344a421cf3",
+      "mediaType": "model/gltf-binary",
+      "sha256": "7c28cbfdc3c9361c414d18723f628e36e07a64e0f1dbed8ae0d96e344a421cf3",
+      "byteLength": 18384,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 4, "triangleCount": 230 }
+    },
+    {
+      "id": "shower",
+      "name": "shower",
+      "uri": "asset://56bf308a451ed28766e71dd184596866943bcb15dcfa3cde4add0022f12183a6",
+      "mediaType": "model/gltf-binary",
+      "sha256": "56bf308a451ed28766e71dd184596866943bcb15dcfa3cde4add0022f12183a6",
+      "byteLength": 72340,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 960 }
+    },
+    {
+      "id": "mirror",
+      "name": "mirror",
+      "uri": "asset://f68ef56544b8d1c442caef2b05dd6d45cb2bd7e464840d939ba0abd0b0c53d00",
+      "mediaType": "model/gltf-binary",
+      "sha256": "f68ef56544b8d1c442caef2b05dd6d45cb2bd7e464840d939ba0abd0b0c53d00",
+      "byteLength": 7088,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 3, "triangleCount": 72 }
+    },
+    {
+      "id": "plant",
+      "name": "plant",
+      "uri": "asset://608d1bc50dba9cd079c5974b0ab1890873b8e39c28231ac51635f7e070ff6267",
+      "mediaType": "model/gltf-binary",
+      "sha256": "608d1bc50dba9cd079c5974b0ab1890873b8e39c28231ac51635f7e070ff6267",
+      "byteLength": 7836,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 3, "triangleCount": 60 }
+    },
+    {
+      "id": "small_plant",
+      "name": "small plant",
+      "uri": "asset://2de6bf90e08da181086b04ce189555cf0958919059cfdfc1d1831ce4627714b4",
+      "mediaType": "model/gltf-binary",
+      "sha256": "2de6bf90e08da181086b04ce189555cf0958919059cfdfc1d1831ce4627714b4",
+      "byteLength": 8420,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 102 }
+    },
+    {
+      "id": "rug",
+      "name": "rug",
+      "uri": "asset://13dbaabb7d606d6f2a91ee08f20c57f2a4cab08b2d68f3b173046dba6e4ee61a",
+      "mediaType": "model/gltf-binary",
+      "sha256": "13dbaabb7d606d6f2a91ee08f20c57f2a4cab08b2d68f3b173046dba6e4ee61a",
+      "byteLength": 11104,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 204 }
+    },
+    {
+      "id": "bedrug",
+      "name": "bedrug",
+      "uri": "asset://0ba54af71308f317985be4a013bda4e29a16d6f628b73902825f31e25dbec08b",
+      "mediaType": "model/gltf-binary",
+      "sha256": "0ba54af71308f317985be4a013bda4e29a16d6f628b73902825f31e25dbec08b",
+      "byteLength": 3400,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 28 }
+    },
+    {
+      "id": "doormat",
+      "name": "doormat",
+      "uri": "asset://1e4c06238c29f65bbdf08ad48a91c587a46aba20eb68cafe0daad41c7b34d577",
+      "mediaType": "model/gltf-binary",
+      "sha256": "1e4c06238c29f65bbdf08ad48a91c587a46aba20eb68cafe0daad41c7b34d577",
+      "byteLength": 13992,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 204 }
+    },
+    {
+      "id": "lamp",
+      "name": "lamp",
+      "uri": "asset://12d19eedd8c3bbe3f3ac9a486cf296666c4744e4c5986233ea7333af7e4f131d",
+      "mediaType": "model/gltf-binary",
+      "sha256": "12d19eedd8c3bbe3f3ac9a486cf296666c4744e4c5986233ea7333af7e4f131d",
+      "byteLength": 6828,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 76 }
+    },
+    {
+      "id": "books",
+      "name": "books",
+      "uri": "asset://7b6ffd49d397ab9cf24e3160c3561163ad4016eda185a8c5762f1dc4e2cdfa16",
+      "mediaType": "model/gltf-binary",
+      "sha256": "7b6ffd49d397ab9cf24e3160c3561163ad4016eda185a8c5762f1dc4e2cdfa16",
+      "byteLength": 7144,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 4, "triangleCount": 62 }
+    },
+    {
+      "id": "laptop",
+      "name": "laptop",
+      "uri": "asset://20a2603949a86d007a1b3b36e23756bd2d465783b7b42135cbf87557e18155e8",
+      "mediaType": "model/gltf-binary",
+      "sha256": "20a2603949a86d007a1b3b36e23756bd2d465783b7b42135cbf87557e18155e8",
+      "byteLength": 5780,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 3, "triangleCount": 68 }
+    },
+    {
+      "id": "upper_cabinet",
+      "name": "upper cabinet",
+      "uri": "asset://ba93595f7dec6595c61c1f189322202a6774bf67d692be277d1ec080b755d2b2",
+      "mediaType": "model/gltf-binary",
+      "sha256": "ba93595f7dec6595c61c1f189322202a6774bf67d692be277d1ec080b755d2b2",
+      "byteLength": 18424,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 234 }
+    },
+    {
+      "id": "home_shell",
+      "name": "home shell",
+      "uri": "asset://597f5d8d3df8d16312f1a83eaa8393f5c49ec99ae86cbabe434898d06b303c85",
+      "mediaType": "model/gltf-binary",
+      "sha256": "597f5d8d3df8d16312f1a83eaa8393f5c49ec99ae86cbabe434898d06b303c85",
+      "byteLength": 128476,
+      "stats": { "nodeCount": 79, "meshCount": 78, "materialCount": 78, "triangleCount": 936 }
+    },
+    {
+      "id": "wall_air_conditioner",
+      "name": "wall air conditioner",
+      "uri": "asset://d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "mediaType": "model/gltf-binary",
+      "sha256": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "byteLength": 15012,
+      "stats": { "nodeCount": 10, "meshCount": 9, "materialCount": 9, "triangleCount": 108 }
+    },
+    {
+      "id": "smart_door_lock",
+      "name": "smart door lock",
+      "uri": "asset://e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "mediaType": "model/gltf-binary",
+      "sha256": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "byteLength": 21540,
+      "stats": { "nodeCount": 14, "meshCount": 13, "materialCount": 13, "triangleCount": 156 }
+    },
+    {
+      "id": "robot_vacuum",
+      "name": "robot vacuum",
+      "uri": "asset://e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "mediaType": "model/gltf-binary",
+      "sha256": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "byteLength": 38336,
+      "stats": { "nodeCount": 7, "meshCount": 6, "materialCount": 6, "triangleCount": 664 }
+    },
+    {
+      "id": "robot_vacuum_dock",
+      "name": "robot vacuum dock",
+      "uri": "asset://ddd33b25921690c37bf8b8ea4a3bf46d68c47d5aab2e01245f435e2e848828c5",
+      "mediaType": "model/gltf-binary",
+      "sha256": "ddd33b25921690c37bf8b8ea4a3bf46d68c47d5aab2e01245f435e2e848828c5",
+      "byteLength": 6848,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 48 }
+    },
+    {
+      "id": "air_purifier",
+      "name": "air purifier",
+      "uri": "asset://42b4a9dc97443d39734b444920c8707e0d3023c8aca9b1e897f8c28d92c6ca7b",
+      "mediaType": "model/gltf-binary",
+      "sha256": "42b4a9dc97443d39734b444920c8707e0d3023c8aca9b1e897f8c28d92c6ca7b",
+      "byteLength": 73524,
+      "stats": { "nodeCount": 12, "meshCount": 11, "materialCount": 11, "triangleCount": 1292 }
+    },
+    {
+      "id": "motorized_curtain",
+      "name": "motorized curtain",
+      "uri": "asset://0aa5bd9a26c620d5e233661c3323a8c8366390f5681e9f32f107e19842a75f8d",
+      "mediaType": "model/gltf-binary",
+      "sha256": "0aa5bd9a26c620d5e233661c3323a8c8366390f5681e9f32f107e19842a75f8d",
+      "byteLength": 21648,
+      "stats": { "nodeCount": 14, "meshCount": 13, "materialCount": 13, "triangleCount": 156 }
+    },
+    {
+      "id": "casement_window",
+      "name": "casement window",
+      "uri": "asset://ce6c5c02f6ed53e7ff6f7e65d6796bbbdfc73eaf4ead50fc166c949f3977a1d0",
+      "mediaType": "model/gltf-binary",
+      "sha256": "ce6c5c02f6ed53e7ff6f7e65d6796bbbdfc73eaf4ead50fc166c949f3977a1d0",
+      "byteLength": 10064,
+      "stats": { "nodeCount": 7, "meshCount": 6, "materialCount": 6, "triangleCount": 72 }
+    },
+    {
+      "id": "balcony_sliding_door",
+      "name": "balcony sliding door",
+      "uri": "asset://9312f996b856e5c1f15b2bbaef605936305845f2ec031b13af96ed3c9ea786a2",
+      "mediaType": "model/gltf-binary",
+      "sha256": "9312f996b856e5c1f15b2bbaef605936305845f2ec031b13af96ed3c9ea786a2",
+      "byteLength": 10136,
+      "stats": { "nodeCount": 7, "meshCount": 6, "materialCount": 6, "triangleCount": 72 }
+    },
+    {
+      "id": "video_doorbell",
+      "name": "video doorbell",
+      "uri": "asset://0f58a9a0f7630f3f2aad518df85183c1b1a7720eb1664a15e657c11d93c2dd01",
+      "mediaType": "model/gltf-binary",
+      "sha256": "0f58a9a0f7630f3f2aad518df85183c1b1a7720eb1664a15e657c11d93c2dd01",
+      "byteLength": 10780,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 152 }
+    },
+    {
+      "id": "smart_wall_switch",
+      "name": "smart wall switch",
+      "uri": "asset://4df05d57990bd902424de00e04737e2edc28e833a0a21edfefb2578076f981bf",
+      "mediaType": "model/gltf-binary",
+      "sha256": "4df05d57990bd902424de00e04737e2edc28e833a0a21edfefb2578076f981bf",
+      "byteLength": 5208,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 36 }
+    },
+    {
+      "id": "smart_control_panel",
+      "name": "smart control panel",
+      "uri": "asset://42d53426d34eb911b4d3cc7994153d9c392c0a33435c0a0df04990e8ace15708",
+      "mediaType": "model/gltf-binary",
+      "sha256": "42d53426d34eb911b4d3cc7994153d9c392c0a33435c0a0df04990e8ace15708",
+      "byteLength": 5208,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 36 }
+    },
+    {
+      "id": "smart_tv",
+      "name": "smart tv",
+      "uri": "asset://97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "mediaType": "model/gltf-binary",
+      "sha256": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "byteLength": 6800,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 48 }
+    },
+    {
+      "id": "ceiling_light",
+      "name": "ceiling light",
+      "uri": "asset://cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "mediaType": "model/gltf-binary",
+      "sha256": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "byteLength": 22784,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 384 }
+    }
+  ],
+  "entities": [
+    {
+      "id": "room-living",
+      "type": "group",
+      "parentId": null,
+      "name": "Living Room",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "living" }
+    },
+    {
+      "id": "room-dining",
+      "type": "group",
+      "parentId": null,
+      "name": "Dining Room",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "dining" }
+    },
+    {
+      "id": "room-master-bedroom",
+      "type": "group",
+      "parentId": null,
+      "name": "Master Bedroom",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "master-bedroom" }
+    },
+    {
+      "id": "room-bedroom-2",
+      "type": "group",
+      "parentId": null,
+      "name": "Bedroom 2",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "bedroom-2" }
+    },
+    {
+      "id": "room-kitchen",
+      "type": "group",
+      "parentId": null,
+      "name": "Kitchen",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "kitchen" }
+    },
+    {
+      "id": "room-bathroom",
+      "type": "group",
+      "parentId": null,
+      "name": "Bathroom",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "bathroom" }
+    },
+    {
+      "id": "room-entry",
+      "type": "group",
+      "parentId": null,
+      "name": "Entry",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "entry" }
+    },
+    {
+      "id": "room-corridor",
+      "type": "group",
+      "parentId": null,
+      "name": "Corridor",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "metadata": { "room": "corridor" }
+    },
+    {
+      "id": "home-shell",
+      "type": "asset",
+      "parentId": null,
+      "name": "90 m2 Home Shell",
+      "visible": true,
+      "locked": true,
+      "transform": { "position": [0, 0, 0], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "home_shell",
+      "metadata": { "room": "architecture", "license": "CC0-1.0" }
+    },
+    {
+      "id": "entrance-door",
+      "type": "asset",
+      "parentId": "room-entry",
+      "name": "Entrance Door",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [5.18, 0, 3.55], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "entrance_door",
+      "metadata": { "room": "entry", "license": "CC0-1.0" }
+    },
+    {
+      "id": "balcony-door",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Balcony Sliding Door",
+      "visible": false,
+      "locked": false,
+      "transform": { "position": [-3.8, 0, 3.55], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "balcony_sliding_door",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "door-living",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Living Room Door",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-4.45, 0, 0.55], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "interior_door",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "door-master",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Master Bedroom Door",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-4.45, 0, -0.8], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "interior_door",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "door-bedroom-2",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Bedroom 2 Door",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-0.05, 0, -0.8], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "interior_door",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "door-kitchen",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Kitchen Door",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [3.45, 0, -0.8], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "interior_door",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "door-bathroom",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Bathroom Door",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [3.43, 0, 0.46], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "interior_door",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "window-master-north",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom North Window",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-3.65, 0.85, -3.55],
+        "rotation": [0, 1, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "casement_window",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "window-bedroom-2-north",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 North Window",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.1, 0.9, -3.55], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "casement_window",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "window-kitchen-north",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Kitchen North Window",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [4, 1.05, -3.55], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "casement_window",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "window-living-west",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room West Window",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-5.9, 0.65, 1.8],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "casement_window",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "window-master-west",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom West Window",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-5.9, 0.9, -2.1],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "casement_window",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-sofa",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Sofa",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-4.25, 0, 2.2],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "sofa_3seat",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-coffee-table",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Coffee Table",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-3.15, 0, 2.15], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "coffee_table",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-tv-console",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room TV Console",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-1.62, 0, 2],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "tv_console",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-smart-tv",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Smart TV",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-1.62, 0.58, 2],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "smart_tv",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-air-purifier",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Air Purifier",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-5.3, 0, 0.85],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "air_purifier",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-ac",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Air Conditioner",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-5.72, 2.25, 0.95],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "wall_air_conditioner",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-curtain",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Motorized Curtain",
+      "visible": false,
+      "locked": false,
+      "transform": { "position": [-3.8, 2.62, 3.46], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "motorized_curtain",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-ceiling-light",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Room Ceiling Light",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-3.65, 2.72, 2], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "ceiling_light",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-table",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Table",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.45, 0, 2.1], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "dining_table",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-chair-north",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Chair North",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.45, 0, 1.35], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "dining_chair",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-chair-south",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Chair South",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.45, 0, 2.85], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "dining_chair",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-chair-west",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Chair West",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-0.45, 0, 2.1],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "dining_chair",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-chair-east",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Chair East",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [1.35, 0, 2.1],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "dining_chair",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-ceiling-light",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Ceiling Light",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.45, 2.72, 2.1], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "ceiling_light",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-double-bed",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom Double Bed",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-4.2, 0, -2.45], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "double_bed",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-bedside-left",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedside Table Left",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-5.25, 0, -2.45],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "bedside_table",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-bedside-right",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedside Table Right",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-3.15, 0, -2.45],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "bedside_table",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-wardrobe",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom Wardrobe",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-1.72, 0, -2.25],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "wardrobe",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-ac",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom Air Conditioner",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-1.5, 2.57, -2.35],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "wall_air_conditioner",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-curtain",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom Motorized Curtain",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-3.65, 2.62, -3.46],
+        "rotation": [0, 1, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "motorized_curtain",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-ceiling-light",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Bedroom Ceiling Light",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-3.62, 2.72, -2.2],
+        "rotation": [0, 0, 0, 1],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "ceiling_light",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bedroom-2-single-bed",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 Single Bed",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-0.55, 0, -2.4], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "single_bed",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bedroom-2-desk",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 Study Desk",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [1.35, 0, -3.1], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "desk",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bedroom-2-office-chair",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 Office Chair",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [1.35, 0, -2.4], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "office_chair",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bedroom-2-ac",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 Air Conditioner",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [2.15, 2.25, -2.25],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "wall_air_conditioner",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bedroom-2-curtain",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 Motorized Curtain",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.1, 2.62, -3.46], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "motorized_curtain",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bedroom-2-ceiling-light",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Bedroom 2 Ceiling Light",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.46, 2.72, -2.2], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "ceiling_light",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-cabinet",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Kitchen Cabinet",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [4.05, 0, -3.25], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "kitchen_cabinet",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-refrigerator",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Smart Refrigerator",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.3, 0, -1.4],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "smart_refrigerator",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-washer-dryer",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Washer Dryer",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.3, 0, -2.35],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "washer_dryer",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-cooktop",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Induction Cooktop",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [3.28, 0, -3.25], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "induction_cooktop",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-range-hood",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Smart Range Hood",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [3.35, 1.75, -3.38],
+        "rotation": [0, 1, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "smart_range_hood",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-microwave",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Microwave Oven",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [4.05, 0.9, -3.25], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "microwave_oven",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-faucet",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Smart Sink Faucet",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [4.85, 0, -3.25], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "smart_sink_faucet",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-trash-bin",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Smart Trash Bin",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [2.65, 0, -1.35], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "smart_trash_bin",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-ceiling-light",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Kitchen Ceiling Light",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [4.08, 2.72, -2.15],
+        "rotation": [0, 0, 0, 1],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "ceiling_light",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bathroom-vanity",
+      "type": "asset",
+      "parentId": "room-bathroom",
+      "name": "Bathroom Vanity",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [2.95, 0, 0.92], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "bathroom_vanity",
+      "metadata": { "room": "bathroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bathroom-ceiling-light",
+      "type": "asset",
+      "parentId": "room-bathroom",
+      "name": "Bathroom Ceiling Light",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [3.4, 2.72, 2], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "ceiling_light",
+      "metadata": { "room": "bathroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "entry-shoe-cabinet",
+      "type": "asset",
+      "parentId": "room-entry",
+      "name": "Entry Shoe Cabinet",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.65, 0, 1.42],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "shoe_cabinet",
+      "metadata": { "room": "entry", "license": "CC0-1.0" }
+    },
+    {
+      "id": "entry-door-lock",
+      "type": "asset",
+      "parentId": "room-entry",
+      "name": "Entry Smart Door Lock",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [4.82, 1.05, 3.5], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "smart_door_lock",
+      "metadata": { "room": "entry", "license": "CC0-1.0" }
+    },
+    {
+      "id": "entry-video-doorbell",
+      "type": "asset",
+      "parentId": "room-entry",
+      "name": "Entry Video Doorbell",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [4.55, 1.45, 3.74], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "video_doorbell",
+      "metadata": { "room": "entry", "license": "CC0-1.0" }
+    },
+    {
+      "id": "entry-wall-switch",
+      "type": "asset",
+      "parentId": "room-entry",
+      "name": "Entry Smart Wall Switch",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.72, 1.3, 3.35],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "smart_wall_switch",
+      "metadata": { "room": "entry", "license": "CC0-1.0" }
+    },
+    {
+      "id": "corridor-control-panel",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Home Control Panel",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.72, 1.45, -0.2],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "smart_control_panel",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "robot-vacuum",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Robot Vacuum",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [1.55, 0, 0.05],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "robot_vacuum",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "robot-vacuum-dock",
+      "type": "asset",
+      "parentId": "room-corridor",
+      "name": "Robot Vacuum Dock",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [2, 0, 0.35], "rotation": [0, 1, 0, 0], "scale": [1, 1, 1] },
+      "assetId": "robot_vacuum_dock",
+      "metadata": { "room": "corridor", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bathroom-toilet",
+      "type": "asset",
+      "parentId": "room-bathroom",
+      "name": "Bathroom Toilet",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [2.98, 0, 2],
+        "rotation": [0, 0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "toilet",
+      "metadata": { "room": "bathroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bathroom-shower",
+      "type": "asset",
+      "parentId": "room-bathroom",
+      "name": "Bathroom Shower",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [3.68, 0, 3.1], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "shower",
+      "metadata": { "room": "bathroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "bathroom-mirror",
+      "type": "asset",
+      "parentId": "room-bathroom",
+      "name": "Bathroom Mirror",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [2.95, 1.1, 0.67], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "mirror",
+      "metadata": { "room": "bathroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-rug",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Rug",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-3.55, 0.004, 2.12],
+        "rotation": [0, 0, 0, 1],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "rug",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-rug",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Rug",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-4.2, 0.005, -1.2],
+        "rotation": [0, 0, 0, 1],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "bedrug",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "entry-mat",
+      "type": "asset",
+      "parentId": "room-entry",
+      "name": "Entry Mat",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.15, 0.005, 3.03],
+        "rotation": [0, 0, 0, 1],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "doormat",
+      "metadata": { "room": "entry", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-plant",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Plant",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-5.45, 0, 3.1], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "plant",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-plant",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Plant",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [1.9, 0, 3.2], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "plant",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "living-floor-lamp",
+      "type": "asset",
+      "parentId": "room-living",
+      "name": "Living Floor Lamp",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [-5.15, 0, 1.3], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "lamp",
+      "metadata": { "room": "living", "license": "CC0-1.0" }
+    },
+    {
+      "id": "dining-centerpiece",
+      "type": "asset",
+      "parentId": "room-dining",
+      "name": "Dining Centerpiece",
+      "visible": true,
+      "locked": false,
+      "transform": { "position": [0.45, 0.76, 2.1], "rotation": [0, 0, 0, 1], "scale": [1, 1, 1] },
+      "assetId": "small_plant",
+      "metadata": { "room": "dining", "license": "CC0-1.0" }
+    },
+    {
+      "id": "master-books",
+      "type": "asset",
+      "parentId": "room-master-bedroom",
+      "name": "Master Books",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [-5.25, 0.5, -2.45],
+        "rotation": [0, 0, 0, 1],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "books",
+      "metadata": { "room": "master-bedroom", "license": "CC0-1.0" }
+    },
+    {
+      "id": "study-laptop",
+      "type": "asset",
+      "parentId": "room-bedroom-2",
+      "name": "Study Laptop",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [1.35, 0.76, -3.1],
+        "rotation": [0, 1, 0, 6.123233995736766e-17],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "laptop",
+      "metadata": { "room": "bedroom-2", "license": "CC0-1.0" }
+    },
+    {
+      "id": "kitchen-upper",
+      "type": "asset",
+      "parentId": "room-kitchen",
+      "name": "Kitchen Upper",
+      "visible": true,
+      "locked": false,
+      "transform": {
+        "position": [5.7, 1.7, -2.25],
+        "rotation": [0, -0.7071067811865475, 0, 0.7071067811865476],
+        "scale": [1, 1, 1]
+      },
+      "assetId": "upper_cabinet",
+      "metadata": { "room": "kitchen", "license": "CC0-1.0" }
+    }
+  ],
+  "targets": [
+    {
+      "id": "living-light-status",
+      "entityId": "living-ceiling-light",
+      "name": "Living Light Status",
+      "businessId": "SMART-HOME/LIVING/LIGHT",
+      "assetHash": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "nodeIndex": 2,
+      "metadata": { "semanticTargetId": "STATE_EMITTER", "storyState": "normal" }
+    },
+    {
+      "id": "living-climate-status",
+      "entityId": "living-ac",
+      "name": "Living Climate Status",
+      "businessId": "SMART-HOME/LIVING/CLIMATE",
+      "assetHash": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "nodeIndex": 9,
+      "metadata": { "semanticTargetId": "STATE_DISPLAY", "storyState": "offline" }
+    },
+    {
+      "id": "entry-access-status",
+      "entityId": "entry-door-lock",
+      "name": "Entry Access Status",
+      "businessId": "SMART-HOME/ENTRY/ACCESS",
+      "assetHash": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "nodeIndex": 13,
+      "metadata": { "semanticTargetId": "STATE_LED", "storyState": "alarm" }
+    },
+    {
+      "id": "living-media-status",
+      "entityId": "living-smart-tv",
+      "name": "Living Media Status",
+      "businessId": "SMART-HOME/LIVING/MEDIA",
+      "assetHash": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "nodeIndex": 2,
+      "metadata": { "semanticTargetId": "STATE_SCREEN", "storyState": "normal" }
+    },
+    {
+      "id": "cleaning-motion-status",
+      "entityId": "robot-vacuum",
+      "name": "Cleaning Motion Status",
+      "businessId": "SMART-HOME/CLEANING/MOTION",
+      "assetHash": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "nodeIndex": 4,
+      "metadata": { "semanticTargetId": "STATE_MOTION", "storyState": "normal" }
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "smart-home-demo-source",
+      "name": "Smart Home Demo Source",
+      "adapter": "mock",
+      "staleAfterMs": 30000,
+      "offlineAfterMs": 60000,
+      "options": { "scenario": "multi-status-cycle", "seed": 90, "defaultSpeed": 1 }
+    }
+  ],
+  "bindings": [
+    {
+      "id": "living-light-status-binding",
+      "targetId": "living-light-status",
+      "sourceId": "smart-home-demo-source",
+      "pointer": "/channels/channel-a/status",
+      "ruleSetId": "device-status",
+      "writes": ["color", "alarm"],
+      "enabled": true
+    },
+    {
+      "id": "living-climate-status-binding",
+      "targetId": "living-climate-status",
+      "sourceId": "smart-home-demo-source",
+      "pointer": "/channels/channel-b/status",
+      "ruleSetId": "device-status",
+      "writes": ["color", "alarm"],
+      "enabled": true
+    },
+    {
+      "id": "entry-access-status-binding",
+      "targetId": "entry-access-status",
+      "sourceId": "smart-home-demo-source",
+      "pointer": "/channels/channel-c/status",
+      "ruleSetId": "device-status",
+      "writes": ["color", "alarm"],
+      "enabled": true
+    },
+    {
+      "id": "living-media-status-binding",
+      "targetId": "living-media-status",
+      "sourceId": "smart-home-demo-source",
+      "pointer": "/channels/channel-a/status",
+      "ruleSetId": "device-status",
+      "writes": ["color", "alarm"],
+      "enabled": true
+    },
+    {
+      "id": "cleaning-motion-status-binding",
+      "targetId": "cleaning-motion-status",
+      "sourceId": "smart-home-demo-source",
+      "pointer": "/channels/channel-a/status",
+      "ruleSetId": "device-status",
+      "writes": ["color", "alarm"],
+      "enabled": true
+    }
+  ],
+  "ruleSets": [
+    {
+      "id": "device-status",
+      "name": "Device Status",
+      "rules": [
+        {
+          "id": "device-alarm",
+          "priority": 300,
+          "when": { "fact": "value", "operator": "eq", "expected": "alarm" },
+          "effects": [
+            { "type": "color", "value": "#C6352B" },
+            { "type": "alarm", "level": "critical", "message": "Device alarm" }
+          ]
+        },
+        {
+          "id": "device-offline",
+          "priority": 200,
+          "when": { "fact": "value", "operator": "eq", "expected": "offline" },
+          "effects": [
+            { "type": "color", "value": "#66736D" },
+            { "type": "alarm", "level": "warning", "message": "Device offline" }
+          ]
+        },
+        {
+          "id": "device-ready",
+          "priority": 100,
+          "when": { "fact": "value", "operator": "eq", "expected": "ready" },
+          "effects": [
+            { "type": "color", "value": "#21866F" },
+            { "type": "alarm", "level": "none", "message": "" }
+          ]
+        }
+      ],
+      "fallback": [
+        { "type": "color", "value": "#A96800" },
+        { "type": "alarm", "level": "info", "message": "Status unavailable" }
+      ]
+    }
+  ],
+  "annotations": [],
+  "views": [
+    {
+      "id": "a-whole-home",
+      "name": "Whole Home",
+      "position": [12.8, 14.4, 15.6],
+      "target": [0, 0.8, 0],
+      "fov": 45
+    },
+    {
+      "id": "living-dining",
+      "name": "Living And Dining",
+      "position": [-3.9, 8.7, 9],
+      "target": [-2.2, 0.6, 1.8],
+      "fov": 48
+    },
+    {
+      "id": "bedrooms",
+      "name": "Bedrooms",
+      "position": [-3.5, 10, -7],
+      "target": [-2, 0.6, -2.1],
+      "fov": 46
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "position": [7.8, 7.8, 0.5],
+      "target": [4.1, 0.8, -2.2],
+      "fov": 44
+    },
+    {
+      "id": "entry-security",
+      "name": "Entry Security",
+      "position": [7.8, 7.5, 7.8],
+      "target": [4.2, 0.8, 2.1],
+      "fov": 40
+    }
+  ],
+  "environment": {
+    "backgroundMode": "custom",
+    "background": "#E7EBE8",
+    "grid": false,
+    "unit": "m",
+    "upAxis": "Y",
+    "lighting": {
+      "fill": { "skyColor": "#F8FAF8", "groundColor": "#788078", "intensity": 1.6 },
+      "key": {
+        "color": "#FFF4DE",
+        "intensity": 2.2,
+        "directionToLight": [0.4082482904638631, 0.8164965809277261, 0.4082482904638631]
+      }
+    }
+  }
+}

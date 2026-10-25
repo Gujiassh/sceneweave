@@ -1,0 +1,37 @@
+[
+  {
+    "assetId": "ceiling_light",
+    "assetHash": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+    "semanticTargetId": "STATE_EMITTER",
+    "nodeIndex": 2,
+    "expectedNodeName": "STATE_EMITTER"
+  },
+  {
+    "assetId": "wall_air_conditioner",
+    "assetHash": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+    "semanticTargetId": "STATE_DISPLAY",
+    "nodeIndex": 9,
+    "expectedNodeName": "STATE_DISPLAY"
+  },
+  {
+    "assetId": "smart_door_lock",
+    "assetHash": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+    "semanticTargetId": "STATE_LED",
+    "nodeIndex": 13,
+    "expectedNodeName": "STATE_LED"
+  },
+  {
+    "assetId": "smart_tv",
+    "assetHash": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+    "semanticTargetId": "STATE_SCREEN",
+    "nodeIndex": 2,
+    "expectedNodeName": "STATE_SCREEN"
+  },
+  {
+    "assetId": "robot_vacuum",
+    "assetHash": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+    "semanticTargetId": "STATE_MOTION",
+    "nodeIndex": 4,
+    "expectedNodeName": "STATE_MOTION"
+  }
+]

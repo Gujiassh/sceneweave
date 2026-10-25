@@ -7,6 +7,7 @@ export interface StudioErrorDiagnosticDetails {
 }
 
 export interface StudioAppErrorDetailsByCode {
+  readonly EXPORT_REVISION_NOT_SAVED: EmptyDetails;
   readonly LOCAL_SAVE_FAILED: EmptyDetails;
   readonly IMPORT_COMMITTING: EmptyDetails;
   readonly PROJECT_REPOSITORY_NOT_READY: EmptyDetails;
@@ -105,6 +106,12 @@ function createStudioAppError<TCode extends StudioAppErrorCode>(
 }
 
 export const studioAppErrors = {
+  exportRevisionNotSaved: () =>
+    createStudioAppError(
+      "EXPORT_REVISION_NOT_SAVED",
+      "Export acknowledgement requires a saved document revision.",
+      {},
+    ),
   localSaveFailed: () => createStudioAppError("LOCAL_SAVE_FAILED", "Local save failed.", {}),
   importCommitting: () =>
     createStudioAppError("IMPORT_COMMITTING", "Import is being committed.", {}),

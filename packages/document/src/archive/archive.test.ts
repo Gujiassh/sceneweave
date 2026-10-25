@@ -34,7 +34,7 @@ describe("archive codec", () => {
       properties: { sceneSchemaVersion: { enum: string[] } };
     };
     const example = JSON.parse(readFileSync(manifestExampleUrl, "utf8")) as unknown;
-    const contract = readFileSync(manifestContractUrl, "utf8");
+    const contract = readFileSync(manifestContractUrl, "utf8").replace(/\r\n/g, "\n");
 
     expect(schema.properties.sceneSchemaVersion.enum).toEqual([
       "1.0.0",

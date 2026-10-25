@@ -3,11 +3,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   createDocumentHistory,
   executeHistoryCommand,
-  exportCanonicalSceneJson,
-  exportSceneArchive,
-  importCanonicalSceneJson,
-  importSceneArchive,
-  LOCAL_ASSET_URI_PREFIX,
   redoHistoryCommand,
   undoHistoryCommand,
   type DocumentCommand,
@@ -22,7 +17,12 @@ import { isStudioAppError, studioAppErrors } from "../errors";
 import type { ModelImportSummary } from "../features/ImportDialog";
 import { formatStudioError } from "../i18n/error-presentation";
 import { useStudioI18n } from "../i18n/I18nProvider";
-import { buildStudioPublish } from "../publish/studio-publish";
+import {
+  buildProjectExport,
+  buildProjectPublish,
+  downloadBytes,
+  readProjectFile,
+} from "./project-transfer";
 import {
   createAutosaveController,
   createIndexedDbProjectRepository,
@@ -122,6 +122,12 @@ export function useStudioWorkspace(): StudioWorkspace {
   const repositoryRef = useRef<StudioProjectRepository | null>(null);
   const autosaveRef = useRef<AutosaveController | null>(null);
   const importCandidateRef = useRef<ImportCandidate | null>(null);
+  const replacingRef = useRef(false);
+  const replacementRef = useRef(0);
+  const replacementQueueRef = useRef<Promise<unknown>>(Promise.resolve());
+  const importRequestRef = useRef(0);
+  const committingRef = useRef(false);
+  const [replacing, setReplacing] = useState(false);
   const projectRef = useRef<StudioProjectSnapshot | null>(null);
   const liveErrorCopyRef = useRef(t.errors);
   liveErrorCopyRef.current = t.errors;
@@ -144,10 +150,6 @@ export function useStudioWorkspace(): StudioWorkspace {
   );
 
   useEffect(() => {
-    projectRef.current = project;
-  }, [project]);
-
-  useEffect(() => {
     let active = true;
     let repository: StudioProjectRepository;
     try {
@@ -162,12 +164,12 @@ export function useStudioWorkspace(): StudioWorkspace {
       async save(snapshot) {
         const saved = await repository.save(snapshot);
         if (!active) return;
-        setProject((current) => {
-          if (current?.record.id !== saved.record.id) return current;
+        const current = projectRef.current;
+        if (current?.record.id === saved.record.id) {
           const next = withSavedProjectRecord(current, saved.record);
           projectRef.current = next;
-          return next;
-        });
+          setProject(next);
+        }
         void repository.listRecent().then((items) => {
           if (!active) return;
           const current = projectRef.current;
@@ -250,6 +252,7 @@ export function useStudioWorkspace(): StudioWorkspace {
     })
       .then(({ current, items }) => {
         if (!active) return;
+        projectRef.current = current;
         activateProject(current, setProject, setHistory, setSession);
         setRecent(items);
         setLoading(false);
@@ -262,6 +265,8 @@ export function useStudioWorkspace(): StudioWorkspace {
 
     return () => {
       active = false;
+      replacementRef.current++;
+      importRequestRef.current++;
       initializationAbort.abort();
       browserNavigation?.removeEventListener("navigate", flushBeforeNavigation);
       window.removeEventListener("pagehide", flushBeforePageExit);
@@ -287,12 +292,12 @@ export function useStudioWorkspace(): StudioWorkspace {
 
   const execute = useCallback(
     (command: DocumentCommand): StudioCommandOutcome => {
-      if (project === null || history === null || session === null) {
+      if (project === null || history === null || session === null || replacingRef.current) {
         return { status: "unavailable" };
       }
       try {
         assertCanEdit(session);
-        if (importState?.status === "committing") {
+        if (committingRef.current) {
           throw studioAppErrors.importCommitting();
         }
         const nextHistory = executeHistoryCommand(history, command, { mode: session.mode });
@@ -314,11 +319,18 @@ export function useStudioWorkspace(): StudioWorkspace {
         return { status: "rejected", message };
       }
     },
-    [addDiagnostic, history, importState?.status, presentError, project, session],
+    [addDiagnostic, history, presentError, project, session],
   );
 
   const undo = useCallback(() => {
-    if (project === null || history === null || session === null) return;
+    if (
+      project === null ||
+      history === null ||
+      session === null ||
+      committingRef.current ||
+      replacingRef.current
+    )
+      return;
     try {
       assertCanEdit(session);
       const next = undoHistoryCommand(history);
@@ -337,7 +349,14 @@ export function useStudioWorkspace(): StudioWorkspace {
   }, [addDiagnostic, history, presentError, project, session]);
 
   const redo = useCallback(() => {
-    if (project === null || history === null || session === null) return;
+    if (
+      project === null ||
+      history === null ||
+      session === null ||
+      committingRef.current ||
+      replacingRef.current
+    )
+      return;
     try {
       assertCanEdit(session);
       const next = redoHistoryCommand(history);
@@ -356,18 +375,18 @@ export function useStudioWorkspace(): StudioWorkspace {
   }, [addDiagnostic, history, presentError, project, session]);
 
   const save = useCallback(async () => {
-    if (project === null) return;
+    if (projectRef.current === null || replacingRef.current || committingRef.current) return;
     try {
-      await requireAutosave(autosaveRef.current).flush(project);
+      await requireAutosave(autosaveRef.current).flush(projectRef.current);
     } catch (error) {
       addDiagnostic(presentError(error));
       throw error;
     }
-  }, [addDiagnostic, presentError, project]);
+  }, [addDiagnostic, presentError]);
 
   const setMode = useCallback(
     (mode: StudioMode) => {
-      if (session !== null) {
+      if (session !== null && !committingRef.current && !replacingRef.current) {
         setSession(reduceStudioSession(session, { type: "mode-changed", mode }));
       }
     },
@@ -376,7 +395,7 @@ export function useStudioWorkspace(): StudioWorkspace {
 
   const setTool = useCallback(
     (tool: AuthoringTool) => {
-      if (session !== null) {
+      if (session !== null && !committingRef.current && !replacingRef.current) {
         setSession(reduceStudioSession(session, { type: "tool-changed", tool }));
       }
     },
@@ -421,14 +440,18 @@ export function useStudioWorkspace(): StudioWorkspace {
 
   const inspectModel = useCallback(
     async (file: File) => {
+      if (committingRef.current || replacingRef.current) return;
+      const request = ++importRequestRef.current;
       setImportState({ status: "inspecting", fileName: file.name });
       importCandidateRef.current = null;
       try {
         const bytes = await file.arrayBuffer();
         const inspection = await inspectGltf(file.name, bytes);
+        if (request !== importRequestRef.current) return;
         importCandidateRef.current = { bytes, inspection };
         setImportState({ status: "ready", summary: toImportSummary(inspection) });
       } catch (error) {
+        if (request !== importRequestRef.current) return;
         setImportState({ status: "failed", fileName: file.name, message: presentError(error) });
       }
     },
@@ -436,6 +459,7 @@ export function useStudioWorkspace(): StudioWorkspace {
   );
 
   const confirmImport = useCallback(async () => {
+    if (committingRef.current || replacingRef.current) return;
     const candidate = importCandidateRef.current;
     const repository = repositoryRef.current;
     if (
@@ -448,6 +472,7 @@ export function useStudioWorkspace(): StudioWorkspace {
       return;
     }
     const summary = toImportSummary(candidate.inspection);
+    committingRef.current = true;
     setImportState({ status: "committing", summary });
     try {
       assertCanEdit(session);
@@ -478,11 +503,13 @@ export function useStudioWorkspace(): StudioWorkspace {
               blob: new Blob([candidate.bytes], { type: candidate.inspection.mediaType }),
             },
           ];
+      await requireAutosave(autosaveRef.current).flush(project);
       const saved = await repository.save({
         ...project,
         document: nextHistory.document,
         assets: pendingAssets,
       });
+      projectRef.current = { ...saved, assets: pendingAssets };
       setHistory({ ...nextHistory, document: saved.document });
       setProject({ ...saved, assets: pendingAssets });
       let nextSession = reduceStudioSession(session, {
@@ -510,42 +537,81 @@ export function useStudioWorkspace(): StudioWorkspace {
       const message = presentError(error);
       addDiagnostic(message);
       setImportState({ status: "failed", fileName: summary.fileName, message });
+    } finally {
+      committingRef.current = false;
     }
   }, [addDiagnostic, history, presentError, project, session, t.defaults.importedModel]);
 
   const closeImport = useCallback(() => {
+    if (committingRef.current) return;
+    importRequestRef.current++;
     importCandidateRef.current = null;
     setImportState(null);
   }, []);
 
-  const switchToProject = useCallback(async (next: StudioProjectSnapshot) => {
-    projectRef.current = next;
-    activateProject(next, setProject, setHistory, setSession);
-    const repository = requireRepository(repositoryRef.current);
-    setRecent(await repository.listRecent());
-    importCandidateRef.current = null;
-    setImportState(null);
-  }, []);
+  const replaceProject = useCallback(
+    (
+      load: (repository: StudioProjectRepository) => Promise<StudioProjectSnapshot>,
+    ): Promise<boolean> => {
+      if (committingRef.current) return Promise.resolve(false);
+      const request = ++replacementRef.current;
+      importRequestRef.current++;
+      importCandidateRef.current = null;
+      setImportState(null);
+      replacingRef.current = true;
+      setReplacing(true);
+      const run = async (): Promise<boolean> => {
+        if (request !== replacementRef.current) return false;
+        try {
+          await flushBeforeSwitch(projectRef.current, autosaveRef.current);
+          if (request !== replacementRef.current) return false;
+          const repository = requireRepository(repositoryRef.current);
+          const next = await load(repository);
+          if (request !== replacementRef.current) return false;
+          projectRef.current = next;
+          activateProject(next, setProject, setHistory, setSession);
+          const items = await repository.listRecent();
+          if (request === replacementRef.current) setRecent(items);
+          return true;
+        } catch (error) {
+          if (request === replacementRef.current) {
+            addDiagnostic(presentError(error));
+            const current = projectRef.current;
+            if (current !== null) {
+              try {
+                await requireRepository(repositoryRef.current).open(current.record.id);
+              } catch (restoreError) {
+                addDiagnostic(presentError(restoreError));
+              }
+            }
+          }
+          return false;
+        } finally {
+          if (request === replacementRef.current) {
+            replacingRef.current = false;
+            setReplacing(false);
+          }
+        }
+      };
+      const result = replacementQueueRef.current.then(run, run);
+      replacementQueueRef.current = result;
+      return result;
+    },
+    [addDiagnostic, presentError],
+  );
 
   const createProject = useCallback(
-    async (name: string): Promise<boolean> => {
-      try {
-        const now = new Date().toISOString();
-        const next = createNewStudioProject({
-          id: `project-${globalThis.crypto.randomUUID()}`,
-          name,
-          createdAt: now,
-        });
-        await flushBeforeSwitch(project, autosaveRef.current);
-        const repository = requireRepository(repositoryRef.current);
-        await switchToProject(await repository.save(next));
-        return true;
-      } catch (error) {
-        addDiagnostic(presentError(error));
-        return false;
-      }
-    },
-    [addDiagnostic, presentError, project, switchToProject],
+    (name: string) =>
+      replaceProject(async (repository) =>
+        repository.save(
+          createNewStudioProject({
+            id: `project-${globalThis.crypto.randomUUID()}`,
+            name,
+            createdAt: new Date().toISOString(),
+          }),
+        ),
+      ),
+    [replaceProject],
   );
 
   const renameProject = useCallback(
@@ -558,21 +624,20 @@ export function useStudioWorkspace(): StudioWorkspace {
 
   const openProject = useCallback(
     async (projectId: string) => {
-      if (project?.record.id === projectId) return;
-      try {
-        await flushBeforeSwitch(project, autosaveRef.current);
-        const repository = requireRepository(repositoryRef.current);
-        await switchToProject(await repository.open(projectId));
-      } catch (error) {
-        addDiagnostic(presentError(error));
-      }
+      if (projectRef.current?.record.id === projectId && !replacingRef.current) return;
+      await replaceProject((repository) => repository.open(projectId));
     },
-    [addDiagnostic, presentError, project, switchToProject],
+    [replaceProject],
   );
 
   const deleteProject = useCallback(
     async (projectId: string) => {
-      if (project?.record.id === projectId) return;
+      if (
+        replacingRef.current ||
+        committingRef.current ||
+        projectRef.current?.record.id === projectId
+      )
+        return;
       try {
         const repository = requireRepository(repositoryRef.current);
         await repository.delete(projectId);
@@ -586,91 +651,69 @@ export function useStudioWorkspace(): StudioWorkspace {
 
   const importJson = useCallback(
     async (file: File) => {
-      try {
-        await flushBeforeSwitch(project, autosaveRef.current);
-        const document = importCanonicalSceneJson(new Uint8Array(await file.arrayBuffer()));
-        const repository = requireRepository(repositoryRef.current);
-        const next = projectSnapshotForImportedDocument(document, []);
-        await switchToProject(await repository.save(next));
-      } catch (error) {
-        addDiagnostic(presentError(error));
-      }
+      await replaceProject(async (repository) =>
+        repository.save(await readProjectFile(file, "json")),
+      );
     },
-    [addDiagnostic, presentError, project, switchToProject],
+    [replaceProject],
   );
 
   const importArchive = useCallback(
     async (file: File) => {
+      await replaceProject(async (repository) =>
+        repository.save(await readProjectFile(file, "archive")),
+      );
+    },
+    [replaceProject],
+  );
+
+  const exportProject = useCallback(
+    async (format: "json" | "archive") => {
+      const captured = projectRef.current;
+      if (captured === null || committingRef.current || replacingRef.current) return;
       try {
-        await flushBeforeSwitch(project, autosaveRef.current);
-        const imported = await importSceneArchive(new Uint8Array(await file.arrayBuffer()));
-        const assets = imported.assets.map((asset) => ({
-          sha256: asset.sha256,
-          mediaType: asset.mediaType,
-          blob: new Blob([ownedArrayBuffer(asset.bytes)], { type: asset.mediaType }),
-        }));
         const repository = requireRepository(repositoryRef.current);
-        const next = projectSnapshotForImportedDocument(imported.document, assets);
-        await switchToProject(await repository.save(next));
+        await requireAutosave(autosaveRef.current).flush(captured);
+        const bytes = await buildProjectExport(captured, repository, format);
+        const extension = format === "json" ? "scene.json" : "scene.zip";
+        downloadBytes(
+          bytes,
+          `${formatters.safeFileStem(captured.document.name, t.defaults.fileNameScene)}.${extension}`,
+          format === "json" ? "application/json" : "application/zip",
+        );
+        const record = await repository.markExported(
+          captured.record.id,
+          captured.document.revision,
+        );
+        if (projectRef.current?.record.id === captured.record.id) {
+          const current = projectRef.current;
+          const exportedRevision = Math.max(
+            current.record.lastExportedRevision ?? -1,
+            record.lastExportedRevision ?? -1,
+          );
+          const next = {
+            ...current,
+            record: { ...current.record, lastExportedRevision: exportedRevision },
+          };
+          projectRef.current = next;
+          setProject(next);
+          setSession((current) =>
+            current === null
+              ? current
+              : reduceStudioSession(current, {
+                  type: "export-succeeded",
+                  revision: exportedRevision,
+                }),
+          );
+        }
       } catch (error) {
         addDiagnostic(presentError(error));
       }
     },
-    [addDiagnostic, presentError, project, switchToProject],
+    [addDiagnostic, formatters, presentError, replacing, t.defaults.fileNameScene],
   );
-
-  const markExported = useCallback(async () => {
-    if (project === null || session === null) return;
-    const repository = requireRepository(repositoryRef.current);
-    const revision = project.document.revision;
-    const saved = await repository.save({
-      ...project,
-      record: { ...project.record, lastExportedRevision: revision },
-    });
-    setProject({ ...saved, assets: project.assets });
-    let nextSession = reduceStudioSession(session, { type: "save-succeeded", revision });
-    nextSession = reduceStudioSession(nextSession, { type: "export-succeeded", revision });
-    setSession(nextSession);
-    setRecent(await repository.listRecent());
-  }, [project, session]);
-
-  const exportJson = useCallback(async () => {
-    if (project === null) return;
-    try {
-      const bytes = exportCanonicalSceneJson(project.document);
-      downloadBytes(
-        bytes,
-        `${formatters.safeFileStem(project.document.name, t.defaults.fileNameScene)}.scene.json`,
-        "application/json",
-      );
-      await markExported();
-    } catch (error) {
-      addDiagnostic(presentError(error));
-    }
-  }, [addDiagnostic, formatters, markExported, presentError, project, t.defaults.fileNameScene]);
-
-  const exportArchive = useCallback(async () => {
-    if (project === null) return;
-    try {
-      const repository = requireRepository(repositoryRef.current);
-      const bytes = await exportSceneArchive({
-        document: project.document,
-        createdAt: new Date().toISOString(),
-        async resolveAssetBytes(sha256) {
-          const blob = await repository.resolveAsset(`asset://${sha256}`);
-          return new Uint8Array(await blob.arrayBuffer());
-        },
-      });
-      downloadBytes(
-        bytes,
-        `${formatters.safeFileStem(project.document.name, t.defaults.fileNameScene)}.scene.zip`,
-        "application/zip",
-      );
-      await markExported();
-    } catch (error) {
-      addDiagnostic(presentError(error));
-    }
-  }, [addDiagnostic, formatters, markExported, presentError, project, t.defaults.fileNameScene]);
+  const exportJson = useCallback(() => exportProject("json"), [exportProject]);
+  const exportArchive = useCallback(() => exportProject("archive"), [exportProject]);
 
   const publishScene = useCallback(
     async (
@@ -690,20 +733,7 @@ export function useStudioWorkspace(): StudioWorkspace {
       }
       try {
         const repository = requireRepository(repositoryRef.current);
-        const result = await buildStudioPublish({
-          document: project.document,
-          surfaceEvidence,
-          signal,
-          async resolveAssetBytes(sha256, assetSignal) {
-            assetSignal.throwIfAborted();
-            const pending = project.assets.find((candidate) => candidate.sha256 === sha256);
-            const blob =
-              pending?.blob ??
-              (await repository.resolveAsset(`${LOCAL_ASSET_URI_PREFIX}${sha256}`));
-            assetSignal.throwIfAborted();
-            return new Uint8Array(await blob.arrayBuffer());
-          },
-        });
+        const result = await buildProjectPublish(project, repository, surfaceEvidence, signal);
         if (result.status === "blocked") return result;
         signal.throwIfAborted();
         const fileName = `${formatters.safeFileStem(project.document.name, t.defaults.fileNameScene)}.web3d.zip`;
@@ -755,7 +785,7 @@ export function useStudioWorkspace(): StudioWorkspace {
     assetResolver,
     dirty: session === null ? false : isDirty(session),
     exportOutdated: session === null ? true : isExportOutdated(session),
-    canEdit: session?.mode === "edit" && importState?.status !== "committing",
+    canEdit: session?.mode === "edit" && importState?.status !== "committing" && !replacing,
     execute,
     undo,
     redo,
@@ -815,26 +845,6 @@ async function flushBeforeSwitch(
   await requireAutosave(autosave).flush(project);
 }
 
-function projectSnapshotForImportedDocument(
-  document: SceneDocument,
-  assets: StudioProjectSnapshot["assets"],
-): StudioProjectSnapshot {
-  const now = new Date().toISOString();
-  return {
-    record: {
-      id: `project-${globalThis.crypto.randomUUID()}`,
-      name: document.name,
-      createdAt: now,
-      updatedAt: now,
-      lastOpenedAt: now,
-      lastSavedRevision: document.revision,
-      lastExportedRevision: null,
-    },
-    document,
-    assets,
-  };
-}
-
 function toImportSummary(summary: GltfInspectionSummary): ModelImportSummary {
   return {
     fileName: summary.name,
@@ -857,19 +867,4 @@ function requireRepository(value: StudioProjectRepository | null): StudioProject
 function requireAutosave(value: AutosaveController | null): AutosaveController {
   if (value === null) throw studioAppErrors.autosaveNotReady();
   return value;
-}
-
-function downloadBytes(bytes: Uint8Array, fileName: string, mediaType: string): void {
-  const url = URL.createObjectURL(new Blob([ownedArrayBuffer(bytes)], { type: mediaType }));
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = fileName;
-  anchor.click();
-  URL.revokeObjectURL(url);
-}
-
-function ownedArrayBuffer(bytes: Uint8Array): ArrayBuffer {
-  const copy = new Uint8Array(bytes.byteLength);
-  copy.set(bytes);
-  return copy.buffer;
 }

@@ -9,6 +9,8 @@ export function formatStudioError(error: unknown, copy: StudioErrorCopy): string
   }
 
   switch (error.code) {
+    case "EXPORT_REVISION_NOT_SAVED":
+      return copy.exportRevisionNotSaved;
     case "LOCAL_SAVE_FAILED":
       return copy.localSaveFailed;
     case "IMPORT_COMMITTING":

@@ -5,6 +5,7 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ThemeProvider } from "@web3d/demo-support/theme-provider";
+import type { Diagnostic } from "@web3d/runtime";
 import type { AuthoringSceneHandle } from "@web3d/react";
 
 import { StudioI18nProvider } from "./i18n/I18nProvider";
@@ -24,6 +25,7 @@ interface TestReadyEvent {
 }
 
 const harness = vi.hoisted(() => ({
+  authoringDiagnostic: undefined as ((diagnostic: Diagnostic) => void) | undefined,
   authoringReady: undefined as ((event: TestReadyEvent) => void) | undefined,
   authoringSceneMounts: 0,
   authoringSceneRenders: [] as Array<string | null | undefined>,
@@ -131,6 +133,7 @@ vi.mock("@web3d/react", async () => {
         readonly gridPreview?: boolean | null;
         readonly lightingPreview?: unknown;
         readonly smartAlignEnabled?: boolean;
+        readonly onDiagnostic?: (diagnostic: Diagnostic) => void;
         readonly onReady?: (event: TestReadyEvent) => void;
       },
       ref: React.ForwardedRef<AuthoringSceneHandle>,
@@ -189,6 +192,7 @@ vi.mock("@web3d/react", async () => {
         harness.authoringSceneMounts += 1;
       }, []);
       harness.authoringReady = props.onReady;
+      harness.authoringDiagnostic = props.onDiagnostic;
       harness.authoringSceneRenders.push(props.backgroundPreview);
       harness.gridRenders.push(props.gridPreview);
       harness.lightingRenders.push(props.lightingPreview);
@@ -323,6 +327,63 @@ describe("App scene settings preview", () => {
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
     localStorage.clear();
+  });
+
+  it("reports current-generation readiness and recovers a failed renderer only on Retry", () => {
+    renderApp();
+    const viewport = container.querySelector(".studio-viewport")!;
+    expect(viewport.getAttribute("data-scene-ready")).toBe("false");
+    expect(container.querySelector(".viewport-scene-loading")).not.toBeNull();
+    act(() =>
+      harness.authoringDiagnostic?.({
+        code: "ASSET_LOAD_FAILED",
+        source: "asset",
+        severity: "error",
+        message: "Fixture asset unavailable",
+      }),
+    );
+    expect(container.querySelector(".viewport-scene-error")?.textContent).toContain(
+      "Could not display scene models",
+    );
+    const mounts = harness.authoringSceneMounts;
+    act(() => buttonByVisibleName("Retry").click());
+    expect(harness.authoringSceneMounts).toBe(mounts + 1);
+    expect(container.querySelector(".viewport-scene-error")).toBeNull();
+    act(() =>
+      harness.authoringReady?.({
+        type: "ready",
+        documentId: harness.workspace.project.document.id,
+        revision: harness.workspace.project.document.revision,
+      }),
+    );
+    expect(viewport.getAttribute("data-scene-ready")).toBe("true");
+    expect(container.querySelector(".viewport-scene-loading")).toBeNull();
+  });
+
+  it("requires readiness for the current revision and ignores an older ready event", () => {
+    renderApp();
+    const document = harness.workspace.project.document;
+    const revision = document.revision;
+    act(() => harness.authoringReady?.({ type: "ready", documentId: document.id, revision }));
+    expect(container.querySelector(".studio-viewport")?.getAttribute("data-scene-ready")).toBe(
+      "true",
+    );
+    document.revision = revision + 1;
+    renderApp();
+    expect(container.querySelector(".studio-viewport")?.getAttribute("data-scene-ready")).toBe(
+      "false",
+    );
+    act(() => harness.authoringReady?.({ type: "ready", documentId: document.id, revision }));
+    expect(container.querySelector(".studio-viewport")?.getAttribute("data-scene-ready")).toBe(
+      "false",
+    );
+    act(() =>
+      harness.authoringReady?.({ type: "ready", documentId: document.id, revision: revision + 1 }),
+    );
+    expect(container.querySelector(".studio-viewport")?.getAttribute("data-scene-ready")).toBe(
+      "true",
+    );
+    document.revision = revision;
   });
 
   it("opens one unified Settings dialog without reporting an initial scene preview", () => {

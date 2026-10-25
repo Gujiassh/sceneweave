@@ -5,6 +5,7 @@ import { AuthoringScene, type AuthoringSceneHandle } from "@web3d/react";
 import type { PublishSurfaceEvidence } from "@web3d/publish";
 import { useTheme } from "@web3d/demo-support/theme-provider";
 
+import { ViewportCommands } from "./features/ViewportCommands";
 import { AssetList } from "./features/AssetList";
 import { ImportDialog } from "./features/ImportDialog";
 import { ProjectMenu } from "./features/ProjectMenu";
@@ -53,6 +54,19 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
   const helpButtonRef = useRef<HTMLButtonElement>(null);
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const publishAbortRef = useRef<AbortController | null>(null);
+  const [viewerAttempt, setViewerAttempt] = useState(0);
+  const [sceneFailure, setSceneFailure] = useState<{
+    projectId: string;
+    revision: number;
+    message: string;
+  } | null>(null);
+  const [readyScene, setReadyScene] = useState<{
+    projectId: string;
+    documentId: string;
+    revision: number;
+  } | null>(null);
+  const [navigationOpen, setNavigationOpen] = useState(true);
+  const [inspectorOpen, setInspectorOpen] = useState(true);
   const [leftPanel, setLeftPanel] = useState<LeftPanel>("scene");
   const [projectMenuOpen, setProjectMenuOpen] = useState(false);
   const [sceneNameDialogMode, setSceneNameDialogMode] = useState<SceneNameDialogMode | null>(null);
@@ -352,7 +366,11 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
         exportOutdated={workspace.exportOutdated}
         hasSelection={selectedEntityId !== null || hotspots.selectedId !== null}
         mode={session?.mode ?? "edit"}
-        projectName={project?.record.name ?? t.app.openingProject}
+        projectName={
+          project?.record.name ??
+          (workspace.loading ? t.app.openingProject : t.app.projectUnavailable)
+        }
+        initializationStatus={project !== null ? "ready" : workspace.loading ? "loading" : "failed"}
         save={session?.save ?? { status: "saving", revision: 0 }}
         smartAlignEnabled={smartAlignEnabled}
         hotspotPlacementActive={hotspots.placementActive}
@@ -446,8 +464,15 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
         />
       )}
 
-      <main className="studio-workspace">
-        <aside className="studio-left" aria-label={t.app.navigationLabel}>
+      <main
+        className={`studio-workspace ${navigationOpen ? "" : "is-navigation-collapsed"} ${inspectorOpen ? "" : "is-inspector-collapsed"}`}
+      >
+        <aside
+          id="studio-navigation"
+          hidden={!navigationOpen}
+          className="studio-left"
+          aria-label={t.app.navigationLabel}
+        >
           <div className="panel-tabs">
             <button
               className={leftPanel === "scene" ? "is-active" : ""}
@@ -520,14 +545,26 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
         <section
           className={`studio-viewport ${hotspots.placementActive ? "is-hotspot-placement" : ""}`}
           aria-label={t.app.viewport.label}
+          data-scene-ready={
+            project !== null &&
+            readyScene?.projectId === project.record.id &&
+            readyScene.documentId === project.document.id &&
+            readyScene.revision === project.document.revision
+          }
         >
           {workspace.loading ? (
-            <div className="viewport-loading" data-testid="project-loading">
+            <div className="viewport-loading" role="status" data-testid="project-loading">
               {t.app.openingLocalProject}
             </div>
           ) : project === null ? (
             <div className="viewport-initialization" data-testid="starter-bootstrap-error">
-              <span>{workspace.diagnostics.at(-1) ?? t.app.openingLocalProject}</span>
+              <TriangleAlert size={24} />
+              <strong role="alert">{t.app.openingFailed}</strong>
+              <span>{t.app.openingFailureHelp}</span>
+              <details>
+                <summary>{t.app.technicalDetails}</summary>
+                <p>{workspace.diagnostics.at(-1)}</p>
+              </details>
               <button className="secondary-command" onClick={workspace.retryInitialization}>
                 {t.app.retryOpeningProject}
               </button>
@@ -546,7 +583,7 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
               className="studio-viewer"
               initialTool={activeTool}
               gridPreview={settings.preview?.grid ?? null}
-              key={project.record.id}
+              key={`${project.record.id}:${viewerAttempt}`}
               primaryEntityId={session?.primaryEntityId ?? null}
               selectedEntityIds={session?.selectedEntityIds ?? []}
               smartAlignEnabled={smartAlignEnabled}
@@ -554,9 +591,21 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
               lightingPreview={settings.preview?.lighting ?? null}
               themeBackground={themeBackground}
               transformSettings={sceneLayout.transformSettings}
-              onDiagnostic={(diagnostic) =>
-                workspace.addDiagnostic(`${diagnostic.code} ${diagnostic.message}`)
-              }
+              onDiagnostic={(diagnostic) => {
+                workspace.addDiagnostic(`${diagnostic.code} ${diagnostic.message}`);
+                const snapshot = viewerRef.current?.getSnapshot();
+                if (
+                  diagnostic.severity === "error" &&
+                  (snapshot?.lifecycle !== "ready" ||
+                    snapshot.revision !== project.document.revision)
+                ) {
+                  setSceneFailure({
+                    projectId: project.record.id,
+                    revision: project.document.revision,
+                    message: diagnostic.message,
+                  });
+                }
+              }}
               onEvent={dataBinding.handleViewerEvent}
               onHotspotActivation={hotspots.handleActivation}
               onHotspotContent={hotspots.handleContent}
@@ -567,6 +616,12 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
               onHotspotSelectionRequest={hotspots.handleSelectionRequest}
               onHotspotSessionCancel={hotspots.handleSessionCancel}
               onReady={(event) => {
+                setSceneFailure(null);
+                setReadyScene({
+                  projectId: project.record.id,
+                  documentId: event.documentId,
+                  revision: event.revision,
+                });
                 settings.handleReady(event.documentId, event.revision);
                 lightAuthoring.handleReady(event.documentId, event.revision);
                 const viewer = viewerRef.current;
@@ -618,59 +673,103 @@ export function App({ trustedHotspotContentCatalog }: StudioAppProps = {}) {
           {hotspots.mode === "run" && hotspots.runContent !== null && (
             <HotspotRunContent content={hotspots.runContent} onClose={hotspots.closeRunContent} />
           )}
-          <div className="viewport-mode mono" data-testid="viewport-mode">
-            {t.app.viewport.modeStatus[session?.mode ?? "edit"]} /{" "}
-            {t.app.viewport.toolStatus[activeTool]} /{" "}
-            {selectedEntityId ?? t.app.viewport.noSelection}
-          </div>
+          {project !== null &&
+            (readyScene?.projectId !== project.record.id ||
+              readyScene.documentId !== project.document.id ||
+              readyScene.revision !== project.document.revision) &&
+            (sceneFailure?.projectId === project.record.id &&
+            sceneFailure.revision === project.document.revision ? (
+              <div className="viewport-scene-error" role="alert">
+                <strong>{t.app.sceneDisplayFailed}</strong>
+                <details>
+                  <summary>{t.app.technicalDetails}</summary>
+                  <p>{sceneFailure.message}</p>
+                </details>
+                <button
+                  className="secondary-command"
+                  type="button"
+                  onClick={() => {
+                    setSceneFailure(null);
+                    setReadyScene(null);
+                    setViewerAttempt((attempt) => attempt + 1);
+                  }}
+                >
+                  {t.app.retryOpeningProject}
+                </button>
+              </div>
+            ) : (
+              <div className="viewport-scene-loading" role="status">
+                {t.app.loadingScene}
+              </div>
+            ))}
+          <ViewportCommands
+            mode={session?.mode ?? "edit"}
+            tool={activeTool}
+            selectionName={hotspots.selected?.title ?? selectedEntity?.name ?? null}
+            selectionId={hotspots.selectedId ?? selectedEntityId}
+            selectionCount={
+              hotspots.selectedId !== null ? 1 : (session?.selectedEntityIds.length ?? 0)
+            }
+            navigationOpen={navigationOpen}
+            inspectorOpen={inspectorOpen}
+            onToggleNavigation={() => setNavigationOpen((open) => !open)}
+            onToggleInspector={() => setInspectorOpen((open) => !open)}
+            onFocus={focusSelection}
+            onClear={() => {
+              hotspots.clearSelection();
+              workspace.selectEntity(null);
+            }}
+          />
         </section>
 
-        {project !== null &&
-        hotspots.mode === "edit" &&
-        hotspots.selected !== null &&
-        hotspots.inspectorOpen ? (
-          <aside aria-label={t.inspector.ariaLabel} className="studio-inspector">
-            <HotspotInspector
-              annotation={hotspots.selected}
+        <div id="studio-properties" className="studio-properties" hidden={!inspectorOpen}>
+          {project !== null &&
+          hotspots.mode === "edit" &&
+          hotspots.selected !== null &&
+          hotspots.inspectorOpen ? (
+            <aside aria-label={t.inspector.ariaLabel} className="studio-inspector">
+              <HotspotInspector
+                annotation={hotspots.selected}
+                document={project.document}
+                editable={!hotspots.selected.locked}
+                trustedContentCatalog={effectiveTrustedContentCatalog}
+                key={`${hotspots.selected.id}:${project.document.revision}`}
+                onClose={hotspots.closeInspector}
+                onUpdate={hotspots.update}
+              />
+            </aside>
+          ) : project !== null ? (
+            <StudioInspector
               document={project.document}
-              editable={!hotspots.selected.locked}
-              trustedContentCatalog={effectiveTrustedContentCatalog}
-              key={`${hotspots.selected.id}:${project.document.revision}`}
-              onClose={hotspots.closeInspector}
-              onUpdate={hotspots.update}
+              projectId={project.record.id}
+              editable={workspace.canEdit}
+              entity={selectedEntity}
+              execute={workspace.execute}
+              lightPreviewCancellation={lightAuthoring.previewCancellation}
+              layout={sceneLayout}
+              mode={session?.mode ?? "edit"}
+              preview={dataBinding.preview}
+              selectedEntityId={selectedEntityId}
+              targetResolution={dataBinding.targetResolution}
+              onCancelLightPreview={lightAuthoring.cancelPreview}
+              onAcceptLightPreview={lightAuthoring.acceptPreview}
+              onFocusTarget={(targetId) => {
+                const entityId = project.document.targets.find(
+                  (target) => target.id === targetId,
+                )?.entityId;
+                if (entityId === undefined) return;
+                workspace.selectEntity(entityId);
+                void viewerRef.current?.focusEntity(entityId).catch((error: unknown) => {
+                  workspace.addDiagnostic(error instanceof Error ? error.message : String(error));
+                });
+              }}
+              onPreviewLight={lightAuthoring.preview}
+              onRename={(entityId, name) =>
+                workspace.execute({ type: "rename-entity", entityId, name })
+              }
             />
-          </aside>
-        ) : project !== null ? (
-          <StudioInspector
-            document={project.document}
-            projectId={project.record.id}
-            editable={workspace.canEdit}
-            entity={selectedEntity}
-            execute={workspace.execute}
-            lightPreviewCancellation={lightAuthoring.previewCancellation}
-            layout={sceneLayout}
-            mode={session?.mode ?? "edit"}
-            preview={dataBinding.preview}
-            selectedEntityId={selectedEntityId}
-            targetResolution={dataBinding.targetResolution}
-            onCancelLightPreview={lightAuthoring.cancelPreview}
-            onAcceptLightPreview={lightAuthoring.acceptPreview}
-            onFocusTarget={(targetId) => {
-              const entityId = project.document.targets.find(
-                (target) => target.id === targetId,
-              )?.entityId;
-              if (entityId === undefined) return;
-              workspace.selectEntity(entityId);
-              void viewerRef.current?.focusEntity(entityId).catch((error: unknown) => {
-                workspace.addDiagnostic(error instanceof Error ? error.message : String(error));
-              });
-            }}
-            onPreviewLight={lightAuthoring.preview}
-            onRename={(entityId, name) =>
-              workspace.execute({ type: "rename-entity", entityId, name })
-            }
-          />
-        ) : null}
+          ) : null}
+        </div>
 
         {workspace.diagnostics.length > 0 && (
           <section className="studio-diagnostics" aria-label={t.app.diagnostics.label}>

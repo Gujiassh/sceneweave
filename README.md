@@ -73,17 +73,18 @@ Open <http://localhost:4173>. Studio requires a desktop viewport at least 1280 p
 
 ### Smart-Home Starter
 
-The clean-profile reference project can be generated from the separately delivered owner assets:
+The default clean-profile project is a bundled, redistributable CC0 90 m² home: 35 Kenney furniture models and 14 original supplementary models. Ordinary `pnpm dev` opens it without external model files, a separate asset delivery, paid services or a login. Existing saved projects are retained.
+
+All generation inputs are vendored. After installing the repository dependencies, regenerate and validate the starter offline with:
 
 ```bash
-node scripts/smart-home/generate.mjs \
-  --mode local-validation \
-  --output /home/cc/tmp/sceneweave-smart-home-starter
-ln -sfn /home/cc/tmp/sceneweave-smart-home-starter apps/studio/public/starter
-pnpm dev
+node scripts/free-home/generate.mjs
+node --test scripts/free-home/free-home.test.mjs
 ```
 
-Unlicensed local output is deliberately restricted to `/home/cc/tmp`. Public generation requires a hash-bound redistribution authorization and fails closed without it. Existing IndexedDB projects and explicit **New Scene** behavior are unchanged by starter bootstrap.
+See the [free-home asset README](assets/free-home/README.md) for provenance, licenses, exact hash/node-index bindings, budgets and reproducibility. The default descriptor is `apps/studio/public/starter/descriptor.json`.
+
+`scripts/smart-home` remains an optional historical owner-source generator. Its separate source/license authorization and local-output restrictions apply only when deliberately using that generator; they are not prerequisites for the bundled default home.
 
 ## Packages
 

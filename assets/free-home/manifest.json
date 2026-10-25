@@ -1,0 +1,850 @@
+{
+  "descriptor": {
+    "schemaVersion": "1.0.0",
+    "projectId": "free-home-90sqm",
+    "archiveUrl": "/starter/free-home-90sqm.web3d.zip",
+    "archiveSha256": "85259024fddc28a5c0b52b2c4defb6dc25505c412ac60af61750202fbc6ee3f6",
+    "archiveByteLength": 1045464
+  },
+  "assetCount": 49,
+  "instanceCount": 71,
+  "totalUniqueTriangles": 11662,
+  "roundtrip": "PASS",
+  "determinism": "PASS",
+  "semanticManifest": [
+    {
+      "id": "living-light-status",
+      "entityId": "living-ceiling-light",
+      "name": "Living Light Status",
+      "businessId": "SMART-HOME/LIVING/LIGHT",
+      "semanticTargetId": "STATE_EMITTER",
+      "pointer": "/channels/channel-a/status",
+      "storyState": "normal",
+      "assetId": "ceiling_light",
+      "assetHash": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "nodeIndex": 2,
+      "expectedNodeName": "STATE_EMITTER"
+    },
+    {
+      "id": "living-climate-status",
+      "entityId": "living-ac",
+      "name": "Living Climate Status",
+      "businessId": "SMART-HOME/LIVING/CLIMATE",
+      "semanticTargetId": "STATE_DISPLAY",
+      "pointer": "/channels/channel-b/status",
+      "storyState": "offline",
+      "assetId": "wall_air_conditioner",
+      "assetHash": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "nodeIndex": 9,
+      "expectedNodeName": "STATE_DISPLAY"
+    },
+    {
+      "id": "entry-access-status",
+      "entityId": "entry-door-lock",
+      "name": "Entry Access Status",
+      "businessId": "SMART-HOME/ENTRY/ACCESS",
+      "semanticTargetId": "STATE_LED",
+      "pointer": "/channels/channel-c/status",
+      "storyState": "alarm",
+      "assetId": "smart_door_lock",
+      "assetHash": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "nodeIndex": 13,
+      "expectedNodeName": "STATE_LED"
+    },
+    {
+      "id": "living-media-status",
+      "entityId": "living-smart-tv",
+      "name": "Living Media Status",
+      "businessId": "SMART-HOME/LIVING/MEDIA",
+      "semanticTargetId": "STATE_SCREEN",
+      "pointer": "/channels/channel-a/status",
+      "storyState": "normal",
+      "assetId": "smart_tv",
+      "assetHash": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "nodeIndex": 2,
+      "expectedNodeName": "STATE_SCREEN"
+    },
+    {
+      "id": "cleaning-motion-status",
+      "entityId": "robot-vacuum",
+      "name": "Cleaning Motion Status",
+      "businessId": "SMART-HOME/CLEANING/MOTION",
+      "semanticTargetId": "STATE_MOTION",
+      "pointer": "/channels/channel-a/status",
+      "storyState": "normal",
+      "assetId": "robot_vacuum",
+      "assetHash": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "nodeIndex": 4,
+      "expectedNodeName": "STATE_MOTION"
+    }
+  ],
+  "assets": [
+    {
+      "id": "sofa_3seat",
+      "name": "sofa 3seat",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/loungeDesignSofa.glb",
+        "sha256": "b4f4e6850118e409da301df678228c703b6ac02e94fbb9dbde61543af817fa53",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [2.35, 0.82, 0.9],
+        "originalBounds": { "min": [0, 0, -0.410000026], "max": [1.12, 0.4, 0] }
+      },
+      "sha256": "18d067a407a30c0dde0bdc069dc18184944473525a912ff95f1eaca358ebab83",
+      "byteLength": 9360,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 116 }
+    },
+    {
+      "id": "coffee_table",
+      "name": "coffee table",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/tableCoffee.glb",
+        "sha256": "e38bea760fbd514efbb75528d09b4752c91af44677bbb97e6d4386c263525179",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.05, 0.4, 0.62],
+        "originalBounds": { "min": [-0.4609961, -3.609557e-16, -0.3], "max": [0.2, 0.23, 0.1] }
+      },
+      "sha256": "975e24b1f4fff9b69a579e9cbd3c150e1b920e0e88908d8c65ca543ade4409be",
+      "byteLength": 8500,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 124 }
+    },
+    {
+      "id": "tv_console",
+      "name": "tv console",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/cabinetTelevisionDoors.glb",
+        "sha256": "8959347bfe26b1ac7e44c476f05789466bb84bcd2ad8b0fb40286005399bfcfc",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.65, 0.58, 0.4],
+        "originalBounds": { "min": [0, 0, -0.25], "max": [0.8, 0.31, 0.0100000012] }
+      },
+      "sha256": "12f9e521efc34c2457c824e92a932e44b726d26dc3628f497cae8ec98099a58f",
+      "byteLength": 17136,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 2, "triangleCount": 210 }
+    },
+    {
+      "id": "dining_table",
+      "name": "dining table",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/tableRound.glb",
+        "sha256": "f8daea9124a542a00b7bdacfddac82dc468573d43e44d7b54dd6316e9695754b",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.25, 0.76, 1.25],
+        "originalBounds": { "min": [0, -0.269999981, -0.8], "max": [0.6928203, 0.09673398, 0] }
+      },
+      "sha256": "6bc6ea7600d084244e10f7af11e39072450dc2be9bf5a2f4745b22295460b90d",
+      "byteLength": 6648,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 80 }
+    },
+    {
+      "id": "dining_chair",
+      "name": "dining chair",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/chairModernCushion.glb",
+        "sha256": "245132697e633e907e2b48c86d56f6c8543604a3440a055d1c71c06ce11d2858",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.48, 0.82, 0.52],
+        "originalBounds": { "min": [0, -1.11635783e-17, -0.2], "max": [0.2, 0.46, 0] }
+      },
+      "sha256": "9c048afd5fac9be085b21fcd191bad1d6e15055b3b1c23d5175a5203c41a61f5",
+      "byteLength": 7596,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 92 }
+    },
+    {
+      "id": "double_bed",
+      "name": "double bed",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/bedDouble.glb",
+        "sha256": "c49b33e7d797d2ba1111895587dba7ff63b17a712eb9b4ceeb40a598f73e476c",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.65, 0.8, 2.05],
+        "originalBounds": {
+          "min": [-1.1028009443136977e-9, 0, -1.125],
+          "max": [0.9560000358323066, 0.375, 0]
+        }
+      },
+      "sha256": "1ab8c7e4d2de40e73ad86ad9e8119b836c62fa1470ef2787f6b1275f86562455",
+      "byteLength": 23684,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 264 }
+    },
+    {
+      "id": "single_bed",
+      "name": "single bed",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/bedSingle.glb",
+        "sha256": "ca00c63f9a12da3138d902b2f5f18e0360fb6e8a5ac42ccb4bc3f185724b65d1",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1, 0.76, 2],
+        "originalBounds": {
+          "min": [0.38500000250536454, 3.31176872e-14, -1.125],
+          "max": [0.9560000358323066, 0.375, 0]
+        }
+      },
+      "sha256": "d141a8957db1b4b4dfd6337d69c2dd4d7c990eebf32e5d57cd4e2475111d56b4",
+      "byteLength": 18972,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 4, "triangleCount": 214 }
+    },
+    {
+      "id": "bedside_table",
+      "name": "bedside table",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/cabinetBedDrawer.glb",
+        "sha256": "e3dfd2e120af3d4d29b66509e317452cd15bd3f57ac8945575462c582adc6de8",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.46, 0.5, 0.42],
+        "originalBounds": {
+          "min": [-0.01, 0, -0.205000013],
+          "max": [0.255999982, 0.263199985, 0.012299998999999978]
+        }
+      },
+      "sha256": "d2cf568ac7b28b118107067b81f92009671446d37dc245dd2757e11f32db3399",
+      "byteLength": 16348,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 182 }
+    },
+    {
+      "id": "wardrobe",
+      "name": "wardrobe",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/bookcaseClosedDoors.glb",
+        "sha256": "ff33f535acdb1825c0e958a293642b39665adcae0b1317b650e83d2bb687f4e2",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.6, 2, 0.52],
+        "originalBounds": { "min": [0, 0, -0.25], "max": [0.4, 0.849999964, 0] }
+      },
+      "sha256": "9fa9483d9e3e3d2567baaf194170dbb5cb7c17e7a4ada3f0b2b9ba5ee2e31e9b",
+      "byteLength": 22844,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 2, "triangleCount": 296 }
+    },
+    {
+      "id": "desk",
+      "name": "desk",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/desk.glb",
+        "sha256": "0164fe828f028b321730fb8c74502e353583f751be74da1682d42fff7d3c5a42",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.35, 0.76, 0.6],
+        "originalBounds": {
+          "min": [-0.01, 0, -0.38],
+          "max": [0.724475443, 0.38440755, 0.012299998999999978]
+        }
+      },
+      "sha256": "8b920121ddd3a3fed1f13d5e29a8b29eaffb0744e2fca7cf354b966711a52e50",
+      "byteLength": 15304,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 2, "triangleCount": 198 }
+    },
+    {
+      "id": "office_chair",
+      "name": "office chair",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/chairDesk.glb",
+        "sha256": "46406619186034cbe92b19b79a5f1a8e3f442a17a70a7524ef2c0ad0f35095c6",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.58, 0.95, 0.58],
+        "originalBounds": { "min": [0, 0, -0.314299036], "max": [0.33495, 0.6075999759999999, 0] }
+      },
+      "sha256": "3cecbe2ff88b47389f7857637201537cd52688a3fb4c21d354899a35e90375b6",
+      "byteLength": 39216,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 2, "triangleCount": 588 }
+    },
+    {
+      "id": "kitchen_cabinet",
+      "name": "kitchen cabinet",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/kitchenCabinetDrawer.glb",
+        "sha256": "6f784807e3cadb15b4d2d3db726d93357ea5e6c4f2b6e4c9c064048a2d1d9cfc",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.8, 0.9, 0.6],
+        "originalBounds": { "min": [0, 0, -0.45], "max": [0.43, 0.45, 0] }
+      },
+      "sha256": "ad1a0a594e0896e5496af1cd7319c1b72d73c9e15d42078ef3174910a58bdee9",
+      "byteLength": 15620,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 174 }
+    },
+    {
+      "id": "smart_refrigerator",
+      "name": "smart refrigerator",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/kitchenFridge.glb",
+        "sha256": "8af4f4bbb1b5525ad8226e97926a5af60fa8fb20a3cb74dbda5328a9d320dbab",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.74, 1.85, 0.7],
+        "originalBounds": { "min": [0, 0, -0.2819339], "max": [0.43, 0.92, 0.010000000000000002] }
+      },
+      "sha256": "535957effddbb7b1e67f23c7edf3a55f920874801fff8d5ec232fc38a6b7984e",
+      "byteLength": 20392,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 4, "triangleCount": 250 }
+    },
+    {
+      "id": "washer_dryer",
+      "name": "washer dryer",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/washer.glb",
+        "sha256": "0c9704df1817d2699b72305b96cde097c9558bacabaef2fd5ab1ff4c03b81abf",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.64, 0.88, 0.65],
+        "originalBounds": { "min": [0, 0, -0.35], "max": [0.390000015, 0.47, 0.040000005962094715] }
+      },
+      "sha256": "b34fed3e9a50bf9eea6200e781588188f9a1c44b06da6634180dbd42ae4ca847",
+      "byteLength": 48388,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 6, "triangleCount": 720 }
+    },
+    {
+      "id": "induction_cooktop",
+      "name": "induction cooktop",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/kitchenStoveElectric.glb",
+        "sha256": "cf646b960d7dfed1fac27898ff6de1f0671cfa33beecbed06ead7d0684517392",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.65, 0.9, 0.6],
+        "originalBounds": { "min": [0, 0, -0.45], "max": [0.43, 0.45, 0] }
+      },
+      "sha256": "ded0073b31ccf4f74f634c9e3745f183b8bffcc3eb7d157c4628d2b775596547",
+      "byteLength": 18928,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 6, "triangleCount": 338 }
+    },
+    {
+      "id": "smart_range_hood",
+      "name": "smart range hood",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/hoodModern.glb",
+        "sha256": "f5ac7dbadd1d98813c48315e56fa6ab2e8783870b1fb7be30825177bbf2b2afe",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.72, 0.48, 0.4],
+        "originalBounds": {
+          "min": [-1.44382282e-15, -0.0300000012, -0.2849],
+          "max": [0.43, 0.369531721, 0]
+        }
+      },
+      "sha256": "67405ef833664ddecaf52ee199d82d9b5c27b8339b83f71c13f5f45d9a8126f8",
+      "byteLength": 4176,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 28 }
+    },
+    {
+      "id": "microwave_oven",
+      "name": "microwave oven",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/kitchenMicrowave.glb",
+        "sha256": "dd6a6c919f4bebc6e2080fe419262cf97a0d6461ead3f3998aa3c9edf4d2bd27",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.52, 0.32, 0.35],
+        "originalBounds": {
+          "min": [0, 0, -0.219999984],
+          "max": [0.29, 0.179999992, 0.00999999999999991]
+        }
+      },
+      "sha256": "dd10078ba5ffda84a98559b40213055dc5d71db57eb8f1ad96ac58ad19e5491f",
+      "byteLength": 11540,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 4, "triangleCount": 152 }
+    },
+    {
+      "id": "smart_sink_faucet",
+      "name": "smart sink faucet",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/kitchenSink.glb",
+        "sha256": "7b9610277d71f00dcf1bba49cf4d98d77ce5177e84bf76c7da2f8893e542f743",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.8, 0.9, 0.6],
+        "originalBounds": { "min": [0, 0, -0.45], "max": [0.43, 0.48999998, 0] }
+      },
+      "sha256": "efa59f43a09cc8f55c57d8c955021a0c015ebc8889f60297ce578a673b6fc311",
+      "byteLength": 23768,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 6, "triangleCount": 318 }
+    },
+    {
+      "id": "smart_trash_bin",
+      "name": "smart trash bin",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/trashcan.glb",
+        "sha256": "e0ccc1fe50cbd05386477fdff527171d1cf7c0de2ba7ff3233f8d9561feb2561",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.32, 0.5, 0.32],
+        "originalBounds": {
+          "min": [-0.10384674482274778, -2.5062356546489515e-18, -0.11163647945958109],
+          "max": [0.10384674444871723, 0.42786596911021924, 0.12248776981244308]
+        }
+      },
+      "sha256": "588e53c8b2f2c2cb617f16afcf2ace557b55c4e884132e754fd8688e02ffce58",
+      "byteLength": 6740,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 68 }
+    },
+    {
+      "id": "bathroom_vanity",
+      "name": "bathroom vanity",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/bathroomSinkSquare.glb",
+        "sha256": "360853c822f268e7267c62ef20cf646f170a13d76254cc0804a1d397a4a3ea67",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.72, 0.85, 0.45],
+        "originalBounds": { "min": [0, 0.05680801, -0.45], "max": [0.43, 0.636808038, -0.15] }
+      },
+      "sha256": "fa8801dddc8c24f6547b806b78102e6b27090492f60532f3554f6d23d8b9c169",
+      "byteLength": 15392,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 3, "triangleCount": 234 }
+    },
+    {
+      "id": "shoe_cabinet",
+      "name": "shoe cabinet",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/bookcaseClosedWide.glb",
+        "sha256": "55b9903e9646dc407ed5237a1c41c1f0a14f9edc22e3392bdb9a4804d846af6a",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.05, 1, 0.35],
+        "originalBounds": { "min": [0, 0, -0.25], "max": [0.8, 0.789999962, 0] }
+      },
+      "sha256": "0116d5d9a8b56fc816abf4c6e9912cdcef4d3326d3a94b08e62003b75c618101",
+      "byteLength": 23312,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 372 }
+    },
+    {
+      "id": "interior_door",
+      "name": "interior door",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/doorwayOpen.glb",
+        "sha256": "cf05e165ea26dbbeaab4dc6296c143ef5f5a001e2ab5af9cd4fd65739408317e",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.9, 2.15, 0.13],
+        "originalBounds": { "min": [0, 0, -0.0890999958], "max": [0.485999972, 1.00953174, 0] }
+      },
+      "sha256": "7b9f2e2e56d7197ada91a654d3ae1d1bdb10adb98521b7f377ed64a88f0dfbcb",
+      "byteLength": 3452,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 28 }
+    },
+    {
+      "id": "entrance_door",
+      "name": "entrance door",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/doorwayFront.glb",
+        "sha256": "b5b8e4c14ee1f2ffa10ef5c69badc995ae6fbcc868abac240221c61b8c593b0e",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.95, 2.15, 0.15],
+        "originalBounds": {
+          "min": [0, 0, -0.1012499929],
+          "max": [0.485999972, 1.00953174, 0.012149997100000004]
+        }
+      },
+      "sha256": "957f72d09f853b555befc20d8e5d72057d0b61777d9aff6c8ee4700fc6a78d67",
+      "byteLength": 13340,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 4, "triangleCount": 156 }
+    },
+    {
+      "id": "toilet",
+      "name": "toilet",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/toilet.glb",
+        "sha256": "16165cfd03c56c2cb443b800570810a22ef770f65e7a468f6761d9dc14eaaeae",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.42, 0.76, 0.68],
+        "originalBounds": {
+          "min": [-2.3639222384247037e-23, 0, -1.0773211992196606e-8],
+          "max": [0.31255001937686394, 0.450965, 0.4771767014720324]
+        }
+      },
+      "sha256": "7c28cbfdc3c9361c414d18723f628e36e07a64e0f1dbed8ae0d96e344a421cf3",
+      "byteLength": 18384,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 4, "triangleCount": 230 }
+    },
+    {
+      "id": "shower",
+      "name": "shower",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/showerRound.glb",
+        "sha256": "1723208eaba3fb215089e02c8cdd3d7201d0980ad0c7b275319eb539f6094bfb",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.85, 2.1, 0.85],
+        "originalBounds": { "min": [-7.219114e-16, 0, -0.561792], "max": [0.561792, 1.09403336, 0] }
+      },
+      "sha256": "56bf308a451ed28766e71dd184596866943bcb15dcfa3cde4add0022f12183a6",
+      "byteLength": 72340,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 960 }
+    },
+    {
+      "id": "mirror",
+      "name": "mirror",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/bathroomMirror.glb",
+        "sha256": "940b986894101ea59b50541554b6dc608a22b133057975849259009012984175",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.65, 0.75, 0.07],
+        "originalBounds": {
+          "min": [0, 4.443999e-15, -0.0488],
+          "max": [0.301339984, 0.43462503, 0.0956]
+        }
+      },
+      "sha256": "f68ef56544b8d1c442caef2b05dd6d45cb2bd7e464840d939ba0abd0b0c53d00",
+      "byteLength": 7088,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 3, "triangleCount": 72 }
+    },
+    {
+      "id": "plant",
+      "name": "plant",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/pottedPlant.glb",
+        "sha256": "5b760eda2766f75fda36b2c5df652a1662f82981ef64cd8fa7fe7bcd386b3a15",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.5, 1.05, 0.5],
+        "originalBounds": {
+          "min": [-0.10602964, 0, -0.12073097420000001],
+          "max": [0.106029634, 0.6540168000000001, 0.1207309738]
+        }
+      },
+      "sha256": "608d1bc50dba9cd079c5974b0ab1890873b8e39c28231ac51635f7e070ff6267",
+      "byteLength": 7836,
+      "stats": { "nodeCount": 3, "meshCount": 2, "materialCount": 3, "triangleCount": 60 }
+    },
+    {
+      "id": "small_plant",
+      "name": "small plant",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/plantSmall1.glb",
+        "sha256": "2b9c022feb47be857b2c4fdc29f36522766ba9b70c578c31d7c05d71b4377d15",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.23, 0.35, 0.23],
+        "originalBounds": {
+          "min": [-0.047330367074992524, 0, -0.047330367074992524],
+          "max": [0.047330367074992524, 0.14, 0.047330367074992524]
+        }
+      },
+      "sha256": "2de6bf90e08da181086b04ce189555cf0958919059cfdfc1d1831ce4627714b4",
+      "byteLength": 8420,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 102 }
+    },
+    {
+      "id": "rug",
+      "name": "rug",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/rugRounded.glb",
+        "sha256": "2ef5cc634bb1060a1a5774cfcaf6e11c235791c99d6b59da5fdbc09edfb95a68",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [2.3, 0.018, 1.65],
+        "originalBounds": { "min": [0, 0, -0.92], "max": [1.56999993, 0.01, 0] }
+      },
+      "sha256": "13dbaabb7d606d6f2a91ee08f20c57f2a4cab08b2d68f3b173046dba6e4ee61a",
+      "byteLength": 11104,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 204 }
+    },
+    {
+      "id": "bedrug",
+      "name": "bedrug",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/rugRectangle.glb",
+        "sha256": "a989d2d59c04e3071e0c90388b113a9a8f339ce1814ef984c51cb6dcd7c8e0eb",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.8, 0.015, 1.15],
+        "originalBounds": { "min": [0, 0, -0.92], "max": [1.56999993, 0.01, 0] }
+      },
+      "sha256": "0ba54af71308f317985be4a013bda4e29a16d6f628b73902825f31e25dbec08b",
+      "byteLength": 3400,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 28 }
+    },
+    {
+      "id": "doormat",
+      "name": "doormat",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/rugDoormat.glb",
+        "sha256": "bd888e41853342cdc0d34d3f09b99cedc50a144f47b514943b65cdb9a2cfd802",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.8, 0.015, 0.5],
+        "originalBounds": { "min": [0, 0, -0.237009034], "max": [0.4293, 0.01, 0] }
+      },
+      "sha256": "1e4c06238c29f65bbdf08ad48a91c587a46aba20eb68cafe0daad41c7b34d577",
+      "byteLength": 13992,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 1, "triangleCount": 204 }
+    },
+    {
+      "id": "lamp",
+      "name": "lamp",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/lampRoundFloor.glb",
+        "sha256": "50fe1b5b588edf15bfa9cc880f71a02a4fda6036350b24733d0ef4de5cc5e908",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.4, 1.6, 0.4],
+        "originalBounds": {
+          "min": [-0.01601971, 0, -0.14778],
+          "max": [0.1360197, 0.86, 0.0277799983]
+        }
+      },
+      "sha256": "12d19eedd8c3bbe3f3ac9a486cf296666c4744e4c5986233ea7333af7e4f131d",
+      "byteLength": 6828,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 2, "triangleCount": 76 }
+    },
+    {
+      "id": "books",
+      "name": "books",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/books.glb",
+        "sha256": "b8dc56e5d29f6fc1f4727fccb1b9642627fee9942c48060a00034e98df02701c",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.22, 0.27, 0.16],
+        "originalBounds": { "min": [0, 0, -0.0945], "max": [0.150447592, 0.103902258, 0] }
+      },
+      "sha256": "7b6ffd49d397ab9cf24e3160c3561163ad4016eda185a8c5762f1dc4e2cdfa16",
+      "byteLength": 7144,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 4, "triangleCount": 62 }
+    },
+    {
+      "id": "laptop",
+      "name": "laptop",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/laptop.glb",
+        "sha256": "5fa8a1f4a71ab8d82ef64da77a6973ffd350c6d4557516069a4ffd4bb8d808af",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [0.34, 0.23, 0.26],
+        "originalBounds": { "min": [0, 0, -0.24006514400000004], "max": [0.264, 0.16180940512, 0] }
+      },
+      "sha256": "20a2603949a86d007a1b3b36e23756bd2d465783b7b42135cbf87557e18155e8",
+      "byteLength": 5780,
+      "stats": { "nodeCount": 2, "meshCount": 1, "materialCount": 3, "triangleCount": 68 }
+    },
+    {
+      "id": "upper_cabinet",
+      "name": "upper cabinet",
+      "source": {
+        "author": "Kenney",
+        "license": "CC0-1.0",
+        "path": "source/kenney/kitchenCabinetUpperDouble.glb",
+        "sha256": "7b2abd976f2e8f1727d6ba23490aaf5fe18db9c5ac66e729ef6fe8de835c039e",
+        "modifications": "Metric bottom-centering, explicit dimensional normalization, muted material palette",
+        "dimensionsM": [1.3, 0.62, 0.33],
+        "originalBounds": { "min": [0, 0, -0.21], "max": [0.43, 0.390000015, 0.01] }
+      },
+      "sha256": "ba93595f7dec6595c61c1f189322202a6774bf67d692be277d1ec080b755d2b2",
+      "byteLength": 18424,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 234 }
+    },
+    {
+      "id": "home_shell",
+      "name": "home shell",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "597f5d8d3df8d16312f1a83eaa8393f5c49ec99ae86cbabe434898d06b303c85",
+      "byteLength": 128476,
+      "stats": { "nodeCount": 79, "meshCount": 78, "materialCount": 78, "triangleCount": 936 }
+    },
+    {
+      "id": "wall_air_conditioner",
+      "name": "wall air conditioner",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "d519dd40c87c4a9c9ba48add7430fa850073c9bf3c04af40741c57f9663bc106",
+      "byteLength": 15012,
+      "stats": { "nodeCount": 10, "meshCount": 9, "materialCount": 9, "triangleCount": 108 }
+    },
+    {
+      "id": "smart_door_lock",
+      "name": "smart door lock",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "e584092eebe39626c33936824dc4910ef09b24ca97d4d57b9356d81f76909569",
+      "byteLength": 21540,
+      "stats": { "nodeCount": 14, "meshCount": 13, "materialCount": 13, "triangleCount": 156 }
+    },
+    {
+      "id": "robot_vacuum",
+      "name": "robot vacuum",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "e18e94db408e0ab0030d457ed3d62a0da02e5b36ba39a38120ca91d1c61f757b",
+      "byteLength": 38336,
+      "stats": { "nodeCount": 7, "meshCount": 6, "materialCount": 6, "triangleCount": 664 }
+    },
+    {
+      "id": "robot_vacuum_dock",
+      "name": "robot vacuum dock",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "ddd33b25921690c37bf8b8ea4a3bf46d68c47d5aab2e01245f435e2e848828c5",
+      "byteLength": 6848,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 48 }
+    },
+    {
+      "id": "air_purifier",
+      "name": "air purifier",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "42b4a9dc97443d39734b444920c8707e0d3023c8aca9b1e897f8c28d92c6ca7b",
+      "byteLength": 73524,
+      "stats": { "nodeCount": 12, "meshCount": 11, "materialCount": 11, "triangleCount": 1292 }
+    },
+    {
+      "id": "motorized_curtain",
+      "name": "motorized curtain",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "0aa5bd9a26c620d5e233661c3323a8c8366390f5681e9f32f107e19842a75f8d",
+      "byteLength": 21648,
+      "stats": { "nodeCount": 14, "meshCount": 13, "materialCount": 13, "triangleCount": 156 }
+    },
+    {
+      "id": "casement_window",
+      "name": "casement window",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "ce6c5c02f6ed53e7ff6f7e65d6796bbbdfc73eaf4ead50fc166c949f3977a1d0",
+      "byteLength": 10064,
+      "stats": { "nodeCount": 7, "meshCount": 6, "materialCount": 6, "triangleCount": 72 }
+    },
+    {
+      "id": "balcony_sliding_door",
+      "name": "balcony sliding door",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "9312f996b856e5c1f15b2bbaef605936305845f2ec031b13af96ed3c9ea786a2",
+      "byteLength": 10136,
+      "stats": { "nodeCount": 7, "meshCount": 6, "materialCount": 6, "triangleCount": 72 }
+    },
+    {
+      "id": "video_doorbell",
+      "name": "video doorbell",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "0f58a9a0f7630f3f2aad518df85183c1b1a7720eb1664a15e657c11d93c2dd01",
+      "byteLength": 10780,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 152 }
+    },
+    {
+      "id": "smart_wall_switch",
+      "name": "smart wall switch",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "4df05d57990bd902424de00e04737e2edc28e833a0a21edfefb2578076f981bf",
+      "byteLength": 5208,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 36 }
+    },
+    {
+      "id": "smart_control_panel",
+      "name": "smart control panel",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "42d53426d34eb911b4d3cc7994153d9c392c0a33435c0a0df04990e8ace15708",
+      "byteLength": 5208,
+      "stats": { "nodeCount": 4, "meshCount": 3, "materialCount": 3, "triangleCount": 36 }
+    },
+    {
+      "id": "smart_tv",
+      "name": "smart tv",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "97f44e65663a8d2c0a64e3c55f33442ff88f19e5d14731deff233dce094539f6",
+      "byteLength": 6800,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 48 }
+    },
+    {
+      "id": "ceiling_light",
+      "name": "ceiling light",
+      "source": {
+        "author": "SceneWeave contributors",
+        "license": "CC0-1.0",
+        "generator": "scripts/free-home/authored.mjs"
+      },
+      "sha256": "cbe87061b678c15a273990bb1d4a07c792bf0005e2eece1a5d8de642a1a56954",
+      "byteLength": 22784,
+      "stats": { "nodeCount": 5, "meshCount": 4, "materialCount": 4, "triangleCount": 384 }
+    }
+  ]
+}

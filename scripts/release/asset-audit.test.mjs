@@ -15,18 +15,30 @@ describe("release asset audit", () => {
   it("validates the complete tracked inventory with the Khronos validator", async () => {
     const report = await auditRepositoryAssets(root);
     expect(report.totals).toEqual({
-      trackedFiles: 3,
-      uniqueHashes: 2,
-      trackedBytes: 5_632,
-      uniqueBytes: 4_416,
+      trackedFiles: 87,
+      uniqueHashes: 86,
+      trackedBytes: 1_515_964,
+      uniqueBytes: 1_514_748,
     });
-    expect(report.assets.every((asset) => asset.validatorErrors === 0)).toBe(true);
+    expect(
+      report.assets.every((asset) => asset.validatorErrors === 0 && asset.validatorWarnings === 0),
+    ).toBe(true);
+    expect(
+      report.assets.filter((asset) => asset.path.startsWith("assets/free-home/source/kenney/"))
+        .length,
+    ).toBe(35);
+    expect(
+      report.assets.filter((asset) => asset.path.startsWith("assets/free-home/models/")).length,
+    ).toBe(49);
   });
 
   it("fails closed for unlisted models, changed bytes, licenses and budgets", () => {
     expect(() => assertInventoryCoverage(["a.glb"], ["a.glb", "new.glb"])).toThrow(
       /inventory mismatch/u,
     );
+    expect(() =>
+      assertInventoryCoverage(["legacy.glb"], ["legacy.glb", "assets/free-home/models/new.glb"]),
+    ).toThrow(/inventory mismatch/u);
     const bytes = Buffer.from("asset");
     const license = Buffer.from("license");
     const record = {

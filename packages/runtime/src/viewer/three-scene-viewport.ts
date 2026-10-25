@@ -522,7 +522,8 @@ class ThreeSceneViewport {
     this.#entitySelection = nextSelection;
     this.#applyEnvironment(source);
     const initialView = source.views[0];
-    if (initialView !== undefined) this.#applyView(initialView.id);
+    if (initialView !== undefined && previousDocumentId !== source.id)
+      this.#applyView(initialView.id);
     if (this.#dataRuntimeEnabled) this.#dataRuntime.enable();
     this.#syncSelectionOverlay();
     this.#transformAuthoring?.sync(next, nextSelection.entityIds, nextSelection.primaryEntityId);

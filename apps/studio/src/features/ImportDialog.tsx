@@ -29,7 +29,11 @@ export function ImportDialog({ state, onCancel, onConfirm }: ImportDialogProps) 
   const summary = state.status === "ready" || state.status === "committing" ? state.summary : null;
 
   return (
-    <div className="dialog-backdrop" role="presentation" onMouseDown={onCancel}>
+    <div
+      className="dialog-backdrop"
+      role="presentation"
+      onMouseDown={state.status === "committing" ? undefined : onCancel}
+    >
       <section
         aria-labelledby="import-dialog-title"
         aria-modal="true"
@@ -46,6 +50,7 @@ export function ImportDialog({ state, onCancel, onConfirm }: ImportDialogProps) 
             <span className="mono">{importFileName(state)}</span>
           </div>
           <button
+            disabled={state.status === "committing"}
             aria-label={t.importDialog.close}
             className="icon-button"
             type="button"
@@ -112,7 +117,12 @@ export function ImportDialog({ state, onCancel, onConfirm }: ImportDialogProps) 
         )}
 
         <footer>
-          <button className="secondary-command" type="button" onClick={onCancel}>
+          <button
+            className="secondary-command"
+            disabled={state.status === "committing"}
+            type="button"
+            onClick={onCancel}
+          >
             {t.importDialog.cancel}
           </button>
           <button

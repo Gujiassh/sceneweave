@@ -29,6 +29,7 @@ import type { AuthoringTool, SaveState, StudioMode } from "../session/session-st
 
 interface StudioToolbarProps {
   readonly projectName: string;
+  readonly initializationStatus?: "loading" | "failed" | "ready";
   readonly save: SaveState;
   readonly exportOutdated: boolean;
   readonly mode: StudioMode;
@@ -96,13 +97,19 @@ export function StudioToolbar(props: StudioToolbarProps) {
               className={`save-state save-${props.save.status}`}
               data-testid="save-state"
             >
-              {saveLabel(props.save, t)}
+              {props.initializationStatus === "loading"
+                ? t.app.openingLocalProject
+                : props.initializationStatus === "failed"
+                  ? t.app.projectUnavailable
+                  : saveLabel(props.save, t)}
             </small>
-            {props.exportOutdated && (
-              <small className="export-state" data-testid="export-state">
-                {t.toolbar.exportOutdated}
-              </small>
-            )}
+            {props.exportOutdated &&
+              (props.initializationStatus === undefined ||
+                props.initializationStatus === "ready") && (
+                <small className="export-state" data-testid="export-state">
+                  {t.toolbar.exportOutdated}
+                </small>
+              )}
           </span>
         </span>
         <FolderOpen size={14} />

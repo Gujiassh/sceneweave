@@ -24,6 +24,7 @@ export interface StudioProjectSnapshot {
 
 export interface StudioProjectRepository {
   save(snapshot: StudioProjectSnapshot): Promise<StudioProjectSnapshot>;
+  markExported(projectId: string, revision: number): Promise<ProjectRecord>;
   open(projectId: string): Promise<StudioProjectSnapshot>;
   listRecent(limit?: number): Promise<readonly ProjectRecord[]>;
   delete(projectId: string): Promise<void>;

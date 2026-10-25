@@ -1,11 +1,14 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { LightEntity, SceneEntity } from "@web3d/document";
 
 import { StudioI18nProvider } from "../i18n/I18nProvider";
 import { SceneTree } from "./SceneTree";
+
+beforeEach(() => vi.stubGlobal("navigator", { languages: ["en"], language: "en" }));
+afterEach(() => vi.unstubAllGlobals());
 
 describe("SceneTree", () => {
   it("renders a nested multi-select tree with levels and a localized primary name", () => {
